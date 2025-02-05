@@ -4,6 +4,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:venturo_core/constants/core/api/api_constant.dart';
 import 'package:venturo_core/modules/global_controllers/global_controllers.dart';
@@ -28,11 +29,7 @@ class SignInController extends GetxController {
 
   /// Form Password Show
   void showPassword() {
-    if (isPassword.value == true) {
-      isPassword.value = false;
-    } else {
-      isPassword.value = true;
-    }
+    isPassword.value = !isPassword.value;
   }
 
   /// Form Validate & Submited
@@ -52,6 +49,7 @@ class SignInController extends GetxController {
       formKey.currentState!.save();
       if (emailCtrl.text == "admin@gmail.com" && passwordCtrl.text == "admin") {
         EasyLoading.dismiss();
+        _saveSession();
         Get.offAllNamed(Routes.splashRoute);
       } else {
         EasyLoading.dismiss();
@@ -89,11 +87,18 @@ class SignInController extends GetxController {
       );
 
       await _auth.signInWithCredential(credential);
+      _saveSession();
       Get.offAllNamed(Routes.splashRoute);
     } catch (e) {
       Get.snackbar("Error", "Failed to sign in with Google: $e",
           duration: const Duration(seconds: 2));
     }
+  }
+
+  /// Save session status
+  void _saveSession() {
+    var box = Hive.box('venturo');
+    box.put('isLoggedIn', true);
   }
 
   /// Flavor setting

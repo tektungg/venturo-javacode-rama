@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
-import '../../modules/global_controllers/global_controllers.dart';
+import '../../shared/controllers/global_controllers.dart';
 
 class HttpService extends GetxService {
   HttpService._();

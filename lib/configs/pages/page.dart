@@ -5,6 +5,9 @@ import 'package:venturo_core/features/forgot_password/bindings/otp_binding.dart'
 import 'package:venturo_core/features/forgot_password/view/ui/forgot_password_screen.dart';
 import 'package:venturo_core/features/forgot_password/view/ui/otp_screen.dart';
 import 'package:venturo_core/features/no_connection/view/ui/no_connection_screen.dart';
+import 'package:venturo_core/features/profile/bindings/profile_binding.dart';
+import 'package:venturo_core/features/profile/view/components/privacy_policy_screen.dart';
+import 'package:venturo_core/features/profile/view/ui/profile_screen.dart';
 import 'package:venturo_core/features/sign_in/bindings/sign_in_binding.dart';
 import 'package:venturo_core/features/sign_in/view/ui/sign_in_screen.dart';
 import 'package:venturo_core/features/splash/bindings/splash_binding.dart';
@@ -23,18 +26,27 @@ abstract class Pages {
     ),
     GetPage(
       name: Routes.signInRoute,
-      page: () => SignInScreen(),
+      page: () => const SignInScreen(),
       binding: SignInBindding(),
     ),
     GetPage(
       name: Routes.forgotPasswordRoute,
-      page: () => ForgotPasswordScreen(),
+      page: () => const ForgotPasswordScreen(),
       binding: ForgotPasswordBinding(),
     ),
     GetPage(
       name: Routes.otpRoute,
       page: () => OtpScreen(),
       binding: OtpBinding(),
+    ),
+    GetPage(
+      name: Routes.profileRoute,
+      page: () => ProfileScreen(),
+      binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: Routes.privacyPolicyRoute,
+      page: () => const PrivacyPolicyScreen(),
     ),
   ];
 }

@@ -7,7 +7,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:venturo_core/constants/core/api/api_constant.dart';
-import 'package:venturo_core/modules/global_controllers/global_controllers.dart';
+import 'package:venturo_core/shared/controllers/global_controllers.dart';
 import 'package:venturo_core/shared/styles/color_style.dart';
 import 'package:venturo_core/shared/styles/google_text_style.dart';
 import 'package:venturo_core/configs/routes/route.dart';
@@ -50,7 +50,7 @@ class SignInController extends GetxController {
       if (emailCtrl.text == "admin@gmail.com" && passwordCtrl.text == "admin") {
         EasyLoading.dismiss();
         _saveSession();
-        Get.offAllNamed(Routes.splashRoute);
+        Get.offAllNamed(Routes.profileRoute);
       } else {
         EasyLoading.dismiss();
         PanaraInfoDialog.show(
@@ -88,7 +88,7 @@ class SignInController extends GetxController {
 
       await _auth.signInWithCredential(credential);
       _saveSession();
-      Get.offAllNamed(Routes.splashRoute);
+      Get.offAllNamed(Routes.profileRoute);
     } catch (e) {
       Get.snackbar("Error", "Failed to sign in with Google: $e",
           duration: const Duration(seconds: 2));

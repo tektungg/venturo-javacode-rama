@@ -14,7 +14,7 @@ import 'firebase_options.dart';
 import 'configs/pages/page.dart';
 import 'configs/themes/theme.dart';
 import 'utils/services/sentry_services.dart';
-import 'modules/global_controllers/global_controllers.dart';
+import 'shared/controllers/global_controllers.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

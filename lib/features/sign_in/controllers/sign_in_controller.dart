@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:venturo_core/constants/core/api/api_constant.dart';
 import 'package:venturo_core/modules/global_controllers/global_controllers.dart';
@@ -11,6 +13,9 @@ import 'package:venturo_core/configs/routes/route.dart';
 
 class SignInController extends GetxController {
   static SignInController get to => Get.find();
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   /// Form Variable Setting
   var formKey = GlobalKey<FormState>();
@@ -64,6 +69,30 @@ class SignInController extends GetxController {
       }
     } else if (GlobalController.to.isConnect.value == false) {
       Get.toNamed(Routes.noConnectionRoute);
+    }
+  }
+
+  /// Google Sign-In
+  Future<void> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      if (googleUser == null) {
+        // The user canceled the sign-in
+        return;
+      }
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      await _auth.signInWithCredential(credential);
+      Get.offAllNamed(Routes.splashRoute);
+    } catch (e) {
+      Get.snackbar("Error", "Failed to sign in with Google: $e",
+          duration: const Duration(seconds: 2));
     }
   }
 

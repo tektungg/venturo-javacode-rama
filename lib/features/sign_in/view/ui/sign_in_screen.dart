@@ -93,6 +93,34 @@ class SignInScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
+              SizedBox(height: 20.h),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  backgroundColor: Colors.white,
+                ),
+                onPressed: () => SignInController.to.signInWithGoogle(),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/icons/ic_google.png',
+                      height: 24.0,
+                    ),
+                    SizedBox(width: 10),
+                    Text(
+                      "Masuk dengan Google",
+                      style: GoogleTextStyle.fw800.copyWith(
+                        fontSize: 14.sp,
+                        color: ColorStyle.dark,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

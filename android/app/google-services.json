@@ -12,7 +12,20 @@
           "package_name": "com.example.venturo_core"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "77297660472-253fqbbme7oa4c9tv04ves0vjnj4pa2e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.venturo_core",
+            "certificate_hash": "9898756612346123887612365612712536412316"
+          }
+        },
+        {
+          "client_id": "77297660472-l17cm52cassjcq598n5a40iil4gjm151.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDOPtyp_-ZzpkuEyQ376kaA6JIgrx8OliM"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77297660472-l17cm52cassjcq598n5a40iil4gjm151.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "77297660472-5hkds34esjjk3aaq1gfko2uuc5a5q04c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.venturoCore"
+              }
+            }
+          ]
         }
       }
     }

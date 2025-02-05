@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "77297660472",
+    "project_id": "fir-basic-25064",
+    "storage_bucket": "fir-basic-25064.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77297660472:android:f0abd66bd2aa0b0e1caccd",
+        "android_client_info": {
+          "package_name": "com.example.venturo_core"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOPtyp_-ZzpkuEyQ376kaA6JIgrx8OliM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

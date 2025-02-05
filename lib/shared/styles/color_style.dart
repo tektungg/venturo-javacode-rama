@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ColorStyle {
   ColorStyle._();
 
-  static const Color primary = Color(0xff007bff);
+  static const Color primary = Color(0xFF00717F);
   static const Color secondary = Color(0xff6c757d);
   static const Color success = Color(0xff28a745);
   static const Color danger = Color(0xffdc3545);

@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -40,8 +41,8 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCtKDa_ZOBMiZpL81xIMtKiwLyOeaBgiwM',
+  static FirebaseOptions web = FirebaseOptions(
+    apiKey: dotenv.env['FIREBASE_API_KEY_WEB']!,
     appId: '1:77297660472:web:008d9cefe0279db41caccd',
     messagingSenderId: '77297660472',
     projectId: 'fir-basic-25064',
@@ -50,16 +51,16 @@ class DefaultFirebaseOptions {
     measurementId: 'G-KC09PRNB08',
   );
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDOPtyp_-ZzpkuEyQ376kaA6JIgrx8OliM',
+  static FirebaseOptions android = FirebaseOptions(
+    apiKey: dotenv.env['FIREBASE_API_KEY_ANDROID']!,
     appId: '1:77297660472:android:f0abd66bd2aa0b0e1caccd',
     messagingSenderId: '77297660472',
     projectId: 'fir-basic-25064',
     storageBucket: 'fir-basic-25064.firebasestorage.app',
   );
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDRd7uWiugjMfA9pPdeNg3ZEUnYe8iKKgA',
+  static FirebaseOptions ios = FirebaseOptions(
+    apiKey: dotenv.env['FIREBASE_API_KEY_IOS']!,
     appId: '1:77297660472:ios:7ec9828d304d0aa41caccd',
     messagingSenderId: '77297660472',
     projectId: 'fir-basic-25064',
@@ -67,8 +68,8 @@ class DefaultFirebaseOptions {
     iosBundleId: 'com.example.venturoCore',
   );
 
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDRd7uWiugjMfA9pPdeNg3ZEUnYe8iKKgA',
+  static FirebaseOptions macos = FirebaseOptions(
+    apiKey: dotenv.env['FIREBASE_API_KEY_MACOS']!,
     appId: '1:77297660472:ios:7ec9828d304d0aa41caccd',
     messagingSenderId: '77297660472',
     projectId: 'fir-basic-25064',
@@ -76,8 +77,8 @@ class DefaultFirebaseOptions {
     iosBundleId: 'com.example.venturoCore',
   );
 
-  static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyCtKDa_ZOBMiZpL81xIMtKiwLyOeaBgiwM',
+  static FirebaseOptions windows = FirebaseOptions(
+    apiKey: dotenv.env['FIREBASE_API_KEY_WINDOWS']!,
     appId: '1:77297660472:web:ce44a1ffcef76b8d1caccd',
     messagingSenderId: '77297660472',
     projectId: 'fir-basic-25064',

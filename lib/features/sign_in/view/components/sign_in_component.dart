@@ -1,12 +1,14 @@
-// filepath: /D:/Kuliah/Magang/Venturo/venturo-core/lib/features/sign_in/view/components/sign_in_component.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:venturo_core/configs/routes/route.dart';
 import 'package:venturo_core/features/sign_in/controllers/sign_in_controller.dart';
 import 'package:venturo_core/shared/customs/text_form_field_custom.dart';
+import 'package:venturo_core/shared/styles/color_style.dart';
+import 'package:venturo_core/shared/styles/google_text_style.dart';
 
-class FormSignInCompoent extends StatelessWidget {
-  const FormSignInCompoent({super.key});
+class FormSignInComponent extends StatelessWidget {
+  const FormSignInComponent({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +51,26 @@ class FormSignInCompoent extends StatelessWidget {
                 },
               ),
             ),
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Get.toNamed(Routes.forgotPasswordRoute);
+                },
+                child: Text(
+                  "Lupa Password?",
+                  style: GoogleTextStyle.fw600.copyWith(
+                    fontSize: 14.sp,
+                    color: ColorStyle.primary,
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),

@@ -12,8 +12,11 @@ class GetLocationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GetLocationController controller = Get.put(GetLocationController());
+
     return Scaffold(
       body: WillPopScope(
+        onWillPop: () async => false,
         child: Container(
           alignment: Alignment.center,
           width: double.infinity,
@@ -30,96 +33,170 @@ class GetLocationScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                'Searching location...'.tr,
-                style: Get.textTheme.titleLarge!
-                    .copyWith(color: ColorStyle.dark.withOpacity(0.5)),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 50.h),
-              Stack(
-                children: [
-                  ClipOval(
-                    child: Opacity(
-                      opacity: 0.15,
-                      child: Image.asset(
-                        ImageConstant.location,
-                        width: 190.r,
-                        height: 190.r,
-                        fit: BoxFit.cover,
+              Obx(() {
+                if (controller.statusLocation.value == 'request_permission') {
+                  return Column(
+                    children: [
+                      Text(
+                        'Izin Diperlukan'.tr,
+                        style: Get.textTheme.titleLarge!
+                            .copyWith(color: ColorStyle.dark.withOpacity(0.5)),
+                        textAlign: TextAlign.center,
                       ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(70.r),
-                    child: Opacity(
-                      opacity: 0.8,
-                      child: Icon(
-                        Icons.location_pin,
-                        size: 50.r,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 50.h),
-              Obx(
-                () => ConditionalSwitch.single<String>(
-                  context: context,
-                  valueBuilder: (context) =>
-                      GetLocationController.to.statusLocation.value,
-                  caseBuilders: {
-                    'error': (context) => Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              GetLocationController.to.messageLocation.value,
-                              style: Get.textTheme.titleLarge,
-                              textAlign: TextAlign.center,
+                      SizedBox(height: 50.h),
+                      Stack(
+                        children: [
+                          ClipOval(
+                            child: Opacity(
+                              opacity: 0.15,
+                              child: Image.asset(
+                                ImageConstant.location,
+                                width: 190.r,
+                                height: 190.r,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                            SizedBox(height: 24.h),
-                            ElevatedButton(
-                              onPressed: () => AppSettings.openAppSettings(),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.white,
-                                elevation: 2,
-                                padding: EdgeInsets.zero,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(24.r),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(70.r),
+                            child: Opacity(
+                              opacity: 0.8,
+                              child: Icon(
+                                Icons.location_pin,
+                                size: 50.r,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 50.h),
+                      Text(
+                        'Aplikasi ini membutuhkan akses lokasi untuk digunakan.'
+                            .tr,
+                        textAlign: TextAlign.center,
+                        style: Get.textTheme.bodyLarge!
+                            .copyWith(color: ColorStyle.dark.withOpacity(0.7)),
+                      ),
+                      SizedBox(height: 24.h),
+                      ElevatedButton(
+                        onPressed: controller.requestPermission,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: ColorStyle.primary,
+                          elevation: 2,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 24.w, vertical: 12.h),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(24.r),
+                          ),
+                        ),
+                        child: Text(
+                          'Berikan Izin'.tr,
+                          style: Get.textTheme.bodyLarge!
+                              .copyWith(color: ColorStyle.white),
+                        ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return Column(
+                    children: [
+                      Text(
+                        'Mencari lokasi...'.tr,
+                        style: Get.textTheme.titleLarge!
+                            .copyWith(color: ColorStyle.dark.withOpacity(0.5)),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 50.h),
+                      Stack(
+                        children: [
+                          ClipOval(
+                            child: Opacity(
+                              opacity: 0.15,
+                              child: Image.asset(
+                                ImageConstant.location,
+                                width: 190.r,
+                                height: 190.r,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(70.r),
+                            child: Opacity(
+                              opacity: 0.8,
+                              child: Icon(
+                                Icons.location_pin,
+                                size: 50.r,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 50.h),
+                      Obx(
+                        () => ConditionalSwitch.single<String>(
+                          context: context,
+                          valueBuilder: (context) =>
+                              controller.statusLocation.value,
+                          caseBuilders: {
+                            'error': (context) => Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      controller.messageLocation.value,
+                                      style: Get.textTheme.titleLarge,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    SizedBox(height: 24.h),
+                                    ElevatedButton(
+                                      onPressed: () =>
+                                          AppSettings.openAppSettings(),
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.white,
+                                        elevation: 2,
+                                        padding: EdgeInsets.zero,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(24.r),
+                                        ),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          const Icon(
+                                            Icons.settings,
+                                            color: ColorStyle.dark,
+                                          ),
+                                          SizedBox(width: 16.w),
+                                          Text(
+                                            'Buka pengaturan'.tr,
+                                            style: Get.textTheme.bodySmall,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Icon(
-                                    Icons.settings,
-                                    color: ColorStyle.dark,
-                                  ),
-                                  SizedBox(width: 16.w),
-                                  Text(
-                                    'Open settings'.tr,
-                                    style: Get.textTheme.bodySmall,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
+                            'success': (context) => Text(
+                                  controller.address.value!,
+                                  style: Get.textTheme.titleLarge,
+                                  textAlign: TextAlign.center,
+                                ),
+                          },
+                          fallbackBuilder: (context) =>
+                              const CircularProgressIndicator(
+                            color: ColorStyle.primary,
+                          ),
                         ),
-                    'success': (context) => Text(
-                          GetLocationController.to.address.value!,
-                          style: Get.textTheme.titleLarge,
-                          textAlign: TextAlign.center,
-                        ),
-                  },
-                  fallbackBuilder: (context) => const CircularProgressIndicator(
-                    color: ColorStyle.primary,
-                  ),
-                ),
-              ),
+                      ),
+                    ],
+                  );
+                }
+              }),
             ],
           ),
         ),
-        onWillPop: () async => false,
       ),
     );
   }

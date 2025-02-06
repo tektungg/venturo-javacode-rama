@@ -19,29 +19,29 @@ class SignInScreen extends StatelessWidget {
     /// Google analytics untuk tracking user di setiap halaman
     if (Platform.isAndroid) {
       /// Tracking bawah dia masuk screen sign in di device android
-      analytics.setCurrentScreen(
+      analytics.logScreenView(
         screenName: 'Sign In Screen',
-        screenClassOverride: 'Android',
+        screenClass: 'Android',
       );
     } else if (Platform.isIOS) {
       /// Tracking bawah dia masuk screen sign in di device ios
-      analytics.setCurrentScreen(
+      analytics.logScreenView(
         screenName: 'Sign In Screen',
-        screenClassOverride: 'IOS',
+        screenClass: 'IOS',
       );
     } else if (Platform.isMacOS) {
       /// Tracking bawah dia masuk screen sign in di device macos
-      analytics.setCurrentScreen(
+      analytics.logScreenView(
         screenName: 'Sign In Screen',
-        screenClassOverride: 'MacOS',
+        screenClass: 'MacOS',
       );
     }
 
     if (kIsWeb) {
       /// Tracking bawah dia masuk screen sign in di device web
-      analytics.setCurrentScreen(
+      analytics.logScreenView(
         screenName: 'Sign In Screen',
-        screenClassOverride: 'Web',
+        screenClass: 'Web',
       );
     }
 
@@ -109,7 +109,7 @@ class SignInScreen extends StatelessWidget {
                       'assets/icons/ic_google.png',
                       height: 24.0,
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Text(
                       "Masuk dengan Google",
                       style: GoogleTextStyle.fw800.copyWith(

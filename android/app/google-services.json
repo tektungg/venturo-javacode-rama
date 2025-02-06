@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "77297660472-253fqbbme7oa4c9tv04ves0vjnj4pa2e.apps.googleusercontent.com",
+          "client_id": "77297660472-ls23flk5s5qgsg6vvf29knc7q1c6fu35.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.venturo_core",
-            "certificate_hash": "9898756612346123887612365612712536412316"
+            "certificate_hash": "ed2f926aa044ac6e9e1d12bb09a77d9362bc9ae4"
           }
         },
         {

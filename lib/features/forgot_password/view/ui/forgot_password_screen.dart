@@ -22,29 +22,29 @@ class ForgotPasswordScreen extends StatelessWidget {
     /// Google analytics untuk tracking user di setiap halaman
     if (Platform.isAndroid) {
       /// Tracking bawah dia masuk screen lupa password di device android
-      analytics.setCurrentScreen(
+      analytics.logScreenView(
         screenName: 'Forgot Password Screen',
-        screenClassOverride: 'Android',
+        screenClass: 'Android',
       );
     } else if (Platform.isIOS) {
       /// Tracking bawah dia masuk screen lupa password di device ios
-      analytics.setCurrentScreen(
+      analytics.logScreenView(
         screenName: 'Forgot Password Screen',
-        screenClassOverride: 'IOS',
+        screenClass: 'IOS',
       );
     } else if (Platform.isMacOS) {
       /// Tracking bawah dia masuk screen lupa password di device macos
-      analytics.setCurrentScreen(
+      analytics.logScreenView(
         screenName: 'Forgot Password Screen',
-        screenClassOverride: 'MacOS',
+        screenClass: 'MacOS',
       );
     }
 
     if (kIsWeb) {
       /// Tracking bawah dia masuk screen lupa password di device web
-      analytics.setCurrentScreen(
+      analytics.logScreenView(
         screenName: 'Forgot Password Screen',
-        screenClassOverride: 'Web',
+        screenClass: 'Web',
       );
     }
 

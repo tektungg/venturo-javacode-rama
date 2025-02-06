@@ -21,29 +21,29 @@ class OtpScreen extends StatelessWidget {
     /// Google analytics untuk tracking user di setiap halaman
     if (Platform.isAndroid) {
       /// Tracking bawah dia masuk screen otp di device android
-      analytics.setCurrentScreen(
+      analytics.logScreenView(
         screenName: 'OTP Screen',
-        screenClassOverride: 'Android',
+        screenClass: 'Android',
       );
     } else if (Platform.isIOS) {
       /// Tracking bawah dia masuk screen otp di device ios
-      analytics.setCurrentScreen(
+      analytics.logScreenView(
         screenName: 'OTP Screen',
-        screenClassOverride: 'IOS',
+        screenClass: 'IOS',
       );
     } else if (Platform.isMacOS) {
       /// Tracking bawah dia masuk screen otp di device macos
-      analytics.setCurrentScreen(
+      analytics.logScreenView(
         screenName: 'OTP Screen',
-        screenClassOverride: 'MacOS',
+        screenClass: 'MacOS',
       );
     }
 
     if (kIsWeb) {
       /// Tracking bahwa dia masuk screen otp di device web
-      analytics.setCurrentScreen(
+      analytics.logScreenView(
         screenName: 'OTP Screen',
-        screenClassOverride: 'Web',
+        screenClass: 'Web',
       );
     }
     return Scaffold(

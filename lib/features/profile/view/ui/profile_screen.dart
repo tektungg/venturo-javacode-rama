@@ -17,6 +17,8 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(ProfileController());
+
     /// Google analytics untuk tracking user di setiap halaman
     if (Platform.isAndroid) {
       /// Tracking bawah dia masuk screen lupa password di device android

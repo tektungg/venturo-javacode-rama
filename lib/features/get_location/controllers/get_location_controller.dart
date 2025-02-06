@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:venturo_core/configs/routes/route.dart';
 import 'package:venturo_core/features/get_location/view/ui/get_location_screen.dart';
 import 'package:venturo_core/utils/services/location_service.dart';
+import 'package:venturo_core/configs/routes/route.dart';
 
 class GetLocationController extends GetxController {
   static GetLocationController get to => Get.find();
@@ -13,7 +13,7 @@ class GetLocationController extends GetxController {
   RxString messageLocation = RxString('');
   Rxn<Position> position = Rxn<Position>();
   RxnString address = RxnString();
-  bool locationObtained = false;
+  bool locationObtained = false; // Flag to check if location has been obtained
 
   Future<void> requestPermission() async {
     LocationPermission permission = await Geolocator.requestPermission();
@@ -27,7 +27,7 @@ class GetLocationController extends GetxController {
   }
 
   Future<void> getLocation() async {
-    if (locationObtained) return;
+    if (locationObtained) return; // If location is already obtained, return
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (Get.isDialogOpen == false) {
@@ -45,10 +45,11 @@ class GetLocationController extends GetxController {
         position.value = locationResult.position;
         address.value = locationResult.address;
         statusLocation.value = 'success';
-        locationObtained = true;
+        locationObtained = true; // Set the flag to true
 
         await Future.delayed(const Duration(seconds: 1));
-        Get.offAllNamed(Routes.profileRoute);
+        Get.offAllNamed(
+            Routes.profileRoute); // Navigate to profile screen directly
       } else {
         /// Jika jarak lokasi tidak cukup dekat, tampilkan pesan
         statusLocation.value = 'error';

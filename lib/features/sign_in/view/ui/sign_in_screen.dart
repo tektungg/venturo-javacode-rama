@@ -9,6 +9,7 @@ import 'package:venturo_core/features/sign_in/controllers/sign_in_controller.dar
 import 'package:venturo_core/features/sign_in/view/components/sign_in_component.dart';
 import 'package:venturo_core/shared/styles/color_style.dart';
 import 'package:venturo_core/shared/styles/google_text_style.dart';
+import 'package:get/get.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
@@ -16,6 +17,8 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final SignInController controller = Get.put(SignInController());
+
     /// Google analytics untuk tracking user di setiap halaman
     if (Platform.isAndroid) {
       /// Tracking bawah dia masuk screen sign in di device android
@@ -58,7 +61,7 @@ class SignInScreen extends StatelessWidget {
             children: [
               SizedBox(height: 121.h),
               GestureDetector(
-                onDoubleTap: () => SignInController.to.flavorSeting(),
+                onDoubleTap: () => controller.flavorSeting(),
                 child: Image.asset(
                   ImageConstant.logo,
                   fit: BoxFit.contain,
@@ -83,7 +86,7 @@ class SignInScreen extends StatelessWidget {
                   ),
                   backgroundColor: ColorStyle.primary,
                 ),
-                onPressed: () => SignInController.to.validateForm(context),
+                onPressed: () => controller.validateForm(context),
                 child: Text(
                   "Masuk",
                   style: GoogleTextStyle.fw800.copyWith(
@@ -101,7 +104,7 @@ class SignInScreen extends StatelessWidget {
                   ),
                   backgroundColor: Colors.white,
                 ),
-                onPressed: () => SignInController.to.signInWithGoogle(),
+                onPressed: () => controller.signInWithGoogle(),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

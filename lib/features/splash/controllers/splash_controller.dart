@@ -19,7 +19,7 @@ class SplashController extends GetxController {
     bool isLoggedIn = box.get('isLoggedIn', defaultValue: false);
 
     if (isLoggedIn) {
-      Get.offAllNamed(Routes.profileRoute); // Navigate to the initial screen if logged in
+      Get.offAllNamed(Routes.profileRoute); // Navigate to the profile screen if logged in
     } else {
       Get.offAllNamed(Routes.signInRoute); // Navigate to the sign-in screen if not logged in
     }

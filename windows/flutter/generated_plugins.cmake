@@ -8,6 +8,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   fast_rsa
   firebase_auth
   firebase_core
+  geolocator_windows
   sentry_flutter
 )
 

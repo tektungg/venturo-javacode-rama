@@ -5,6 +5,8 @@ import 'package:venturo_core/features/forgot_password/bindings/otp_binding.dart'
 import 'package:venturo_core/features/forgot_password/view/ui/forgot_password_screen.dart';
 import 'package:venturo_core/features/forgot_password/view/ui/otp_screen.dart';
 import 'package:venturo_core/features/get_location/view/ui/get_location_screen.dart';
+import 'package:venturo_core/features/list/bindings/list_binding.dart';
+import 'package:venturo_core/features/list/view/ui/list_screen.dart';
 import 'package:venturo_core/features/no_connection/view/ui/no_connection_screen.dart';
 import 'package:venturo_core/features/profile/bindings/profile_binding.dart';
 import 'package:venturo_core/features/profile/view/components/privacy_policy_screen.dart';
@@ -51,6 +53,11 @@ abstract class Pages {
     GetPage(
       name: Routes.getLocationRoute,
       page: () => const GetLocationScreen(),
+    ),
+    GetPage(
+      name: Routes.listRoute,
+      page: () => const ListScreen(),
+      binding: ListBinding(),
     ),
   ];
 }

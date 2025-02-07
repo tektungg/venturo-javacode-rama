@@ -19,18 +19,19 @@ class ListScreen extends StatefulWidget {
 }
 
 class ListScreenState extends State<ListScreen> {
+  final ScrollController _scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: SearchAppBar(
-        searchController: TextEditingController(),
-        onChange: (value) {
-          ListController.to.keyword(value);
-        },
-      ),
-      body: SafeArea(
-        //safe area dipindah ke scaffold
-        child: Column(
+    return SafeArea(
+      child: Scaffold(
+        appBar: SearchAppBar(
+          searchController: TextEditingController(),
+          onChange: (value) {
+            ListController.to.keyword(value);
+          },
+        ),
+        body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 20.h),
@@ -89,6 +90,8 @@ class ListScreenState extends State<ListScreen> {
                           onTap: () {
                             ListController.to
                                 .selectedCategory(category.toLowerCase());
+                            _scrollController
+                                .jumpTo(0); // Reset scroll position
                           },
                         ),
                       );
@@ -116,6 +119,7 @@ class ListScreenState extends State<ListScreen> {
                       ListController.to.canLoadMore.isTrue ? true : false,
                   onLoading: ListController.to.getListOfData,
                   child: ListView.builder(
+                    controller: _scrollController,
                     padding: EdgeInsets.symmetric(horizontal: 25.w),
                     itemBuilder: (context, index) {
                       final item = ListController.to.filteredList[index];

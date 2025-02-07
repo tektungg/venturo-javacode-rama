@@ -50,7 +50,7 @@ class SignInController extends GetxController {
       if (emailCtrl.text == "admin@gmail.com" && passwordCtrl.text == "admin") {
         EasyLoading.dismiss();
         _saveSession();
-        Get.offAllNamed(Routes.profileRoute);
+        Get.offAllNamed(Routes.listRoute);
       } else {
         EasyLoading.dismiss();
         PanaraInfoDialog.show(
@@ -88,7 +88,7 @@ class SignInController extends GetxController {
 
       await _auth.signInWithCredential(credential);
       _saveSession();
-      Get.offAllNamed(Routes.profileRoute);
+      Get.offAllNamed(Routes.listRoute);
     } catch (e) {
       Get.snackbar("Error", "Failed to sign in with Google: $e",
           duration: const Duration(seconds: 2));

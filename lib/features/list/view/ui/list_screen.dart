@@ -23,6 +23,7 @@ class ListScreenState extends State<ListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(ListController());
     return SafeArea(
       child: Scaffold(
         appBar: SearchAppBar(

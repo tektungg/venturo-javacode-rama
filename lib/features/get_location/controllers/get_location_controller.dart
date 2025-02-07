@@ -49,7 +49,7 @@ class GetLocationController extends GetxController {
 
         await Future.delayed(const Duration(seconds: 1));
         Get.offAllNamed(
-            Routes.profileRoute); // Navigate to profile screen directly
+            Routes.listRoute); // Navigate to profile screen directly
       } else {
         /// Jika jarak lokasi tidak cukup dekat, tampilkan pesan
         statusLocation.value = 'error';

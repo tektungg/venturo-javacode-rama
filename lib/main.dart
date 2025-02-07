@@ -72,7 +72,7 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           // initialBinding: , Jika memiliki global bindding
-          initialRoute: Routes.listRoute,
+          initialRoute: Routes.splashRoute,
           theme: themeLight,
           defaultTransition: Transition.native,
           getPages: Pages.pages,

@@ -1,6 +1,9 @@
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:venturo_core/configs/routes/route.dart';
+import 'package:venturo_core/features/get_location/controllers/get_location_controller.dart';
 import 'package:venturo_core/features/list/repositories/list_repository.dart';
 
 class ListController extends GetxController {
@@ -34,8 +37,31 @@ class ListController extends GetxController {
   void onInit() async {
     super.onInit();
 
+    _checkLocationPermissionAndGetLocation();
     repository = ListRepository();
     await getListOfData();
+  }
+
+  // Memeriksa izin lokasi dan mendapatkan lokasi
+  void _checkLocationPermissionAndGetLocation() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever) {
+      // Jika izin ditolak, arahkan pengguna untuk memberikan izin lokasi
+      Get.toNamed(Routes.getLocationRoute);
+    } else {
+      // Jika izin lokasi sudah diberikan, pastikan lokasi diambil
+      if (!GetLocationController.to.locationObtained) {
+        _initializeGetLocationController();
+      }
+    }
+  }
+
+  void _initializeGetLocationController() {
+    if (!Get.isRegistered<GetLocationController>()) {
+      Get.put(GetLocationController());
+    }
+    GetLocationController.to.getLocation();
   }
 
   void onRefresh() async {

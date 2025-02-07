@@ -13,15 +13,18 @@ class SplashController extends GetxController {
   }
 
   void _navigateBasedOnSession() async {
-    await Future.delayed(const Duration(seconds: 3)); // Simulate a delay for the splash screen
+    await Future.delayed(
+        const Duration(seconds: 3)); // Simulate a delay for the splash screen
 
     var box = Hive.box('venturo');
     bool isLoggedIn = box.get('isLoggedIn', defaultValue: false);
 
     if (isLoggedIn) {
-      Get.offAllNamed(Routes.profileRoute); // Navigate to the profile screen if logged in
+      Get.offAllNamed(
+          Routes.listRoute); // Navigate to the profile screen if logged in
     } else {
-      Get.offAllNamed(Routes.signInRoute); // Navigate to the sign-in screen if not logged in
+      Get.offAllNamed(Routes
+          .signInRoute); // Navigate to the sign-in screen if not logged in
     }
   }
 }

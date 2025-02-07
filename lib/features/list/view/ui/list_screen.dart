@@ -29,6 +29,7 @@ class ListScreenState extends State<ListScreen> {
         },
       ),
       body: SafeArea(
+        //safe area dipindah ke scaffold
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -142,6 +143,8 @@ class ListScreenState extends State<ListScreen> {
                             borderRadius: BorderRadius.circular(10.r),
                             elevation: 2,
                             child: MenuCard(
+                              key: ValueKey(
+                                  item['id_menu']), // Gunakan key yang unik
                               menu: item,
                               isSelected: ListController.to.selectedItems
                                   .contains(item),

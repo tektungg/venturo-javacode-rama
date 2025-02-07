@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:venturo_core/constants/core/assets/image_constant.dart';
 import 'package:venturo_core/features/list/controllers/list_controller.dart';
 import 'package:venturo_core/features/list/view/components/menu_card.dart';
@@ -26,9 +27,9 @@ class ListScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 20.h),
-            const Padding(
-              padding: EdgeInsets.symmetric(),
-              child: SectionHeader(
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 25.w),
+              child: const SectionHeader(
                 title: 'Available Promos',
                 icon: Icons.local_offer,
               ),
@@ -90,45 +91,53 @@ class ListScreen extends StatelessWidget {
               }),
             ),
             SizedBox(height: 20.h),
-            const Padding(
-              padding: EdgeInsets.symmetric(),
-              child: SectionHeader(
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 25.w),
+              child: const SectionHeader(
                 title: 'Menu',
                 icon: Icons.menu_book,
               ),
             ),
             SizedBox(height: 10.h),
             Expanded(
-              child: Obx(() {
-                return ListView.builder(
-                  padding: EdgeInsets.symmetric(horizontal: 25.w),
-                  itemBuilder: (context, index) {
-                    final item = ListController.to.filteredList[index];
-                    return Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.5.h),
-                      child: Material(
-                        borderRadius: BorderRadius.circular(10.r),
-                        elevation: 2,
-                        child: MenuCard(
-                          menu: item,
-                          isSelected:
-                              ListController.to.selectedItems.contains(item),
-                          onTap: () {
-                            if (ListController.to.selectedItems
-                                .contains(item)) {
-                              ListController.to.selectedItems.remove(item);
-                            } else {
-                              ListController.to.selectedItems.add(item);
-                            }
-                          },
+              child: Obx(
+                () => SmartRefresher(
+                  controller: ListController.to.refreshController,
+                  enablePullDown: true,
+                  onRefresh: ListController.to.onRefresh,
+                  enablePullUp:
+                      ListController.to.canLoadMore.isTrue ? true : false,
+                  onLoading: ListController.to.getListOfData,
+                  child: ListView.builder(
+                    padding: EdgeInsets.symmetric(horizontal: 25.w),
+                    itemBuilder: (context, index) {
+                      final item = ListController.to.filteredList[index];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(vertical: 8.5.h),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(10.r),
+                          elevation: 2,
+                          child: MenuCard(
+                            menu: item,
+                            isSelected:
+                                ListController.to.selectedItems.contains(item),
+                            onTap: () {
+                              if (ListController.to.selectedItems
+                                  .contains(item)) {
+                                ListController.to.selectedItems.remove(item);
+                              } else {
+                                ListController.to.selectedItems.add(item);
+                              }
+                            },
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                  itemCount: ListController.to.filteredList.length,
-                  itemExtent: 112.h,
-                );
-              }),
+                      );
+                    },
+                    itemCount: ListController.to.filteredList.length,
+                    itemExtent: 112.h,
+                  ),
+                ),
+              ),
             ),
           ],
         ),

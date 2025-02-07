@@ -11,9 +11,14 @@ import 'package:venturo_core/features/list/view/components/promo_card.dart';
 import 'package:venturo_core/features/list/view/components/search_app_bar.dart';
 import 'package:venturo_core/features/list/view/components/section_header.dart';
 
-class ListScreen extends StatelessWidget {
+class ListScreen extends StatefulWidget {
   const ListScreen({super.key});
 
+  @override
+  ListScreenState createState() => ListScreenState();
+}
+
+class ListScreenState extends State<ListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,9 +33,9 @@ class ListScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 20.h),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25.w),
-              child: const SectionHeader(
+            const Padding(
+              padding: EdgeInsets.symmetric(),
+              child: SectionHeader(
                 title: 'Available Promos',
                 icon: Icons.local_offer,
               ),
@@ -92,9 +97,9 @@ class ListScreen extends StatelessWidget {
               }),
             ),
             SizedBox(height: 20.h),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25.w),
-              child: const SectionHeader(
+            const Padding(
+              padding: EdgeInsets.symmetric(),
+              child: SectionHeader(
                 title: 'Menu',
                 icon: Icons.menu_book,
               ),
@@ -141,12 +146,15 @@ class ListScreen extends StatelessWidget {
                               isSelected: ListController.to.selectedItems
                                   .contains(item),
                               onTap: () {
-                                if (ListController.to.selectedItems
-                                    .contains(item)) {
-                                  ListController.to.selectedItems.remove(item);
-                                } else {
-                                  ListController.to.selectedItems.add(item);
-                                }
+                                setState(() {
+                                  if (ListController.to.selectedItems
+                                      .contains(item)) {
+                                    ListController.to.selectedItems
+                                        .remove(item);
+                                  } else {
+                                    ListController.to.selectedItems.add(item);
+                                  }
+                                });
                               },
                             ),
                           ),

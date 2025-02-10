@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:venturo_core/configs/routes/route.dart';
+import 'package:venturo_core/features/detail_menu/bindings/detail_menu_binding.dart';
+import 'package:venturo_core/features/detail_menu/view/ui/detail_menu_screen.dart';
 import 'package:venturo_core/features/forgot_password/bindings/forgot_password_binding.dart';
 import 'package:venturo_core/features/forgot_password/bindings/otp_binding.dart';
 import 'package:venturo_core/features/forgot_password/view/ui/forgot_password_screen.dart';
@@ -58,6 +60,11 @@ abstract class Pages {
       name: Routes.listRoute,
       page: () => const ListScreen(),
       binding: ListBinding(),
+    ),
+    GetPage(
+      name: Routes.detailMenuRoute,
+      page: () => const DetailMenuScreen(),
+      binding: DetailMenuBinding(),
     ),
   ];
 }

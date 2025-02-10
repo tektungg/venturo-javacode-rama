@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:venturo_core/configs/routes/route.dart';
 
 class MenuCard extends StatelessWidget {
   final Map<String, dynamic> menu;
@@ -21,7 +22,9 @@ class MenuCard extends StatelessWidget {
         'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png';
 
     return InkWell(
-      onTap: onTap,
+      onTap: () {
+        Get.toNamed(Routes.detailMenuRoute, arguments: menu['id_menu']);
+      },
       borderRadius: BorderRadius.circular(10.r),
       child: Ink(
         padding: EdgeInsets.all(7.r),

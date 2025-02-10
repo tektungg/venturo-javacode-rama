@@ -3,6 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:venturo_core/features/detail_menu/controllers/detail_menu_controller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:venturo_core/features/detail_menu/view/components/level_bottom_sheet.dart';
+import 'package:venturo_core/features/detail_menu/view/components/topping_bottom_sheet.dart';
+import 'package:venturo_core/features/detail_menu/view/components/catatan_bottom_sheet.dart';
+import 'package:venturo_core/shared/styles/color_style.dart';
+import 'package:intl/intl.dart';
 
 class DetailMenuScreen extends StatelessWidget {
   const DetailMenuScreen({super.key});
@@ -14,6 +19,8 @@ class DetailMenuScreen extends StatelessWidget {
 
     // Fetch menu detail when screen is loaded
     controller.fetchMenuDetail(menuId);
+
+    final TextEditingController catatanController = TextEditingController();
 
     return Scaffold(
       appBar: PreferredSize(
@@ -91,29 +98,86 @@ class DetailMenuScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 16.h),
-              Text(
-                menu['nama'] ?? 'Nama Tidak Tersedia',
-                style: Get.textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(16.r),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(30.r),
+                  ),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Color.fromARGB(111, 24, 24, 24),
+                      blurRadius: 15,
+                      spreadRadius: -1,
+                      offset: Offset(0, 1),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      menu['nama'] ?? 'Nama Tidak Tersedia',
+                      style: Get.textTheme.headlineSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 8.h),
+                    Text(
+                      menu['deskripsi'] ?? 'Deskripsi Tidak Tersedia',
+                      style: Get.textTheme.bodyMedium,
+                    ),
+                    SizedBox(height: 16.h),
+                    const Divider(),
+                    _buildDetailRow(
+                      context,
+                      'Harga',
+                      Obx(() => Text(
+                            'Rp${NumberFormat.currency(locale: 'id_ID', symbol: '', decimalDigits: 0).format(controller.totalPrice.value)}',
+                            style: const TextStyle(
+                              color: ColorStyle.primary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )),
+                      Icons.attach_money,
+                    ),
+                    const Divider(),
+                    _buildTouchableDetailRow(
+                      context,
+                      'Level',
+                      controller.selectedLevel.value.isEmpty
+                          ? 'Pilih Level'
+                          : controller.selectedLevel.value,
+                      () => showLevelBottomSheet(context, controller),
+                      Icons.whatshot,
+                    ),
+                    const Divider(),
+                    _buildTouchableDetailRow(
+                      context,
+                      'Topping',
+                      controller.selectedToppings.isEmpty
+                          ? 'Pilih Topping'
+                          : controller.selectedToppings.join(', '),
+                      () => showToppingBottomSheet(context, controller),
+                      Icons.local_pizza,
+                    ),
+                    const Divider(),
+                    _buildTouchableDetailRow(
+                      context,
+                      'Catatan',
+                      controller.catatan.value.isEmpty
+                          ? 'Masukkan catatan'
+                          : controller.catatan.value,
+                      () => showCatatanBottomSheet(
+                          context, controller, catatanController),
+                      Icons.edit_note_outlined,
+                    ),
+                    const Divider(),
+                  ],
                 ),
               ),
-              SizedBox(height: 8.h),
-              Text(
-                menu['deskripsi'] ?? 'Deskripsi Tidak Tersedia',
-                style: Get.textTheme.bodyMedium,
-              ),
-              SizedBox(height: 16.h),
-              const Divider(),
-              _buildDetailRow(
-                  'Harga', Text(menu['harga']?.toString() ?? 'Tidak Tersedia')),
-              const Divider(),
-              _buildDetailRow('Level', _buildLevels(controller.levels)),
-              const Divider(),
-              _buildDetailRow('Topping', _buildToppings(controller.toppings)),
-              const Divider(),
-              _buildDetailRow('Catatan',
-                  Text(menu['catatan']?.toString() ?? 'Tidak Tersedia')),
-              const Divider(),
             ],
           ),
         );
@@ -121,17 +185,24 @@ class DetailMenuScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDetailRow(String title, Widget value) {
+  Widget _buildDetailRow(
+      BuildContext context, String title, Widget value, IconData icon) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            title,
-            style: Get.textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+          Row(
+            children: [
+              Icon(icon, color: ColorStyle.primary),
+              SizedBox(width: 8.w),
+              Text(
+                title,
+                style: Get.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
           ),
           value,
         ],
@@ -139,33 +210,41 @@ class DetailMenuScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildLevels(List<dynamic> levels) {
-    if (levels.isEmpty) {
-      return Text('Tidak Tersedia', style: Get.textTheme.bodyMedium);
-    }
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: levels.map((level) {
-        return Text(
-          '${level['keterangan']} - ${level['harga']}',
-          style: Get.textTheme.bodyMedium,
-        );
-      }).toList(),
-    );
-  }
-
-  Widget _buildToppings(List<dynamic> toppings) {
-    if (toppings.isEmpty) {
-      return Text('Tidak Tersedia', style: Get.textTheme.bodyMedium);
-    }
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: toppings.map((topping) {
-        return Text(
-          '${topping['keterangan']} - ${topping['harga']}',
-          style: Get.textTheme.bodyMedium,
-        );
-      }).toList(),
+  Widget _buildTouchableDetailRow(BuildContext context, String title,
+      String value, VoidCallback onTap, IconData icon) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 8.h),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Icon(icon, color: ColorStyle.primary),
+                SizedBox(width: 8.w),
+                Text(
+                  title,
+                  style: Get.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Text(
+                  value,
+                  style: Get.textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Icon(Icons.arrow_forward_ios, size: 16.r),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

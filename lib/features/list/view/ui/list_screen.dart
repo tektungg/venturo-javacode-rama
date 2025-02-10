@@ -91,7 +91,7 @@ class ListScreenState extends State<ListScreen> {
                           icon = Icons.local_drink;
                           break;
                         case 'Snack':
-                          icon = Icons.local_pizza;
+                          icon = Icons.kebab_dining;
                           break;
                         default:
                           icon = Icons.list_alt;

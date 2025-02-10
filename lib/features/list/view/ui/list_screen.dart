@@ -81,18 +81,31 @@ class ListScreenState extends State<ListScreen> {
                   child: Row(
                     children: ListController.to.categories.map((category) {
                       final isSelected =
-                          ListController.to.selectedCategory.value ==
-                              category.toLowerCase();
+                          ListController.to.selectedCategory.value == category;
+                      IconData icon;
+                      switch (category) {
+                        case 'Makanan':
+                          icon = Icons.local_dining;
+                          break;
+                        case 'Minuman':
+                          icon = Icons.local_drink;
+                          break;
+                        case 'Snack':
+                          icon = Icons.local_pizza;
+                          break;
+                        default:
+                          icon = Icons.list_alt;
+                      }
                       return Padding(
                         padding: EdgeInsets.only(right: 10.w),
                         child: MenuChip(
                           text: category,
+                          icon: icon,
                           isSelected: isSelected,
                           onTap: () {
-                            ListController.to
-                                .selectedCategory(category.toLowerCase());
-                            _scrollController
-                                .jumpTo(0); // Reset scroll position
+                            ListController.to.selectedCategory(category);
+                            ListController.to.getListOfData();
+                            _scrollController.jumpTo(0);
                           },
                         ),
                       );
@@ -116,9 +129,7 @@ class ListScreenState extends State<ListScreen> {
                   controller: ListController.to.refreshController,
                   enablePullDown: true,
                   onRefresh: ListController.to.onRefresh,
-                  enablePullUp:
-                      ListController.to.canLoadMore.isTrue ? true : false,
-                  onLoading: ListController.to.getListOfData,
+                  enablePullUp: false,
                   child: ListView.builder(
                     controller: _scrollController,
                     padding: EdgeInsets.symmetric(horizontal: 25.w),
@@ -148,8 +159,7 @@ class ListScreenState extends State<ListScreen> {
                             borderRadius: BorderRadius.circular(10.r),
                             elevation: 2,
                             child: MenuCard(
-                              key: ValueKey(
-                                  item['id_menu']), // Gunakan key yang unik
+                              key: ValueKey(item['id_menu']),
                               menu: item,
                               isSelected: ListController.to.selectedItems
                                   .contains(item),

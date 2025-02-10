@@ -11,23 +11,20 @@ class ListController extends GetxController {
 
   late final ListRepository repository;
 
-  final RxInt page = 0.obs;
-
   final RxList<Map<String, dynamic>> items = <Map<String, dynamic>>[].obs;
 
   final RxList<Map<String, dynamic>> selectedItems =
       <Map<String, dynamic>>[].obs;
 
-  final RxBool canLoadMore = true.obs;
-
-  final RxString selectedCategory = 'all'.obs;
+  final RxString selectedCategory = 'Semua'.obs;
 
   final RxString keyword = ''.obs;
 
   final List<String> categories = [
-    'All',
-    'Food',
-    'Drink',
+    'Semua',
+    'Makanan',
+    'Minuman',
+    'Snack',
   ];
 
   final RefreshController refreshController =
@@ -42,15 +39,12 @@ class ListController extends GetxController {
     await getListOfData();
   }
 
-  // Memeriksa izin lokasi dan mendapatkan lokasi
   void _checkLocationPermissionAndGetLocation() async {
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied ||
         permission == LocationPermission.deniedForever) {
-      // Jika izin ditolak, arahkan pengguna untuk memberikan izin lokasi
       Get.toNamed(Routes.getLocationRoute);
     } else {
-      // Jika izin lokasi sudah diberikan, pastikan lokasi diambil
       if (!GetLocationController.to.locationObtained) {
         _initializeGetLocationController();
       }
@@ -65,9 +59,6 @@ class ListController extends GetxController {
   }
 
   void onRefresh() async {
-    page(0);
-    canLoadMore(true);
-
     final result = await getListOfData();
 
     if (result) {
@@ -79,31 +70,21 @@ class ListController extends GetxController {
 
   List<Map<String, dynamic>> get filteredList => items
       .where((element) =>
-          element['name']
+          element['nama']
               .toString()
               .toLowerCase()
               .contains(keyword.value.toLowerCase()) &&
-          (selectedCategory.value == 'all' ||
-              element['category'] == selectedCategory.value))
+          (selectedCategory.value == 'Semua' ||
+              element['kategori'].toString().toLowerCase() == selectedCategory.value.toLowerCase()))
       .toList();
 
   Future<bool> getListOfData() async {
     try {
-      final result = repository.getListOfData(
-        offset: page.value * 10,
+      final result = await repository.getListOfData(
+        category: selectedCategory.value.toLowerCase(),
       );
 
-      if (result['previous'] == null) {
-        items.clear();
-      }
-
-      if (result['next'] == null) {
-        canLoadMore(false);
-        refreshController.loadNoData();
-      }
-
-      items.addAll(result['data']);
-      page.value++;
+      items.assignAll(result);
       refreshController.loadComplete();
 
       return true;

@@ -5,12 +5,14 @@ import 'package:get/get.dart';
 class MenuChip extends StatelessWidget {
   final bool isSelected;
   final String text;
+  final IconData icon;
   final Function()? onTap;
 
   const MenuChip({
     super.key,
     this.isSelected = false,
     required this.text,
+    required this.icon,
     this.onTap,
   });
 
@@ -35,13 +37,17 @@ class MenuChip extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Center(
-            child: Text(
-              text,
-              style: Get.textTheme.bodyLarge!.copyWith(
-                color: Colors.white,
+          child: Row(
+            children: [
+              Icon(icon, color: Colors.white),
+              SizedBox(width: 8.w),
+              Text(
+                text,
+                style: Get.textTheme.bodyLarge!.copyWith(
+                  color: Colors.white,
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),

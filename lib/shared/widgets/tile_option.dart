@@ -6,11 +6,11 @@ class TileOption extends StatelessWidget {
   final VoidCallback onTap;
 
   const TileOption({
-    Key? key,
+    super.key,
     required this.title,
     required this.message,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

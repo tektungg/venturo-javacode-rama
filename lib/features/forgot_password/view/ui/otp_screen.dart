@@ -12,7 +12,7 @@ import 'package:venturo_core/shared/styles/color_style.dart';
 import 'package:venturo_core/shared/styles/google_text_style.dart';
 
 class OtpScreen extends StatelessWidget {
-  const OtpScreen({Key? key}) : super(key: key);
+  const OtpScreen({super.key});
 
   static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 

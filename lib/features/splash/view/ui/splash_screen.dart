@@ -4,7 +4,7 @@ import 'package:venturo_core/features/splash/constants/splash_assets_constant.da
 import 'package:venturo_core/features/splash/controllers/splash_controller.dart';
 
 class SplashScreen extends StatelessWidget {
-  SplashScreen({Key? key}) : super(key: key);
+  SplashScreen({super.key});
 
   final assetsConstant = SplashAssetsConstant();
 

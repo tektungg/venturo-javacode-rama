@@ -9,7 +9,7 @@ import 'package:venturo_core/shared/widgets/tile_option.dart';
 import 'package:get/get.dart';
 
 class ProfileScreen extends StatelessWidget {
-  ProfileScreen({Key? key}) : super(key: key);
+  ProfileScreen({super.key});
 
   static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 

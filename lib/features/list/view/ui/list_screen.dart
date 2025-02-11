@@ -129,12 +129,33 @@ class ListScreenState extends State<ListScreen> {
                     children: [
                       if (ListController.to.selectedCategory.value ==
                           'Semua') ...[
-                        _buildCategorySection('Makanan',
-                            ListController.to.makananList, Icons.local_dining),
-                        _buildCategorySection('Minuman',
-                            ListController.to.minumanList, Icons.local_drink),
-                        _buildCategorySection('Snack',
-                            ListController.to.snackList, Icons.kebab_dining),
+                        _buildCategorySection(
+                          'Makanan',
+                          ListController.to.filteredList
+                              .where((item) =>
+                                  item['kategori'].toString().toLowerCase() ==
+                                  'makanan')
+                              .toList(),
+                          Icons.local_dining,
+                        ),
+                        _buildCategorySection(
+                          'Minuman',
+                          ListController.to.filteredList
+                              .where((item) =>
+                                  item['kategori'].toString().toLowerCase() ==
+                                  'minuman')
+                              .toList(),
+                          Icons.local_drink,
+                        ),
+                        _buildCategorySection(
+                          'Snack',
+                          ListController.to.filteredList
+                              .where((item) =>
+                                  item['kategori'].toString().toLowerCase() ==
+                                  'snack')
+                              .toList(),
+                          Icons.kebab_dining,
+                        ),
                       ] else ...[
                         for (var item in ListController.to.filteredList)
                           _buildMenuItem(item),
@@ -163,7 +184,7 @@ class ListScreenState extends State<ListScreen> {
               SizedBox(width: 8.w),
               Text(
                 title,
-                style: Get.textTheme.headline6?.copyWith(
+                style: Get.textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: ColorStyle.primary,
                 ),

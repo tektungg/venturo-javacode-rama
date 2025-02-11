@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:venturo_core/configs/routes/route.dart';
 
 class MenuCard extends StatelessWidget {
@@ -77,7 +78,7 @@ class MenuCard extends StatelessWidget {
                     maxLines: 1,
                   ),
                   Text(
-                    menu['harga']?.toString() ?? 'Harga Tidak Tersedia',
+                    'Rp${NumberFormat.currency(locale: 'id_ID', symbol: '', decimalDigits: 0).format(menu['harga'])}',
                     style: Get.textTheme.bodyMedium!.copyWith(
                       color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.bold,

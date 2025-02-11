@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:venturo_core/shared/styles/color_style.dart';
 
 class MenuChip extends StatelessWidget {
   final bool isSelected;
@@ -25,7 +26,7 @@ class MenuChip extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 14.r),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30.r),
-          color: isSelected ? Theme.of(context).primaryColor : Colors.grey,
+          color: isSelected ? ColorStyle.dark : ColorStyle.primary,
           boxShadow: const [
             BoxShadow(
               offset: Offset(0, 2),

@@ -115,14 +115,6 @@ class ListScreenState extends State<ListScreen> {
                 );
               }),
             ),
-            SizedBox(height: 20.h),
-            const Padding(
-              padding: EdgeInsets.symmetric(),
-              child: SectionHeader(
-                title: 'Menu',
-                icon: Icons.menu_book,
-              ),
-            ),
             SizedBox(height: 10.h),
             Expanded(
               child: Obx(

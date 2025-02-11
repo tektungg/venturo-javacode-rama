@@ -12,17 +12,6 @@ class CheckoutController extends GetxController {
   void onInit() {
     super.onInit();
     // Fetch menu list and calculate total price
-    fetchMenuList();
-  }
-
-  void fetchMenuList() {
-    // Dummy data for illustration
-    menuList.assignAll([
-      {'nama': 'Makanan 1', 'harga': 10000, 'jumlah': 2},
-      {'nama': 'Minuman 1', 'harga': 5000, 'jumlah': 1},
-      {'nama': 'Snack 1', 'harga': 7000, 'jumlah': 3},
-    ]);
-
     calculateTotal();
   }
 
@@ -34,7 +23,8 @@ class CheckoutController extends GetxController {
       totalItems += menu['jumlah'] as int;
     }
     totalHarga.value = total;
-    totalPembayaran.value = total; // Update this with discount and voucher logic
+    totalPembayaran.value =
+        total; // Update this with discount and voucher logic
     totalMenuDipesan.value = totalItems;
   }
 }

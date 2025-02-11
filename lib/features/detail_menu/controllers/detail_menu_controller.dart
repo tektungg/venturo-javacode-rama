@@ -10,6 +10,7 @@ class DetailMenuController extends GetxController {
   final RxString selectedLevel = ''.obs;
   final RxList<String> selectedToppings = <String>[].obs;
   final RxString catatan = ''.obs;
+  final RxInt quantity = 1.obs;
   final RxInt totalPrice = 0.obs;
 
   final DetailMenuRepository repository = DetailMenuRepository();
@@ -22,7 +23,19 @@ class DetailMenuController extends GetxController {
       levels.assignAll(data['level']);
       totalPrice.value = (data['menu']['harga'] as num).toInt();
     } catch (e) {
-      print('Error fetching menu detail: $e');
+      Get.snackbar('Error', e.toString());
+    }
+  }
+
+  void incrementQuantity() {
+    quantity.value++;
+    updateTotalPrice();
+  }
+
+  void decrementQuantity() {
+    if (quantity.value > 1) {
+      quantity.value--;
+      updateTotalPrice();
     }
   }
 
@@ -41,6 +54,6 @@ class DetailMenuController extends GetxController {
           toppings.firstWhere((t) => t['keterangan'] == topping);
       price += (toppingItem['harga'] as num).toInt();
     }
-    totalPrice.value = price;
+    totalPrice.value = price * quantity.value;
   }
 }

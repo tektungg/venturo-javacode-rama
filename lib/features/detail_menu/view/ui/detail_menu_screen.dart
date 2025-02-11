@@ -109,7 +109,7 @@ class DetailMenuScreen extends StatelessWidget {
                   boxShadow: const [
                     BoxShadow(
                       color: Color.fromARGB(111, 24, 24, 24),
-                      blurRadius: 15,
+                      blurRadius: 4,
                       spreadRadius: -1,
                       offset: Offset(0, 1),
                     ),
@@ -122,6 +122,7 @@ class DetailMenuScreen extends StatelessWidget {
                       menu['nama'] ?? 'Nama Tidak Tersedia',
                       style: Get.textTheme.headlineSmall?.copyWith(
                         fontWeight: FontWeight.bold,
+                        color: ColorStyle.primary,
                       ),
                     ),
                     SizedBox(height: 8.h),
@@ -149,7 +150,7 @@ class DetailMenuScreen extends StatelessWidget {
                       'Level',
                       controller.selectedLevel.value.isEmpty
                           ? 'Pilih Level'
-                          : controller.selectedLevel.value,
+                          : capitalize(controller.selectedLevel.value),
                       () => showLevelBottomSheet(context, controller),
                       Icons.whatshot,
                     ),
@@ -159,7 +160,9 @@ class DetailMenuScreen extends StatelessWidget {
                       'Topping',
                       controller.selectedToppings.isEmpty
                           ? 'Pilih Topping'
-                          : controller.selectedToppings.join(', '),
+                          : controller.selectedToppings
+                              .map(capitalize)
+                              .join(', '),
                       () => showToppingBottomSheet(context, controller),
                       Icons.local_pizza,
                     ),
@@ -169,7 +172,7 @@ class DetailMenuScreen extends StatelessWidget {
                       'Catatan',
                       controller.catatan.value.isEmpty
                           ? 'Masukkan catatan'
-                          : controller.catatan.value,
+                          : _truncateWithEllipsis(controller.catatan.value, 20),
                       () => showCatatanBottomSheet(
                           context, controller, catatanController),
                       Icons.edit_note_outlined,
@@ -246,5 +249,14 @@ class DetailMenuScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String capitalize(String s) =>
+      s[0].toUpperCase() + s.substring(1).toLowerCase();
+
+  String _truncateWithEllipsis(String text, int maxLength) {
+    return (text.length <= maxLength)
+        ? text
+        : '${text.substring(0, maxLength)} ...';
   }
 }

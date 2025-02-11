@@ -43,7 +43,7 @@ void showCatatanBottomSheet(BuildContext context,
                   SizedBox(height: 16.h),
                   Text(
                     'Buat Catatan',
-                    style: Get.textTheme.headline6?.copyWith(
+                    style: Get.textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -57,6 +57,8 @@ void showCatatanBottomSheet(BuildContext context,
                       ),
                     ),
                     maxLines: null,
+                    maxLength:
+                        100, // Batasi panjang catatan hingga 100 karakter
                   ),
                   SizedBox(height: 16.h),
                   ElevatedButton(
@@ -64,7 +66,7 @@ void showCatatanBottomSheet(BuildContext context,
                       controller.catatan.value = catatanController.text;
                       Get.back();
                     },
-                    child: Text('Simpan'),
+                    child: const Text('Simpan'),
                   ),
                 ],
               ),

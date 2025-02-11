@@ -75,7 +75,23 @@ class ListController extends GetxController {
               .toLowerCase()
               .contains(keyword.value.toLowerCase()) &&
           (selectedCategory.value == 'Semua' ||
-              element['kategori'].toString().toLowerCase() == selectedCategory.value.toLowerCase()))
+              element['kategori'].toString().toLowerCase() ==
+                  selectedCategory.value.toLowerCase()))
+      .toList();
+
+  List<Map<String, dynamic>> get makananList => items
+      .where((element) =>
+          element['kategori'].toString().toLowerCase() == 'makanan')
+      .toList();
+
+  List<Map<String, dynamic>> get minumanList => items
+      .where((element) =>
+          element['kategori'].toString().toLowerCase() == 'minuman')
+      .toList();
+
+  List<Map<String, dynamic>> get snackList => items
+      .where(
+          (element) => element['kategori'].toString().toLowerCase() == 'snack')
       .toList();
 
   Future<bool> getListOfData() async {

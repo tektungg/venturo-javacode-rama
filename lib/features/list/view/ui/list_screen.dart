@@ -10,6 +10,7 @@ import 'package:venturo_core/features/list/view/components/menu_chip.dart';
 import 'package:venturo_core/features/list/view/components/promo_card.dart';
 import 'package:venturo_core/features/list/view/components/search_app_bar.dart';
 import 'package:venturo_core/features/list/view/components/section_header.dart';
+import 'package:venturo_core/shared/styles/color_style.dart';
 
 class ListScreen extends StatefulWidget {
   const ListScreen({super.key});
@@ -130,62 +131,97 @@ class ListScreenState extends State<ListScreen> {
                   enablePullDown: true,
                   onRefresh: ListController.to.onRefresh,
                   enablePullUp: false,
-                  child: ListView.builder(
+                  child: ListView(
                     controller: _scrollController,
                     padding: EdgeInsets.symmetric(horizontal: 25.w),
-                    itemBuilder: (context, index) {
-                      final item = ListController.to.filteredList[index];
-                      return Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8.5.h),
-                        child: Slidable(
-                          endActionPane: ActionPane(
-                            motion: const ScrollMotion(),
-                            children: [
-                              SlidableAction(
-                                onPressed: (context) {
-                                  ListController.to.deleteItem(item);
-                                },
-                                borderRadius: BorderRadius.horizontal(
-                                  right: Radius.circular(10.r),
-                                ),
-                                backgroundColor: const Color(0xFFFE4A49),
-                                foregroundColor: Colors.white,
-                                icon: Icons.delete,
-                                label: 'Delete',
-                              ),
-                            ],
-                          ),
-                          child: Material(
-                            borderRadius: BorderRadius.circular(10.r),
-                            elevation: 2,
-                            child: MenuCard(
-                              key: ValueKey(item['id_menu']),
-                              menu: item,
-                              isSelected: ListController.to.selectedItems
-                                  .contains(item),
-                              onTap: () {
-                                setState(() {
-                                  if (ListController.to.selectedItems
-                                      .contains(item)) {
-                                    ListController.to.selectedItems
-                                        .remove(item);
-                                  } else {
-                                    ListController.to.selectedItems.add(item);
-                                  }
-                                });
-                              },
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                    itemCount: ListController.to.filteredList.length,
-                    itemExtent: 112.h,
+                    children: [
+                      if (ListController.to.selectedCategory.value ==
+                          'Semua') ...[
+                        _buildCategorySection('Makanan',
+                            ListController.to.makananList, Icons.local_dining),
+                        _buildCategorySection('Minuman',
+                            ListController.to.minumanList, Icons.local_drink),
+                        _buildCategorySection('Snack',
+                            ListController.to.snackList, Icons.kebab_dining),
+                      ] else ...[
+                        for (var item in ListController.to.filteredList)
+                          _buildMenuItem(item),
+                      ],
+                    ],
                   ),
                 ),
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCategorySection(
+      String title, List<Map<String, dynamic>> items, IconData icon) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 10.h),
+          child: Row(
+            children: [
+              Icon(icon, color: ColorStyle.primary),
+              SizedBox(width: 8.w),
+              Text(
+                title,
+                style: Get.textTheme.headline6?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: ColorStyle.primary,
+                ),
+              ),
+            ],
+          ),
+        ),
+        for (var item in items) _buildMenuItem(item),
+      ],
+    );
+  }
+
+  Widget _buildMenuItem(Map<String, dynamic> item) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8.5.h),
+      child: Slidable(
+        endActionPane: ActionPane(
+          motion: const ScrollMotion(),
+          children: [
+            SlidableAction(
+              onPressed: (context) {
+                ListController.to.deleteItem(item);
+              },
+              borderRadius: BorderRadius.horizontal(
+                right: Radius.circular(10.r),
+              ),
+              backgroundColor: const Color(0xFFFE4A49),
+              foregroundColor: Colors.white,
+              icon: Icons.delete,
+              label: 'Delete',
+            ),
+          ],
+        ),
+        child: Material(
+          borderRadius: BorderRadius.circular(10.r),
+          elevation: 2,
+          child: MenuCard(
+            key: ValueKey(item['id_menu']),
+            menu: item,
+            isSelected: ListController.to.selectedItems.contains(item),
+            onTap: () {
+              setState(() {
+                if (ListController.to.selectedItems.contains(item)) {
+                  ListController.to.selectedItems.remove(item);
+                } else {
+                  ListController.to.selectedItems.add(item);
+                }
+              });
+            },
+          ),
         ),
       ),
     );

@@ -8,5 +8,6 @@ abstract class Routes {
   static const String privacyPolicyRoute = '/privacy_policy';
   static const String getLocationRoute = '/get_location';
   static const String listRoute = '/list';
-static const String detailMenuRoute = '/detail_menu';
+  static const String detailMenuRoute = '/detail_menu';
+  static const String checkoutRoute = '/checkout';
 }

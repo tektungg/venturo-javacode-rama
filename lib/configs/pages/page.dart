@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:venturo_core/configs/routes/route.dart';
+import 'package:venturo_core/features/checkout/bindings/checkout_binding.dart';
+import 'package:venturo_core/features/checkout/view/ui/checkout_screen.dart';
 import 'package:venturo_core/features/detail_menu/bindings/detail_menu_binding.dart';
 import 'package:venturo_core/features/detail_menu/view/ui/detail_menu_screen.dart';
 import 'package:venturo_core/features/forgot_password/bindings/forgot_password_binding.dart';
@@ -66,5 +68,10 @@ abstract class Pages {
       page: () => const DetailMenuScreen(),
       binding: DetailMenuBinding(),
     ),
+    GetPage(
+      name: Routes.checkoutRoute,
+      page: () => CheckoutScreen(),
+      binding: CheckoutBinding(),
+    )
   ];
 }

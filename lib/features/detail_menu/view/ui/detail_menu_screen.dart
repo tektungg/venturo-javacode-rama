@@ -30,7 +30,6 @@ class DetailMenuScreen extends StatelessWidget {
             width: double.infinity,
             height: 68.h,
             padding: EdgeInsets.symmetric(
-              horizontal: 25.w,
               vertical: 10.h,
             ),
             decoration: BoxDecoration(
@@ -78,111 +77,109 @@ class DetailMenuScreen extends StatelessWidget {
 
         final menu = controller.menuDetail;
 
-        return SingleChildScrollView(
-          padding: EdgeInsets.all(16.r),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: CachedNetworkImage(
-                  imageUrl: menu['foto'] ??
-                      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png',
-                  height: 200.h,
-                  fit: BoxFit.contain,
-                  placeholder: (context, url) =>
-                      const Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) => Image.network(
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: CachedNetworkImage(
+                imageUrl: menu['foto'] ??
                     'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png',
-                    fit: BoxFit.contain,
-                  ),
+                height: 200.h,
+                fit: BoxFit.contain,
+                placeholder: (context, url) =>
+                    const Center(child: CircularProgressIndicator()),
+                errorWidget: (context, url, error) => Image.network(
+                  'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png',
+                  fit: BoxFit.contain,
                 ),
               ),
-              SizedBox(height: 16.h),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.all(16.r),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(30.r),
+            ),
+            SizedBox(height: 16.h),
+            Container(
+              width: Get.width,
+              height: Get.height - 315.h,
+              padding: EdgeInsets.all(28.r),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(30.r),
+                ),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color.fromARGB(111, 24, 24, 24),
+                    blurRadius: 4,
+                    spreadRadius: -1,
+                    offset: Offset(0, 1),
                   ),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Color.fromARGB(111, 24, 24, 24),
-                      blurRadius: 4,
-                      spreadRadius: -1,
-                      offset: Offset(0, 1),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      menu['nama'] ?? 'Nama Tidak Tersedia',
-                      style: Get.textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: ColorStyle.primary,
-                      ),
-                    ),
-                    SizedBox(height: 8.h),
-                    Text(
-                      menu['deskripsi'] ?? 'Deskripsi Tidak Tersedia',
-                      style: Get.textTheme.bodyMedium,
-                    ),
-                    SizedBox(height: 16.h),
-                    const Divider(),
-                    _buildDetailRow(
-                      context,
-                      'Harga',
-                      Obx(() => Text(
-                            'Rp${NumberFormat.currency(locale: 'id_ID', symbol: '', decimalDigits: 0).format(controller.totalPrice.value)}',
-                            style: const TextStyle(
-                              color: ColorStyle.primary,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )),
-                      Icons.attach_money,
-                    ),
-                    const Divider(),
-                    _buildTouchableDetailRow(
-                      context,
-                      'Level',
-                      controller.selectedLevel.value.isEmpty
-                          ? 'Pilih Level'
-                          : capitalize(controller.selectedLevel.value),
-                      () => showLevelBottomSheet(context, controller),
-                      Icons.whatshot,
-                    ),
-                    const Divider(),
-                    _buildTouchableDetailRow(
-                      context,
-                      'Topping',
-                      controller.selectedToppings.isEmpty
-                          ? 'Pilih Topping'
-                          : controller.selectedToppings
-                              .map(capitalize)
-                              .join(', '),
-                      () => showToppingBottomSheet(context, controller),
-                      Icons.local_pizza,
-                    ),
-                    const Divider(),
-                    _buildTouchableDetailRow(
-                      context,
-                      'Catatan',
-                      controller.catatan.value.isEmpty
-                          ? 'Masukkan catatan'
-                          : _truncateWithEllipsis(controller.catatan.value, 20),
-                      () => showCatatanBottomSheet(
-                          context, controller, catatanController),
-                      Icons.edit_note_outlined,
-                    ),
-                    const Divider(),
-                  ],
-                ),
+                ],
               ),
-            ],
-          ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    menu['nama'] ?? 'Nama Tidak Tersedia',
+                    style: Get.textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: ColorStyle.primary,
+                    ),
+                  ),
+                  SizedBox(height: 8.h),
+                  Text(
+                    menu['deskripsi'] ?? 'Deskripsi Tidak Tersedia',
+                    style: Get.textTheme.bodyMedium,
+                  ),
+                  SizedBox(height: 16.h),
+                  const Divider(),
+                  _buildDetailRow(
+                    context,
+                    'Harga',
+                    Obx(() => Text(
+                          'Rp${NumberFormat.currency(locale: 'id_ID', symbol: '', decimalDigits: 0).format(controller.totalPrice.value)}',
+                          style: const TextStyle(
+                            color: ColorStyle.primary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )),
+                    Icons.attach_money,
+                  ),
+                  const Divider(),
+                  _buildTouchableDetailRow(
+                    context,
+                    'Level',
+                    controller.selectedLevel.value.isEmpty
+                        ? 'Pilih Level'
+                        : capitalize(controller.selectedLevel.value),
+                    () => showLevelBottomSheet(context, controller),
+                    Icons.whatshot,
+                  ),
+                  const Divider(),
+                  _buildTouchableDetailRow(
+                    context,
+                    'Topping',
+                    controller.selectedToppings.isEmpty
+                        ? 'Pilih Topping'
+                        : controller.selectedToppings
+                            .map(capitalize)
+                            .join(', '),
+                    () => showToppingBottomSheet(context, controller),
+                    Icons.local_pizza,
+                  ),
+                  const Divider(),
+                  _buildTouchableDetailRow(
+                    context,
+                    'Catatan',
+                    controller.catatan.value.isEmpty
+                        ? 'Masukkan catatan'
+                        : _truncateWithEllipsis(controller.catatan.value, 20),
+                    () => showCatatanBottomSheet(
+                        context, controller, catatanController),
+                    Icons.edit_note_outlined,
+                  ),
+                  const Divider(),
+                ],
+              ),
+            ),
+          ],
         );
       }),
     );
@@ -257,6 +254,6 @@ class DetailMenuScreen extends StatelessWidget {
   String _truncateWithEllipsis(String text, int maxLength) {
     return (text.length <= maxLength)
         ? text
-        : '${text.substring(0, maxLength)} ...';
+        : '${text.substring(0, maxLength)}...';
   }
 }

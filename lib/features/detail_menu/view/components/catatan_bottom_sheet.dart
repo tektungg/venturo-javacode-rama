@@ -14,7 +14,7 @@ void showCatatanBottomSheet(BuildContext context,
     builder: (context) {
       return Padding(
         padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom + 16.r,
+          bottom: MediaQuery.of(context).viewInsets.bottom + 2.r,
         ),
         child: DraggableScrollableSheet(
           initialChildSize: 0.3,

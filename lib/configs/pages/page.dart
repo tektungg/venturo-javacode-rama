@@ -12,6 +12,8 @@ import 'package:venturo_core/features/get_location/view/ui/get_location_screen.d
 import 'package:venturo_core/features/list/bindings/list_binding.dart';
 import 'package:venturo_core/features/list/view/ui/list_screen.dart';
 import 'package:venturo_core/features/no_connection/view/ui/no_connection_screen.dart';
+import 'package:venturo_core/features/order/bindings/order_binding.dart';
+import 'package:venturo_core/features/order/view/ui/order_screen.dart';
 import 'package:venturo_core/features/profile/bindings/profile_binding.dart';
 import 'package:venturo_core/features/profile/view/components/privacy_policy_screen.dart';
 import 'package:venturo_core/features/profile/view/ui/profile_screen.dart';
@@ -72,6 +74,11 @@ abstract class Pages {
       name: Routes.checkoutRoute,
       page: () => CheckoutScreen(),
       binding: CheckoutBinding(),
-    )
+    ),
+    GetPage(
+      name: Routes.orderRoute,
+      page: () => OrderScreen(),
+      binding: OrderBinding(),
+    ),
   ];
 }

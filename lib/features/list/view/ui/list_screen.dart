@@ -36,9 +36,9 @@ class ListScreenState extends State<ListScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 20.h),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25.w),
-              child: const SectionHeader(
+            const Padding(
+              padding: EdgeInsets.symmetric(),
+              child: SectionHeader(
                 title: 'Available Promos',
                 icon: Icons.local_offer,
               ),

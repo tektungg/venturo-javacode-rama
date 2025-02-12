@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:venturo_core/constants/core/assets/image_constant.dart';
 import 'package:venturo_core/features/list/controllers/list_controller.dart';
-import 'package:venturo_core/features/list/view/components/menu_card.dart';
+import 'package:venturo_core/features/list/view/components/category_section.dart';
 import 'package:venturo_core/features/list/view/components/menu_chip.dart';
+import 'package:venturo_core/features/list/view/components/menu_item.dart';
 import 'package:venturo_core/features/list/view/components/promo_card.dart';
 import 'package:venturo_core/features/list/view/components/search_app_bar.dart';
 import 'package:venturo_core/features/list/view/components/section_header.dart';
-import 'package:venturo_core/shared/styles/color_style.dart';
 
 class ListScreen extends StatefulWidget {
   const ListScreen({super.key});
@@ -37,9 +36,9 @@ class ListScreenState extends State<ListScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 20.h),
-            const Padding(
-              padding: EdgeInsets.symmetric(),
-              child: SectionHeader(
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 25.w),
+              child: const SectionHeader(
                 title: 'Available Promos',
                 icon: Icons.local_offer,
               ),
@@ -129,7 +128,7 @@ class ListScreenState extends State<ListScreen> {
                     children: [
                       if (ListController.to.selectedCategory.value ==
                           'Semua') ...[
-                        _buildCategorySection(
+                        buildCategorySection(
                           'Makanan',
                           ListController.to.filteredList
                               .where((item) =>
@@ -138,7 +137,7 @@ class ListScreenState extends State<ListScreen> {
                               .toList(),
                           Icons.local_dining,
                         ),
-                        _buildCategorySection(
+                        buildCategorySection(
                           'Minuman',
                           ListController.to.filteredList
                               .where((item) =>
@@ -147,7 +146,7 @@ class ListScreenState extends State<ListScreen> {
                               .toList(),
                           Icons.local_drink,
                         ),
-                        _buildCategorySection(
+                        buildCategorySection(
                           'Snack',
                           ListController.to.filteredList
                               .where((item) =>
@@ -158,7 +157,7 @@ class ListScreenState extends State<ListScreen> {
                         ),
                       ] else ...[
                         for (var item in ListController.to.filteredList)
-                          _buildMenuItem(item),
+                          buildMenuItem(item),
                       ],
                     ],
                   ),
@@ -166,75 +165,6 @@ class ListScreenState extends State<ListScreen> {
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildCategorySection(
-      String title, List<Map<String, dynamic>> items, IconData icon) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 10.h),
-          child: Row(
-            children: [
-              Icon(icon, color: ColorStyle.primary),
-              SizedBox(width: 8.w),
-              Text(
-                title,
-                style: Get.textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: ColorStyle.primary,
-                ),
-              ),
-            ],
-          ),
-        ),
-        for (var item in items) _buildMenuItem(item),
-      ],
-    );
-  }
-
-  Widget _buildMenuItem(Map<String, dynamic> item) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.5.h),
-      child: Slidable(
-        endActionPane: ActionPane(
-          motion: const ScrollMotion(),
-          children: [
-            SlidableAction(
-              onPressed: (context) {
-                ListController.to.deleteItem(item);
-              },
-              borderRadius: BorderRadius.horizontal(
-                right: Radius.circular(10.r),
-              ),
-              backgroundColor: const Color(0xFFFE4A49),
-              foregroundColor: Colors.white,
-              icon: Icons.delete,
-              label: 'Delete',
-            ),
-          ],
-        ),
-        child: Material(
-          borderRadius: BorderRadius.circular(10.r),
-          elevation: 2,
-          child: MenuCard(
-            key: ValueKey(item['id_menu']),
-            menu: item,
-            isSelected: ListController.to.selectedItems.contains(item),
-            onTap: () {
-              setState(() {
-                if (ListController.to.selectedItems.contains(item)) {
-                  ListController.to.selectedItems.remove(item);
-                } else {
-                  ListController.to.selectedItems.add(item);
-                }
-              });
-            },
-          ),
         ),
       ),
     );

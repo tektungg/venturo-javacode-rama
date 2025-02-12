@@ -138,8 +138,8 @@ class DetailMenuScreen extends StatelessWidget {
                         children: [
                           // Decrement Button
                           Container(
-                            width: 30.w,
-                            height: 30.h,
+                            width: 20.w,
+                            height: 20.h,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               border: Border.all(color: ColorStyle.primary),
@@ -149,8 +149,11 @@ class DetailMenuScreen extends StatelessWidget {
                               padding: EdgeInsets.zero,
                               constraints: const BoxConstraints(),
                               onPressed: controller.decrementQuantity,
-                              icon: const Icon(Icons.remove,
-                                  color: ColorStyle.primary),
+                              icon: const Icon(
+                                Icons.remove,
+                                color: ColorStyle.primary,
+                                size: 15,
+                              ),
                             ),
                           ),
                           // Quantity Text
@@ -163,8 +166,8 @@ class DetailMenuScreen extends StatelessWidget {
                               )),
                           // Increment Button
                           Container(
-                            width: 30.w,
-                            height: 30.h,
+                            width: 20.w,
+                            height: 20.h,
                             decoration: BoxDecoration(
                               color: ColorStyle.primary,
                               border: Border.all(color: ColorStyle.primary),
@@ -174,7 +177,8 @@ class DetailMenuScreen extends StatelessWidget {
                               padding: EdgeInsets.zero,
                               constraints: const BoxConstraints(),
                               onPressed: controller.incrementQuantity,
-                              icon: const Icon(Icons.add, color: Colors.white),
+                              icon: const Icon(Icons.add,
+                                  color: Colors.white, size: 15),
                             ),
                           ),
                         ],

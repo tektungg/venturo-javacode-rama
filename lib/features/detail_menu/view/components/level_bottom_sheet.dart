@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:venturo_core/features/detail_menu/controllers/detail_menu_controller.dart';
+import 'package:venturo_core/utils/functions/string_utils.dart' as string_utils;
 
 void showLevelBottomSheet(
     BuildContext context, DetailMenuController controller) {
@@ -60,7 +61,7 @@ void showLevelBottomSheet(
                     label: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(capitalize(level['keterangan'])),
+                        Text(string_utils.capitalize(level['keterangan'])),
                         if (isSelected)
                           Padding(
                             padding: EdgeInsets.only(left: 4.w),
@@ -104,6 +105,3 @@ void showLevelBottomSheet(
     },
   );
 }
-
-String capitalize(String s) =>
-    s[0].toUpperCase() + s.substring(1).toLowerCase();

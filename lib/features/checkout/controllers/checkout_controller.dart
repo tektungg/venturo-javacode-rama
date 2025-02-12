@@ -23,8 +23,7 @@ class CheckoutController extends GetxController {
       totalItems += menu['jumlah'] as int;
     }
     totalHarga.value = total;
-    totalPembayaran.value =
-        total; // Update this with discount and voucher logic
+    totalPembayaran.value = total; // Update this with discount and voucher logic
     totalMenuDipesan.value = totalItems;
   }
 }

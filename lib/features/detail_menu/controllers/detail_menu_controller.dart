@@ -29,13 +29,11 @@ class DetailMenuController extends GetxController {
 
   void incrementQuantity() {
     quantity.value++;
-    updateTotalPrice();
   }
 
   void decrementQuantity() {
     if (quantity.value > 1) {
       quantity.value--;
-      updateTotalPrice();
     }
   }
 
@@ -54,6 +52,6 @@ class DetailMenuController extends GetxController {
           toppings.firstWhere((t) => t['keterangan'] == topping);
       price += (toppingItem['harga'] as num).toInt();
     }
-    totalPrice.value = price * quantity.value;
+    totalPrice.value = price;
   }
 }

@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:venturo_core/configs/routes/route.dart';
 import 'package:venturo_core/features/checkout/bindings/checkout_binding.dart';
+import 'package:venturo_core/features/checkout/sub_features/edit_menu/view/ui/edit_menu_screen.dart';
 import 'package:venturo_core/features/checkout/view/ui/checkout_screen.dart';
 import 'package:venturo_core/features/detail_menu/bindings/detail_menu_binding.dart';
 import 'package:venturo_core/features/detail_menu/view/ui/detail_menu_screen.dart';
@@ -79,6 +80,10 @@ abstract class Pages {
       name: Routes.orderRoute,
       page: () => OrderScreen(),
       binding: OrderBinding(),
+    ),
+    GetPage(
+      name: Routes.editMenuRoute,
+      page: () => const EditMenuScreen(),
     ),
   ];
 }

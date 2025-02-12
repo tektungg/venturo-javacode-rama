@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:venturo_core/configs/routes/route.dart';
 import 'package:venturo_core/shared/styles/color_style.dart';
 import 'package:venturo_core/features/checkout/controllers/checkout_controller.dart';
 
@@ -20,7 +21,9 @@ class CheckoutMenuCard extends StatelessWidget {
     return Stack(
       children: [
         InkWell(
-          onTap: null,
+          onTap: () {
+            Get.toNamed(Routes.editMenuRoute, arguments: menu);
+          },
           borderRadius: BorderRadius.circular(10.r),
           child: Ink(
             padding: EdgeInsets.all(7.r),

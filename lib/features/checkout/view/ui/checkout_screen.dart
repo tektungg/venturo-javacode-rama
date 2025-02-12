@@ -73,7 +73,26 @@ class CheckoutScreen extends StatelessWidget {
       ),
       body: Obx(() {
         if (controller.menuList.isEmpty) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.shopping_cart_outlined,
+                  size: 100.r,
+                  color: Colors.grey,
+                ),
+                SizedBox(height: 16.h),
+                Text(
+                  'Belum ada pesanan',
+                  style: Get.textTheme.titleLarge?.copyWith(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          );
         }
 
         final groupedMenu = controller.groupedMenuByCategory;

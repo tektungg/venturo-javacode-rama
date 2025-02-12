@@ -52,4 +52,12 @@ class CheckoutController extends GetxController {
     }
     return groupedMenu;
   }
+
+  void updateMenu(Map<String, dynamic> updatedMenu) {
+    int index = menuList.indexWhere((menu) => menu['id_menu'] == updatedMenu['id_menu']);
+    if (index != -1) {
+      menuList[index] = updatedMenu;
+      calculateTotal();
+    }
+  }
 }

@@ -247,9 +247,13 @@ class DetailMenuScreen extends StatelessWidget {
                         ),
                         onPressed: () {
                           checkoutController.menuList.add({
+                            'id_menu': menuId,
                             'nama': menu['nama'],
                             'harga': controller.totalPrice.value,
                             'jumlah': controller.quantity.value,
+                            'foto': menu['foto'],
+                            'catatan': controller.catatan.value,
+                            'kategori': menu['kategori'],
                           });
                           checkoutController.calculateTotal();
                           Get.toNamed(Routes.checkoutRoute);

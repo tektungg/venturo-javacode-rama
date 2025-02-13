@@ -11,6 +11,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:venturo_core/features/checkout/controllers/checkout_controller.dart';
 import 'package:venturo_core/features/get_location/controllers/get_location_controller.dart';
+import 'package:venturo_core/features/list/sub_features/promo/controllers/list_promo_controller.dart';
 
 import 'firebase_options.dart';
 import 'configs/pages/page.dart';
@@ -42,6 +43,7 @@ Future<void> main() async {
       Get.put(GlobalController());
       Get.put(GetLocationController());
       Get.put(CheckoutController());
+      Get.put(ListPromoController());
       runApp(const MyApp());
     },
   );

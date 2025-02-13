@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:venturo_core/constants/core/assets/image_constant.dart';
 import 'package:venturo_core/features/list/controllers/list_controller.dart';
 import 'package:venturo_core/features/list/view/components/category_section.dart';
 import 'package:venturo_core/features/list/view/components/menu_chip.dart';
@@ -12,6 +11,7 @@ import 'package:venturo_core/features/list/view/components/search_app_bar.dart';
 import 'package:venturo_core/features/list/view/components/section_header.dart';
 import 'package:venturo_core/shared/widgets/checkout_fab.dart';
 import 'package:venturo_core/shared/widgets/bottom_navbar.dart';
+import 'package:venturo_core/features/list/sub_features/promo/controllers/list_promo_controller.dart';
 
 class ListScreen extends StatefulWidget {
   const ListScreen({super.key});
@@ -28,6 +28,7 @@ class ListScreenState extends State<ListScreen> {
   void initState() {
     super.initState();
     _refreshController = RefreshController(initialRefresh: false);
+    Get.put(ListPromoController()); // Initialize ListPromoController
   }
 
   @override
@@ -61,34 +62,27 @@ class ListScreenState extends State<ListScreen> {
                   ),
                 ),
                 SizedBox(height: 10.h),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  padding: EdgeInsets.symmetric(horizontal: 25.w),
-                  child: Row(
-                    children: [
-                      const PromoCard(
-                        promoName: 'Promo 1',
-                        discountNominal: '20',
-                        thumbnailUrl: ImageConstant.promo1,
-                        enableShadow: true,
-                      ),
-                      SizedBox(width: 10.w),
-                      const PromoCard(
-                        promoName: 'Promo 2',
-                        discountNominal: '30',
-                        thumbnailUrl: ImageConstant.promo2,
-                        enableShadow: true,
-                      ),
-                      SizedBox(width: 10.w),
-                      const PromoCard(
-                        promoName: 'Promo 3',
-                        discountNominal: '50',
-                        thumbnailUrl: ImageConstant.promo3,
-                        enableShadow: true,
-                      ),
-                    ],
-                  ),
-                ),
+                Obx(() {
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.symmetric(horizontal: 25.w),
+                    child: Row(
+                      children: ListPromoController.to.promos.map((promo) {
+                        return Padding(
+                          padding: EdgeInsets.only(right: 10.w),
+                          child: PromoCard(
+                            promoName: promo['nama'] ?? 'Promo Tanpa Nama',
+                            discountNominal: promo['diskon']?.toString() ?? '0',
+                            thumbnailUrl: promo['foto'] ??
+                                'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png',
+                            enableShadow: true,
+                            promoId: promo['id_promo'],
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  );
+                }),
                 SizedBox(height: 20.h),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25.w),
@@ -98,7 +92,8 @@ class ListScreenState extends State<ListScreen> {
                       child: Row(
                         children: ListController.to.categories.map((category) {
                           final isSelected =
-                              ListController.to.selectedCategory.value == category;
+                              ListController.to.selectedCategory.value ==
+                                  category;
                           IconData icon;
                           switch (category) {
                             case 'Makanan':
@@ -149,7 +144,9 @@ class ListScreenState extends State<ListScreen> {
                               'Makanan',
                               ListController.to.filteredList
                                   .where((item) =>
-                                      item['kategori'].toString().toLowerCase() ==
+                                      item['kategori']
+                                          .toString()
+                                          .toLowerCase() ==
                                       'makanan')
                                   .toList(),
                               Icons.local_dining,
@@ -158,7 +155,9 @@ class ListScreenState extends State<ListScreen> {
                               'Minuman',
                               ListController.to.filteredList
                                   .where((item) =>
-                                      item['kategori'].toString().toLowerCase() ==
+                                      item['kategori']
+                                          .toString()
+                                          .toLowerCase() ==
                                       'minuman')
                                   .toList(),
                               Icons.local_drink,
@@ -167,7 +166,9 @@ class ListScreenState extends State<ListScreen> {
                               'Snack',
                               ListController.to.filteredList
                                   .where((item) =>
-                                      item['kategori'].toString().toLowerCase() ==
+                                      item['kategori']
+                                          .toString()
+                                          .toLowerCase() ==
                                       'snack')
                                   .toList(),
                               Icons.kebab_dining,

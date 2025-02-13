@@ -11,6 +11,7 @@ import 'package:venturo_core/features/forgot_password/view/ui/forgot_password_sc
 import 'package:venturo_core/features/forgot_password/view/ui/otp_screen.dart';
 import 'package:venturo_core/features/get_location/view/ui/get_location_screen.dart';
 import 'package:venturo_core/features/list/bindings/list_binding.dart';
+import 'package:venturo_core/features/list/sub_features/promo/view/ui/promo_screen.dart';
 import 'package:venturo_core/features/list/view/ui/list_screen.dart';
 import 'package:venturo_core/features/no_connection/view/ui/no_connection_screen.dart';
 import 'package:venturo_core/features/order/bindings/order_binding.dart';
@@ -84,6 +85,10 @@ abstract class Pages {
     GetPage(
       name: Routes.editMenuRoute,
       page: () => const EditMenuScreen(),
+    ),
+    GetPage(
+      name: Routes.promoRoute,
+      page: () => const PromoScreen(),
     ),
   ];
 }

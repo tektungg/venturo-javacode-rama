@@ -4,7 +4,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
-        android:label="venturo_core"
+        android:label="Java Code"
         android:name="io.flutter.app.FlutterMultiDexApplication"
         android:icon="@mipmap/ic_launcher">
         <activity

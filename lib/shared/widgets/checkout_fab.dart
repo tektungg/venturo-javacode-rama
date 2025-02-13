@@ -14,18 +14,23 @@ class CheckoutFAB extends StatelessWidget {
 
     return Stack(
       children: [
-        FloatingActionButton(
-          onPressed: () {
-            Get.toNamed(Routes.checkoutRoute);
-          },
-          backgroundColor: ColorStyle.primary,
-          child: const Icon(
-            Icons.shopping_cart,
-            color: Colors.white,
+        Positioned(
+          bottom: 50.h, // Adjust this value to move the FAB upwards
+          right: 16.w,
+          child: FloatingActionButton(
+            onPressed: () {
+              Get.toNamed(Routes.checkoutRoute);
+            },
+            backgroundColor: ColorStyle.primary,
+            child: const Icon(
+              Icons.shopping_cart,
+              color: Colors.white,
+            ),
           ),
         ),
         Positioned(
-          right: 0,
+          bottom: 50.h + 28.r, // Adjust this value to match the FAB position
+          right: 0.w + 28.r,
           child: Obx(() {
             int itemCount = controller.menuList.length;
             return itemCount > 0

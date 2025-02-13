@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:venturo_core/configs/routes/route.dart';
 import 'package:venturo_core/features/checkout/controllers/checkout_controller.dart';
 import 'package:venturo_core/features/detail_menu/controllers/detail_menu_controller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -130,17 +129,17 @@ Widget buildAddToOrderButton(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
       ),
       onPressed: () {
-        checkoutController.menuList.add({
+        final updatedMenu = {
           'id_menu': menuId,
-          'nama': menu['nama'],
+          'nama': menu['nama'] ?? '',
           'harga': controller.totalPrice.value,
           'jumlah': controller.quantity.value,
-          'foto': menu['foto'],
+          'foto': menu['foto'] ?? '',
           'catatan': controller.catatan.value,
-          'kategori': menu['kategori'],
-        });
+          'kategori': menu['kategori'] ?? '',
+        };
+        checkoutController.menuList.add(updatedMenu);
         checkoutController.calculateTotal();
-        Get.toNamed(Routes.checkoutRoute);
       },
       child: Text(
         'Tambahkan ke Pesanan',

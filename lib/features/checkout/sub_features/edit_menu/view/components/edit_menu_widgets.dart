@@ -38,7 +38,8 @@ PreferredSizeWidget buildAppBar() {
             Center(
               child: Text(
                 'Edit Menu',
-                style: Get.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                style: Get.textTheme.titleLarge
+                    ?.copyWith(fontWeight: FontWeight.bold),
               ),
             ),
           ],
@@ -51,10 +52,12 @@ PreferredSizeWidget buildAppBar() {
 Widget buildMenuImage(String? imageUrl) {
   return Center(
     child: CachedNetworkImage(
-      imageUrl: imageUrl ?? 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png',
+      imageUrl: imageUrl ??
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png',
       height: 200.h,
       fit: BoxFit.contain,
-      placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+      placeholder: (context, url) =>
+          const Center(child: CircularProgressIndicator()),
       errorWidget: (context, url, error) => Image.network(
         'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png',
         fit: BoxFit.contain,
@@ -63,14 +66,15 @@ Widget buildMenuImage(String? imageUrl) {
   );
 }
 
-Widget buildMenuHeader(DetailMenuController controller, Map<String, dynamic> menuDetail) {
+Widget buildMenuHeader(
+    DetailMenuController controller, Map<String, dynamic> menuDetail) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       Text(
         menuDetail['nama'] ?? 'Nama Tidak Tersedia',
-        style: Get.textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.bold, color: ColorStyle.primary),
+        style: Get.textTheme.headlineSmall
+            ?.copyWith(fontWeight: FontWeight.bold, color: ColorStyle.primary),
       ),
       Row(
         children: [
@@ -84,14 +88,16 @@ Widget buildMenuHeader(DetailMenuController controller, Map<String, dynamic> men
                 child: Text('${controller.quantity.value}',
                     style: Get.textTheme.bodyLarge),
               )),
-          buildQuantityButton(controller, Icons.add, controller.incrementQuantity),
+          buildQuantityButton(
+              controller, Icons.add, controller.incrementQuantity),
         ],
       ),
     ],
   );
 }
 
-Widget buildQuantityButton(DetailMenuController controller, IconData icon, VoidCallback onPressed) {
+Widget buildQuantityButton(
+    DetailMenuController controller, IconData icon, VoidCallback onPressed) {
   return Container(
     width: 20.w,
     height: 20.h,

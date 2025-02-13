@@ -74,7 +74,7 @@ class CheckoutMenuCard extends StatelessWidget {
                         maxLines: 1,
                       ),
                       Text(
-                        'Rp${NumberFormat.currency(locale: 'id_ID', symbol: '', decimalDigits: 0).format(menu['harga'])}',
+                        'Rp${NumberFormat.currency(locale: 'id_ID', symbol: '', decimalDigits: 0).format(menu['harga'] ?? 0)}',
                         style: Get.textTheme.bodyMedium!.copyWith(
                           color: Theme.of(context).primaryColor,
                           fontWeight: FontWeight.bold,

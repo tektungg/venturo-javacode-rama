@@ -10,6 +10,7 @@ import 'package:venturo_core/features/list/view/components/menu_item.dart';
 import 'package:venturo_core/features/list/view/components/promo_card.dart';
 import 'package:venturo_core/features/list/view/components/search_app_bar.dart';
 import 'package:venturo_core/features/list/view/components/section_header.dart';
+import 'package:venturo_core/shared/widgets/checkout_fab.dart';
 
 class ListScreen extends StatefulWidget {
   const ListScreen({super.key});
@@ -166,6 +167,7 @@ class ListScreenState extends State<ListScreen> {
             ),
           ],
         ),
+        floatingActionButton: const CheckoutFAB(),
       ),
     );
   }

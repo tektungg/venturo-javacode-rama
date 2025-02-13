@@ -11,6 +11,7 @@ import 'package:venturo_core/features/detail_menu/view/components/detail_row_wid
 import 'package:venturo_core/features/detail_menu/view/components/touchable_detail_row_widget.dart';
 import 'package:venturo_core/shared/styles/color_style.dart';
 import 'package:intl/intl.dart';
+import 'package:venturo_core/shared/widgets/checkout_fab.dart';
 import 'package:venturo_core/utils/functions/string_utils.dart' as string_utils;
 import 'package:venturo_core/utils/functions/string_utils.dart';
 
@@ -47,6 +48,7 @@ class DetailMenuScreen extends StatelessWidget {
           ],
         );
       }),
+      floatingActionButton: const CheckoutFAB(),
     );
   }
 

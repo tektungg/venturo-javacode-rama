@@ -27,12 +27,13 @@ class ListController extends GetxController {
     'Snack',
   ];
 
-  final RefreshController refreshController =
-      RefreshController(initialRefresh: false);
+  late RefreshController refreshController;
 
   @override
   void onInit() async {
     super.onInit();
+
+    refreshController = RefreshController(initialRefresh: false);
 
     _checkLocationPermissionAndGetLocation();
     repository = ListRepository();

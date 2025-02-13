@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:venturo_core/features/order/controllers/order_controller.dart';
 import 'package:venturo_core/shared/styles/color_style.dart';
 import 'package:venturo_core/constants/core/assets/image_constant.dart';
+import 'package:venturo_core/shared/widgets/bottom_navbar.dart';
 
 class OrderScreen extends StatelessWidget {
   OrderScreen({super.key});
@@ -75,24 +76,34 @@ class OrderScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(ImageConstant.bgPattern2),
-            fit: BoxFit.cover,
+      body: Stack(
+        children: [
+          Container(
+            width: double.infinity,
+            height: double.infinity,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(ImageConstant.bgPattern2),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Obx(() {
+              if (controller.selectedTab.value == 'Sedang Berjalan') {
+                return _buildOrderList(
+                    controller.ongoingOrders, 'Belum ada pesanan');
+              } else {
+                return _buildOrderList(
+                    controller.orderHistory, 'Belum ada riwayat');
+              }
+            }),
           ),
-        ),
-        child: Obx(() {
-          if (controller.selectedTab.value == 'Sedang Berjalan') {
-            return _buildOrderList(
-                controller.ongoingOrders, 'Belum ada pesanan');
-          } else {
-            return _buildOrderList(
-                controller.orderHistory, 'Belum ada riwayat');
-          }
-        }),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: BottomNavbar(),
+          ),
+        ],
       ),
     );
   }

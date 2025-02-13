@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:venturo_core/features/profile/constants/profile_assets_constant.dart';
 import 'package:venturo_core/features/profile/controllers/profile_controller.dart';
 import 'package:venturo_core/shared/widgets/tile_option.dart';
+import 'package:venturo_core/shared/widgets/bottom_navbar.dart';
+
 import 'package:get/get.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -52,23 +54,33 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Profile'),
       ),
-      body: ListView(
+      body: Stack(
         children: [
-          const Divider(),
-          TileOption(
-            title: 'Privacy Policy'.tr,
-            message: 'Here',
-            onTap: ProfileController.to.privacyPolicyWebView,
+          ListView(
+            children: [
+              const Divider(),
+              TileOption(
+                title: 'Privacy Policy'.tr,
+                message: 'Here',
+                onTap: ProfileController.to.privacyPolicyWebView,
+              ),
+              const Divider(),
+              Obx(() {
+                return ListTile(
+                  title: Text(
+                      'Device Model: ${ProfileController.to.deviceModel.value}'),
+                  subtitle: Text(
+                      'Android Version: ${ProfileController.to.deviceVersion.value}'),
+                );
+              }),
+            ],
           ),
-          const Divider(),
-          Obx(() {
-            return ListTile(
-              title: Text(
-                  'Device Model: ${ProfileController.to.deviceModel.value}'),
-              subtitle: Text(
-                  'Android Version: ${ProfileController.to.deviceVersion.value}'),
-            );
-          }),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: BottomNavbar(),
+          ),
         ],
       ),
     );

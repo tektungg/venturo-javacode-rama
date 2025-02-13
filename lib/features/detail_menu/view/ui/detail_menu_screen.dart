@@ -11,6 +11,7 @@ import 'package:venturo_core/features/detail_menu/view/components/detail_row_wid
 import 'package:venturo_core/features/detail_menu/view/components/touchable_detail_row_widget.dart';
 import 'package:venturo_core/shared/styles/color_style.dart';
 import 'package:intl/intl.dart';
+import 'package:venturo_core/shared/widgets/bottom_navbar.dart';
 import 'package:venturo_core/shared/widgets/checkout_fab.dart';
 import 'package:venturo_core/utils/functions/string_utils.dart' as string_utils;
 import 'package:venturo_core/utils/functions/string_utils.dart';
@@ -30,24 +31,34 @@ class DetailMenuScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: buildAppBar(),
-      body: Obx(() {
-        if (controller.menuDetail.isEmpty) {
-          return const Center(child: CircularProgressIndicator());
-        }
+      body: Stack(
+        children: [
+          Obx(() {
+            if (controller.menuDetail.isEmpty) {
+              return const Center(child: CircularProgressIndicator());
+            }
 
-        final menu = controller.menuDetail;
+            final menu = controller.menuDetail;
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            buildMenuImage(menu['foto']),
-            Expanded(
-              child: _buildMenuDetails(context, controller, menu,
-                  catatanController, checkoutController, menuId),
-            ),
-          ],
-        );
-      }),
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                buildMenuImage(menu['foto']),
+                Expanded(
+                  child: _buildMenuDetails(context, controller, menu,
+                      catatanController, checkoutController, menuId),
+                ),
+              ],
+            );
+          }),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: BottomNavbar(),
+          ),
+        ],
+      ),
       floatingActionButton: const CheckoutFAB(),
     );
   }

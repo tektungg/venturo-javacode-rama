@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return GetMaterialApp(
-          title: 'Venturo Core',
+          title: 'Java Code',
           debugShowCheckedModeBanner: false,
           locale: const Locale('id'),
           fallbackLocale: const Locale('id'),

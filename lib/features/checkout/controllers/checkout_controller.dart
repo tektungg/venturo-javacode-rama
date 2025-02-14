@@ -9,7 +9,8 @@ class CheckoutController extends GetxController {
   final RxInt totalPembayaran = 0.obs;
   final RxInt totalMenuDipesan = 0.obs;
   final RxInt totalVoucherNominal = 0.obs;
-  final Rx<Map<String, dynamic>?> selectedVoucher = Rx<Map<String, dynamic>?>(null);
+  final Rx<Map<String, dynamic>?> selectedVoucher =
+      Rx<Map<String, dynamic>?>(null);
 
   final DetailMenuRepository detailMenuRepository = DetailMenuRepository();
 
@@ -38,7 +39,8 @@ class CheckoutController extends GetxController {
       totalItems += menu['jumlah'] as int;
     }
     totalHarga.value = total;
-    totalPembayaran.value = total - totalVoucherNominal.value;
+    totalPembayaran.value =
+        (total - totalVoucherNominal.value).clamp(10000, total);
     totalMenuDipesan.value = totalItems;
   }
 

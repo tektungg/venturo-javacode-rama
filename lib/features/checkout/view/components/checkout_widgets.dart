@@ -75,8 +75,7 @@ Widget buildEmptyCart() {
   );
 }
 
-Widget buildSummarySection(
-    BuildContext context, CheckoutController controller) {
+Widget buildSummarySection(BuildContext context, CheckoutController controller) {
   return Container(
     width: Get.width,
     height: 330.h,
@@ -132,9 +131,7 @@ Widget buildSummarySection(
               }
             },
             Icons.local_play,
-            textColor: controller.totalVoucherNominal.value > 0
-                ? Colors.red
-                : Colors.black,
+            textColor: controller.totalVoucherNominal.value > 0 ? Colors.red : Colors.black,
             subtitle: voucherName,
           );
         }),

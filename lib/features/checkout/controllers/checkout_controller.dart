@@ -9,6 +9,7 @@ class CheckoutController extends GetxController {
   final RxInt totalPembayaran = 0.obs;
   final RxInt totalMenuDipesan = 0.obs;
   final RxInt totalVoucherNominal = 0.obs;
+  final Rx<Map<String, dynamic>?> selectedVoucher = Rx<Map<String, dynamic>?>(null);
 
   final DetailMenuRepository detailMenuRepository = DetailMenuRepository();
 
@@ -41,9 +42,9 @@ class CheckoutController extends GetxController {
     totalMenuDipesan.value = totalItems;
   }
 
-  void applyVouchers(List<Map<String, dynamic>> vouchers) {
-    totalVoucherNominal.value = vouchers.fold<int>(
-        0, (sum, voucher) => sum + (voucher['nominal'] as int));
+  void applyVoucher(Map<String, dynamic> voucher) {
+    selectedVoucher.value = voucher;
+    totalVoucherNominal.value = voucher['nominal'] as int;
     calculateTotal();
   }
 

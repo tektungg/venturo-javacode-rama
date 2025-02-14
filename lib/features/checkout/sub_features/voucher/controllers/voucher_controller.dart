@@ -3,19 +3,17 @@ import 'package:get/get.dart';
 class VoucherController extends GetxController {
   static VoucherController get to => Get.find();
 
-  final RxList<Map<String, dynamic>> selectedVouchers =
-      <Map<String, dynamic>>[].obs;
+  final Rx<Map<String, dynamic>?> selectedVoucher = Rx<Map<String, dynamic>?>(null);
 
-  void toggleVoucher(Map<String, dynamic> voucher) {
-    if (selectedVouchers.contains(voucher)) {
-      selectedVouchers.remove(voucher);
+  void selectVoucher(Map<String, dynamic> voucher) {
+    if (selectedVoucher.value == voucher) {
+      selectedVoucher.value = null;
     } else {
-      selectedVouchers.add(voucher);
+      selectedVoucher.value = voucher;
     }
   }
 
   int get totalVoucherNominal {
-    return selectedVouchers.fold<int>(
-        0, (sum, voucher) => sum + (voucher['nominal'] as int));
+    return selectedVoucher.value != null ? selectedVoucher.value!['nominal'] as int : 0;
   }
 }

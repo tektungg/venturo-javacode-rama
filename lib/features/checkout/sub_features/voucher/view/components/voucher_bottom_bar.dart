@@ -30,14 +30,15 @@ Widget buildVoucherBottomBar(VoucherController controller) {
             children: [
               TextSpan(
                 text: 'Voucher',
-                style: Get.textTheme.titleMedium?.copyWith(color: ColorStyle.primary),
+                style: Get.textTheme.titleMedium
+                    ?.copyWith(color: ColorStyle.primary),
               ),
             ],
           ),
         ),
         ElevatedButton(
           onPressed: () {
-            Get.back(result: controller.selectedVouchers);
+            Get.back(result: controller.selectedVoucher.value);
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: ColorStyle.primary,

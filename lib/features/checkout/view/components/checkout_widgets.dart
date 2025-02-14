@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:venturo_core/features/checkout/controllers/checkout_controller.dart';
 import 'package:venturo_core/features/checkout/sub_features/voucher/view/ui/voucher_screen.dart';
 import 'package:venturo_core/shared/styles/color_style.dart';
-import 'package:intl/intl.dart';
 import 'package:venturo_core/features/checkout/view/components/detail_row.dart';
 import 'package:venturo_core/features/checkout/view/components/touchable_detail_row.dart';
 
@@ -79,7 +79,7 @@ Widget buildSummarySection(
     BuildContext context, CheckoutController controller) {
   return Container(
     width: Get.width,
-    height: 320.h,
+    height: 330.h,
     padding: EdgeInsets.all(16.r),
     decoration: BoxDecoration(
       color: ColorStyle.tertiary,
@@ -116,23 +116,28 @@ Widget buildSummarySection(
           Icons.discount,
         ),
         const Divider(),
-        Obx(() => buildTouchableDetailRow(
-              context,
-              'Voucher',
-              controller.totalVoucherNominal.value > 0
-                  ? 'Rp${NumberFormat.currency(locale: 'id_ID', symbol: '', decimalDigits: 0).format(controller.totalVoucherNominal.value)}'
-                  : 'Pilih Voucher',
-              () async {
-                final selectedVouchers = await Get.to(() => VoucherScreen());
-                if (selectedVouchers != null) {
-                  controller.applyVouchers(selectedVouchers);
-                }
-              },
-              Icons.local_play,
-              textColor: controller.totalVoucherNominal.value > 0
-                  ? Colors.red
-                  : Colors.black,
-            )),
+        Obx(() {
+          final voucher = controller.selectedVoucher.value;
+          final voucherName = voucher != null ? voucher['nama'] : null;
+          return buildTouchableDetailRow(
+            context,
+            'Voucher',
+            controller.totalVoucherNominal.value > 0
+                ? 'Rp${NumberFormat.currency(locale: 'id_ID', symbol: '', decimalDigits: 0).format(controller.totalVoucherNominal.value)}'
+                : 'Pilih Voucher',
+            () async {
+              final selectedVoucher = await Get.to(() => VoucherScreen());
+              if (selectedVoucher != null) {
+                controller.applyVoucher(selectedVoucher);
+              }
+            },
+            Icons.local_play,
+            textColor: controller.totalVoucherNominal.value > 0
+                ? Colors.red
+                : Colors.black,
+            subtitle: voucherName,
+          );
+        }),
         const Divider(),
         buildDetailRow(
           context,

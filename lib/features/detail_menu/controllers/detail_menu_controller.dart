@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import 'package:venturo_core/features/detail_menu/repositories/detail_menu_repository.dart';
 
 class DetailMenuController extends GetxController {
@@ -14,44 +15,63 @@ class DetailMenuController extends GetxController {
   final RxInt totalPrice = 0.obs;
 
   final DetailMenuRepository repository = DetailMenuRepository();
+  final Logger logger = Logger();
 
   Future<void> fetchMenuDetail(int id) async {
     try {
+      logger.d('Fetching menu detail for id: $id');
       var data = await repository.fetchMenuDetail(id);
       menuDetail.value = data['menu'];
       toppings.assignAll(data['topping']);
       levels.assignAll(data['level']);
       totalPrice.value = (data['menu']['harga'] as num).toInt();
+      logger.d('Menu detail fetched successfully');
     } catch (e) {
+      logger.e('Error in fetchMenuDetail');
       Get.snackbar('Error', e.toString());
     }
   }
 
   void incrementQuantity() {
-    quantity.value++;
+    try {
+      quantity.value++;
+      logger.d('Quantity incremented to ${quantity.value}');
+    } catch (e) {
+      logger.e('Error in incrementQuantity');
+    }
   }
 
   void decrementQuantity() {
-    if (quantity.value > 1) {
-      quantity.value--;
+    try {
+      if (quantity.value > 1) {
+        quantity.value--;
+        logger.d('Quantity decremented to ${quantity.value}');
+      }
+    } catch (e) {
+      logger.e('Error in decrementQuantity');
     }
   }
 
   void updateTotalPrice() {
-    int price = (menuDetail['harga'] as num).toInt();
-    if (selectedLevel.isNotEmpty) {
-      final level = levels.firstWhere(
-          (level) => level['keterangan'] == selectedLevel.value,
-          orElse: () => null);
-      if (level != null) {
-        price += (level['harga'] as num).toInt();
+    try {
+      int price = (menuDetail['harga'] as num).toInt();
+      if (selectedLevel.isNotEmpty) {
+        final level = levels.firstWhere(
+            (level) => level['keterangan'] == selectedLevel.value,
+            orElse: () => null);
+        if (level != null) {
+          price += (level['harga'] as num).toInt();
+        }
       }
+      for (var topping in selectedToppings) {
+        final toppingItem =
+            toppings.firstWhere((t) => t['keterangan'] == topping);
+        price += (toppingItem['harga'] as num).toInt();
+      }
+      totalPrice.value = price;
+      logger.d('Total price updated to $price');
+    } catch (e) {
+      logger.e('Error in updateTotalPrice');
     }
-    for (var topping in selectedToppings) {
-      final toppingItem =
-          toppings.firstWhere((t) => t['keterangan'] == topping);
-      price += (toppingItem['harga'] as num).toInt();
-    }
-    totalPrice.value = price;
   }
 }

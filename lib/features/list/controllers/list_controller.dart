@@ -1,5 +1,6 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:venturo_core/configs/routes/route.dart';
@@ -12,12 +13,8 @@ class ListController extends GetxController {
   late final ListRepository repository;
 
   final RxList<Map<String, dynamic>> items = <Map<String, dynamic>>[].obs;
-
-  final RxList<Map<String, dynamic>> selectedItems =
-      <Map<String, dynamic>>[].obs;
-
+  final RxList<Map<String, dynamic>> selectedItems = <Map<String, dynamic>>[].obs;
   final RxString selectedCategory = 'Semua'.obs;
-
   final RxString keyword = ''.obs;
 
   final List<String> categories = [
@@ -28,6 +25,7 @@ class ListController extends GetxController {
   ];
 
   late RefreshController refreshController;
+  final Logger logger = Logger();
 
   @override
   void onInit() async {
@@ -35,36 +33,53 @@ class ListController extends GetxController {
 
     refreshController = RefreshController(initialRefresh: false);
 
-    _checkLocationPermissionAndGetLocation();
-    repository = ListRepository();
-    await getListOfData();
+    try {
+      await _checkLocationPermissionAndGetLocation();
+      repository = ListRepository();
+      await getListOfData();
+    } catch (e) {
+      logger.e('Error in ListController onInit');
+    }
   }
 
-  void _checkLocationPermissionAndGetLocation() async {
-    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied ||
-        permission == LocationPermission.deniedForever) {
-      Get.toNamed(Routes.getLocationRoute);
-    } else {
-      if (!GetLocationController.to.locationObtained) {
-        _initializeGetLocationController();
+  Future<void> _checkLocationPermissionAndGetLocation() async {
+    try {
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        Get.toNamed(Routes.getLocationRoute);
+      } else {
+        if (!GetLocationController.to.locationObtained) {
+          _initializeGetLocationController();
+        }
       }
+    } catch (e) {
+      logger.e('Error in _checkLocationPermissionAndGetLocation');
     }
   }
 
   void _initializeGetLocationController() {
-    if (!Get.isRegistered<GetLocationController>()) {
-      Get.put(GetLocationController());
+    try {
+      if (!Get.isRegistered<GetLocationController>()) {
+        Get.put(GetLocationController());
+      }
+      GetLocationController.to.getLocation();
+    } catch (e) {
+      logger.e('Error in _initializeGetLocationController');
     }
-    GetLocationController.to.getLocation();
   }
 
   void onRefresh() async {
-    final result = await getListOfData();
+    try {
+      final result = await getListOfData();
 
-    if (result) {
-      refreshController.refreshCompleted();
-    } else {
+      if (result) {
+        refreshController.refreshCompleted();
+      } else {
+        refreshController.refreshFailed();
+      }
+    } catch (e) {
+      logger.e('Error in onRefresh');
       refreshController.refreshFailed();
     }
   }
@@ -106,6 +121,7 @@ class ListController extends GetxController {
 
       return true;
     } catch (exception, stacktrace) {
+      logger.e('Error in getListOfData');
       await Sentry.captureException(
         exception,
         stackTrace: stacktrace,
@@ -118,12 +134,12 @@ class ListController extends GetxController {
 
   Future<void> deleteItem(Map<String, dynamic> item) async {
     try {
-      repository.deleteItem(item['id_menu']);
+      await repository.deleteItem(item['id_menu']);
 
       items.remove(item);
-
       selectedItems.remove(item);
     } catch (exception, stacktrace) {
+      logger.e('Error in deleteItem');
       await Sentry.captureException(
         exception,
         stackTrace: stacktrace,

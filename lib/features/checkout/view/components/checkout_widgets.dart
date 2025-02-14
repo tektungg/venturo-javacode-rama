@@ -75,7 +75,8 @@ Widget buildEmptyCart() {
   );
 }
 
-Widget buildSummarySection(BuildContext context, CheckoutController controller) {
+Widget buildSummarySection(
+    BuildContext context, CheckoutController controller) {
   return Container(
     width: Get.width,
     height: 330.h,
@@ -122,7 +123,7 @@ Widget buildSummarySection(BuildContext context, CheckoutController controller) 
             context,
             'Voucher',
             controller.totalVoucherNominal.value > 0
-                ? 'Rp${NumberFormat.currency(locale: 'id_ID', symbol: '', decimalDigits: 0).format(controller.totalVoucherNominal.value)}'
+                ? '-Rp${NumberFormat.currency(locale: 'id_ID', symbol: '', decimalDigits: 0).format(controller.totalVoucherNominal.value)}'
                 : 'Pilih Voucher',
             () async {
               final selectedVoucher = await Get.to(() => VoucherScreen());
@@ -131,7 +132,9 @@ Widget buildSummarySection(BuildContext context, CheckoutController controller) 
               }
             },
             Icons.local_play,
-            textColor: controller.totalVoucherNominal.value > 0 ? Colors.red : Colors.black,
+            textColor: controller.totalVoucherNominal.value > 0
+                ? Colors.red
+                : Colors.black,
             subtitle: voucherName,
           );
         }),

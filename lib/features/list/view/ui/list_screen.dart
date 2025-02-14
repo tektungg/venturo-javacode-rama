@@ -177,6 +177,7 @@ class ListScreenState extends State<ListScreen> {
                             for (var item in ListController.to.filteredList)
                               buildMenuItem(item),
                           ],
+                          SizedBox(height: 80.h),
                         ],
                       ),
                     ),

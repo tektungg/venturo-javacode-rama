@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:venturo_core/features/checkout/controllers/checkout_controller.dart';
+import 'package:venturo_core/features/checkout/sub_features/voucher/view/ui/voucher_screen.dart';
 import 'package:venturo_core/shared/styles/color_style.dart';
 import 'package:intl/intl.dart';
 import 'package:venturo_core/features/checkout/view/components/detail_row.dart';
@@ -44,7 +45,8 @@ PreferredSizeWidget buildAppBar() {
                   SizedBox(width: 8.w),
                   Text(
                     'Pesanan',
-                    style: Get.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                    style: Get.textTheme.titleLarge
+                        ?.copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -65,14 +67,16 @@ Widget buildEmptyCart() {
         SizedBox(height: 16.h),
         Text(
           'Belum ada pesanan',
-          style: Get.textTheme.titleLarge?.copyWith(color: Colors.grey, fontWeight: FontWeight.bold),
+          style: Get.textTheme.titleLarge
+              ?.copyWith(color: Colors.grey, fontWeight: FontWeight.bold),
         ),
       ],
     ),
   );
 }
 
-Widget buildSummarySection(BuildContext context, CheckoutController controller) {
+Widget buildSummarySection(
+    BuildContext context, CheckoutController controller) {
   return Container(
     width: Get.width,
     height: 320.h,
@@ -112,15 +116,23 @@ Widget buildSummarySection(BuildContext context, CheckoutController controller) 
           Icons.discount,
         ),
         const Divider(),
-        buildTouchableDetailRow(
-          context,
-          'Voucher',
-          'Pilih Voucher',
-          () {
-            // Implementasi untuk memilih voucher
-          },
-          Icons.local_play,
-        ),
+        Obx(() => buildTouchableDetailRow(
+              context,
+              'Voucher',
+              controller.totalVoucherNominal.value > 0
+                  ? 'Rp${NumberFormat.currency(locale: 'id_ID', symbol: '', decimalDigits: 0).format(controller.totalVoucherNominal.value)}'
+                  : 'Pilih Voucher',
+              () async {
+                final selectedVouchers = await Get.to(() => VoucherScreen());
+                if (selectedVouchers != null) {
+                  controller.applyVouchers(selectedVouchers);
+                }
+              },
+              Icons.local_play,
+              textColor: controller.totalVoucherNominal.value > 0
+                  ? Colors.red
+                  : Colors.black,
+            )),
         const Divider(),
         buildDetailRow(
           context,
@@ -192,8 +204,8 @@ Widget buildBottomBar(CheckoutController controller) {
             ),
             child: Text(
               'Pesan Sekarang',
-              style: Get.textTheme.labelLarge?.copyWith(
-                  fontWeight: FontWeight.bold, color: Colors.white),
+              style: Get.textTheme.labelLarge
+                  ?.copyWith(fontWeight: FontWeight.bold, color: Colors.white),
             ),
           ),
         ],

@@ -3,8 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:venturo_core/shared/styles/color_style.dart';
 
-Widget buildTouchableDetailRow(BuildContext context, String title,
-    String value, VoidCallback onTap, IconData icon) {
+Widget buildTouchableDetailRow(BuildContext context, String title, String value,
+    VoidCallback onTap, IconData icon,
+    {Color? textColor}) {
   return GestureDetector(
     onTap: onTap,
     child: Padding(
@@ -30,6 +31,7 @@ Widget buildTouchableDetailRow(BuildContext context, String title,
                 value,
                 style: Get.textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.bold,
+                  color: textColor,
                 ),
               ),
               Icon(Icons.arrow_forward_ios, size: 16.r),

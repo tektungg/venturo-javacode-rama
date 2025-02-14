@@ -8,6 +8,7 @@ class CheckoutController extends GetxController {
   final RxInt totalHarga = 0.obs;
   final RxInt totalPembayaran = 0.obs;
   final RxInt totalMenuDipesan = 0.obs;
+  final RxInt totalVoucherNominal = 0.obs;
 
   final DetailMenuRepository detailMenuRepository = DetailMenuRepository();
 
@@ -23,7 +24,7 @@ class CheckoutController extends GetxController {
     for (var menu in menuList) {
       var menuDetail =
           await detailMenuRepository.fetchMenuDetail(menu['id_menu']);
-      menu['foto'] = menuDetail['foto']; // Pastikan properti foto diatur
+      menu['foto'] = menuDetail['foto'];
     }
     menuList.refresh();
   }
@@ -36,9 +37,14 @@ class CheckoutController extends GetxController {
       totalItems += menu['jumlah'] as int;
     }
     totalHarga.value = total;
-    totalPembayaran.value =
-        total; // Update this with discount and voucher logic
+    totalPembayaran.value = total - totalVoucherNominal.value;
     totalMenuDipesan.value = totalItems;
+  }
+
+  void applyVouchers(List<Map<String, dynamic>> vouchers) {
+    totalVoucherNominal.value = vouchers.fold<int>(
+        0, (sum, voucher) => sum + (voucher['nominal'] as int));
+    calculateTotal();
   }
 
   Map<String, List<Map<String, dynamic>>> get groupedMenuByCategory {
@@ -54,7 +60,8 @@ class CheckoutController extends GetxController {
   }
 
   void updateMenu(Map<String, dynamic> updatedMenu) {
-    int index = menuList.indexWhere((menu) => menu['id_menu'] == updatedMenu['id_menu']);
+    int index = menuList
+        .indexWhere((menu) => menu['id_menu'] == updatedMenu['id_menu']);
     if (index != -1) {
       menuList[index] = updatedMenu;
       calculateTotal();

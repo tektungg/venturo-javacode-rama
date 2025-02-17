@@ -9,7 +9,7 @@ class VoucherController extends GetxController {
 
   void selectVoucher(Map<String, dynamic> voucher) {
     try {
-      if (selectedVoucher.value == voucher) {
+      if (selectedVoucher.value != null && selectedVoucher.value!['id_voucher'] == voucher['id_voucher']) {
         selectedVoucher.value = null;
         logger.d('Voucher deselected');
       } else {

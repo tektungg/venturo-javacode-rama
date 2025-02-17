@@ -46,12 +46,17 @@ class VoucherItem extends StatelessWidget {
                   ),
                 ),
                 Obx(() {
-                  final isSelected = voucherController.selectedVoucherId == voucher['id_voucher'] as int?;
+                  final isSelected = voucherController.selectedVoucherId ==
+                      voucher['id_voucher'] as int?;
                   return Checkbox(
                     value: isSelected,
                     onChanged: (value) {
                       voucherController.selectVoucher(voucher);
-                      checkoutController.applyVoucher(voucher);
+                      if (isSelected) {
+                        checkoutController.applyVoucher(null);
+                      } else {
+                        checkoutController.applyVoucher(voucher);
+                      }
                     },
                   );
                 }),

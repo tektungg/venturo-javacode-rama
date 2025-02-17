@@ -22,11 +22,9 @@ class DetailMenuRepository {
 
     if (response.statusCode == 200) {
       var responseData = await response.stream.bytesToString();
-      print('API Response Data: $responseData'); // Log API response
       var data = json.decode(responseData)['data'];
       return data;
     } else {
-      print('API Error: ${response.reasonPhrase}'); // Log API error
       throw Exception('Failed to load menu detail');
     }
   }

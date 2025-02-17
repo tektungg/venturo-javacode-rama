@@ -62,11 +62,17 @@ class CheckoutController extends GetxController {
     }
   }
 
-  void applyVoucher(Map<String, dynamic> voucher) {
+  void applyVoucher(Map<String, dynamic>? voucher) {
     try {
-      logger.d('Applying voucher: ${voucher['nominal']}');
-      selectedVoucher.value = voucher;
-      totalVoucherNominal.value = voucher['nominal'] as int;
+      if (voucher == null || voucher.isEmpty) {
+        logger.d('Removing voucher');
+        selectedVoucher.value = null;
+        totalVoucherNominal.value = 0;
+      } else {
+        logger.d('Applying voucher: ${voucher['nominal']}');
+        selectedVoucher.value = voucher;
+        totalVoucherNominal.value = voucher['nominal'] as int;
+      }
       calculateTotal();
     } catch (e) {
       logger.e('Error in applyVoucher');

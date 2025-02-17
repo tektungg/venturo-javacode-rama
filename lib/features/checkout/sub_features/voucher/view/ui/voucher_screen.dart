@@ -10,7 +10,7 @@ import 'package:venturo_core/features/checkout/sub_features/voucher/view/compone
 class VoucherScreen extends StatelessWidget {
   VoucherScreen({super.key});
 
-  final VoucherController controller = Get.put(VoucherController());
+  final VoucherController controller = Get.put(VoucherController(), permanent: true);
   final VoucherRepository repository = VoucherRepository();
 
   @override

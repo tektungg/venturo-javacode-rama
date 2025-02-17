@@ -29,4 +29,8 @@ class VoucherController extends GetxController {
       return 0;
     }
   }
+
+  int? get selectedVoucherId {
+    return selectedVoucher.value?['id_voucher'] as int?;
+  }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:venturo_core/features/checkout/sub_features/voucher/controllers/voucher_controller.dart';
 import 'package:venturo_core/shared/styles/color_style.dart';
 import 'package:venturo_core/features/checkout/controllers/checkout_controller.dart';
 
@@ -13,6 +14,7 @@ class VoucherItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final CheckoutController checkoutController = Get.find();
+    final VoucherController voucherController = Get.find();
 
     return Container(
       margin: EdgeInsets.only(bottom: 16.h),
@@ -44,10 +46,11 @@ class VoucherItem extends StatelessWidget {
                   ),
                 ),
                 Obx(() {
-                  final isSelected = checkoutController.selectedVoucher.value == voucher;
+                  final isSelected = voucherController.selectedVoucherId == voucher['id_voucher'] as int?;
                   return Checkbox(
                     value: isSelected,
                     onChanged: (value) {
+                      voucherController.selectVoucher(voucher);
                       checkoutController.applyVoucher(voucher);
                     },
                   );

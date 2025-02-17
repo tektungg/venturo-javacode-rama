@@ -20,38 +20,63 @@ Widget buildVoucherBottomBar(VoucherController controller) {
         ),
       ],
     ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        RichText(
-          text: TextSpan(
-            text: 'Penggunaan ',
-            style: Get.textTheme.titleMedium?.copyWith(color: Colors.black),
-            children: [
-              TextSpan(
-                text: 'Voucher',
-                style: Get.textTheme.titleMedium
-                    ?.copyWith(color: ColorStyle.primary),
+        Row(
+          children: [
+            Container(
+              width: 24.r,
+              height: 24.r,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: ColorStyle.primary, width: 2),
               ),
-            ],
-          ),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            Get.back(result: controller.selectedVoucher.value);
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: ColorStyle.primary,
-            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.r),
+              child: Icon(
+                Icons.check,
+                color: ColorStyle.primary,
+                size: 16.r,
+              ),
             ),
-          ),
-          child: Text(
-            'Oke',
-            style: Get.textTheme.labelLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
+            SizedBox(width: 8.w),
+            Expanded(
+              child: RichText(
+                text: TextSpan(
+                  text: 'Penggunaan voucher tidak dapat digabung dengan ',
+                  style:
+                      Get.textTheme.titleSmall?.copyWith(color: Colors.black),
+                  children: [
+                    TextSpan(
+                      text: 'discount employee reward program.',
+                      style: Get.textTheme.titleSmall
+                          ?.copyWith(color: ColorStyle.primary),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: 16.h),
+        SizedBox(
+          width: Get.width,
+          child: ElevatedButton(
+            onPressed: () {
+              Get.back(result: controller.selectedVoucher.value);
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: ColorStyle.primary,
+              padding: EdgeInsets.symmetric(vertical: 12.h),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.r),
+              ),
+            ),
+            child: Text(
+              'Oke',
+              style: Get.textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
           ),
         ),

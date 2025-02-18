@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:venturo_core/features/detail_menu/repositories/detail_menu_repository.dart';
+import 'package:venturo_core/features/checkout/sub_features/discount/controllers/discount_controller.dart';
 
 class CheckoutController extends GetxController {
   static CheckoutController get to => Get.find();
@@ -15,6 +16,7 @@ class CheckoutController extends GetxController {
       Rx<Map<String, dynamic>?>(null);
 
   final DetailMenuRepository detailMenuRepository = DetailMenuRepository();
+  final DiscountController discountController = Get.find();
   final Logger logger = Logger();
 
   @override
@@ -55,8 +57,10 @@ class CheckoutController extends GetxController {
         totalItems += menu['jumlah'] as int;
       }
       totalHarga.value = total;
+      discountController.calculateTotalDiscount();
       totalPembayaran.value =
-          (total - totalVoucherNominal.value - totalDiskonNominal.value).clamp(10000, total);
+          (total - totalVoucherNominal.value - totalDiskonNominal.value)
+              .clamp(10000, total);
       totalMenuDipesan.value = totalItems;
       logger.d('Total calculated: $total, Total items: $totalItems');
     } catch (e) {

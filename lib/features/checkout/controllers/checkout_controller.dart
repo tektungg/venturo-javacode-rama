@@ -10,6 +10,7 @@ class CheckoutController extends GetxController {
   final RxInt totalPembayaran = 0.obs;
   final RxInt totalMenuDipesan = 0.obs;
   final RxInt totalVoucherNominal = 0.obs;
+  final RxInt totalDiskonNominal = 0.obs;
   final Rx<Map<String, dynamic>?> selectedVoucher =
       Rx<Map<String, dynamic>?>(null);
 
@@ -38,6 +39,7 @@ class CheckoutController extends GetxController {
       }
       menuList.refresh();
       logger.d('Menu details fetched successfully');
+      calculateTotal();
     } catch (e) {
       logger.e('Error in fetchMenuDetails');
     }
@@ -54,7 +56,7 @@ class CheckoutController extends GetxController {
       }
       totalHarga.value = total;
       totalPembayaran.value =
-          (total - totalVoucherNominal.value).clamp(10000, total);
+          (total - totalVoucherNominal.value - totalDiskonNominal.value).clamp(10000, total);
       totalMenuDipesan.value = totalItems;
       logger.d('Total calculated: $total, Total items: $totalItems');
     } catch (e) {

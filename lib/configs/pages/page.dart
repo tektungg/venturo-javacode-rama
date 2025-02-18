@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:venturo_core/configs/routes/route.dart';
 import 'package:venturo_core/features/checkout/bindings/checkout_binding.dart';
+import 'package:venturo_core/features/checkout/sub_features/discount/view/ui/discount_screen.dart';
 import 'package:venturo_core/features/checkout/sub_features/edit_menu/view/ui/edit_menu_screen.dart';
 import 'package:venturo_core/features/checkout/sub_features/voucher/view/ui/voucher_screen.dart';
 import 'package:venturo_core/features/checkout/view/ui/checkout_screen.dart';
@@ -94,6 +95,10 @@ abstract class Pages {
     GetPage(
       name: Routes.voucherRoute,
       page: () => VoucherScreen(),
+    ),
+    GetPage(
+      name: Routes.discountRoute,
+      page: () => DiscountScreen(),
     ),
   ];
 }

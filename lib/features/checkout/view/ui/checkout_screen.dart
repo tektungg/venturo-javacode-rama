@@ -2,24 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:venturo_core/features/checkout/controllers/checkout_controller.dart';
+import 'package:venturo_core/features/checkout/sub_features/discount/controllers/discount_controller.dart';
 import 'package:venturo_core/features/checkout/view/components/category_section.dart';
 import 'package:venturo_core/features/checkout/view/components/checkout_widgets.dart';
 
 class CheckoutScreen extends StatelessWidget {
   CheckoutScreen({super.key});
 
-  final CheckoutController controller = Get.put(CheckoutController());
+  final CheckoutController checkoutController = Get.put(CheckoutController());
+  final DiscountController discountController = Get.put(DiscountController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
       body: Obx(() {
-        if (controller.menuList.isEmpty) {
+        if (checkoutController.menuList.isEmpty) {
           return buildEmptyCart();
         }
 
-        final groupedMenu = controller.groupedMenuByCategory;
+        final groupedMenu = checkoutController.groupedMenuByCategory;
 
         return Stack(
           children: [
@@ -37,10 +39,10 @@ class CheckoutScreen extends StatelessWidget {
                     },
                   ),
                 ),
-                buildSummarySection(context, controller),
+                buildSummarySection(context, checkoutController),
               ],
             ),
-            buildBottomBar(controller),
+            buildBottomBar(checkoutController),
           ],
         );
       }),

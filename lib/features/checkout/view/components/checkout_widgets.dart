@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:venturo_core/features/checkout/controllers/checkout_controller.dart';
+import 'package:venturo_core/features/checkout/sub_features/discount/view/ui/discount_screen.dart';
 import 'package:venturo_core/features/checkout/sub_features/voucher/view/ui/voucher_screen.dart';
 import 'package:venturo_core/shared/styles/color_style.dart';
 import 'package:venturo_core/features/checkout/view/components/detail_row.dart';
@@ -106,15 +107,22 @@ Widget buildSummarySection(
               )),
         ),
         const Divider(),
-        buildTouchableDetailRow(
-          context,
-          'Diskon',
-          'Pilih Diskon',
-          () {
-            // Implementasi untuk memilih diskon
-          },
-          Icons.discount,
-        ),
+        Obx(() {
+          return buildTouchableDetailRow(
+            context,
+            'Diskon',
+            controller.totalDiskonNominal.value > 0
+                ? '-Rp${NumberFormat.currency(locale: 'id_ID', symbol: '', decimalDigits: 0).format(controller.totalDiskonNominal.value)}'
+                : 'Info Diskon',
+            () async {
+              await Get.dialog(DiscountScreen());
+            },
+            Icons.discount,
+            textColor: controller.totalDiskonNominal.value > 0
+                ? Colors.red
+                : Colors.black,
+          );
+        }),
         const Divider(),
         Obx(() {
           final voucher = controller.selectedVoucher.value;
@@ -199,7 +207,7 @@ Widget buildBottomBar(CheckoutController controller) {
           ),
           ElevatedButton(
             onPressed: () {
-              // Implementasi untuk memesan sekarang
+              // Implementasi untuk memesan
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: ColorStyle.primary,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:venturo_core/features/checkout/controllers/checkout_controller.dart';
 import 'package:venturo_core/features/checkout/sub_features/voucher/controllers/voucher_controller.dart';
 import 'package:venturo_core/shared/styles/color_style.dart';
 
@@ -62,6 +63,9 @@ Widget buildVoucherBottomBar(VoucherController controller) {
           width: Get.width,
           child: ElevatedButton(
             onPressed: () {
+              if (controller.selectedVoucher.value == null) {
+                CheckoutController.to.applyVoucher(null); 
+              }
               Get.back(result: controller.selectedVoucher.value);
             },
             style: ElevatedButton.styleFrom(

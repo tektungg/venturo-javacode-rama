@@ -88,14 +88,39 @@ class CheckoutController extends GetxController {
         logger.d('Removing voucher');
         selectedVoucher.value = null;
         totalVoucherNominal.value = 0;
+        restoreDiscounts(); // Restore discounts when voucher is removed
       } else {
         logger.d('Applying voucher: ${voucher['nominal']}');
         selectedVoucher.value = voucher;
         totalVoucherNominal.value = voucher['nominal'] as int;
+        removeDiscounts(); // Remove discounts when voucher is applied
       }
       calculateTotal();
     } catch (e) {
       logger.e('Error in applyVoucher');
+    }
+  }
+
+  void removeDiscounts() {
+    try {
+      logger.d('Removing discounts');
+      discountController.discounts.clear();
+      totalDiskonNominal.value = 0;
+      calculateTotal();
+    } catch (e) {
+      logger.e('Error in removeDiscounts');
+    }
+  }
+
+  void restoreDiscounts() {
+    try {
+      logger.d('Restoring discounts');
+      // Logic to restore discounts
+      discountController
+          .fetchDiscounts(); // Assuming fetchDiscounts() will restore the discounts
+      calculateTotal(); // Recalculate total after restoring discounts
+    } catch (e) {
+      logger.e('Error in restoreDiscounts');
     }
   }
 

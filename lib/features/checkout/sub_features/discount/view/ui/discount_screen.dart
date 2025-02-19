@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:venturo_core/features/checkout/sub_features/discount/controllers/discount_controller.dart';
+import 'package:venturo_core/features/checkout/sub_features/voucher/controllers/voucher_controller.dart';
 import 'package:venturo_core/shared/styles/color_style.dart';
 
 class DiscountScreen extends StatelessWidget {
   DiscountScreen({super.key});
 
-  final DiscountController controller = Get.put(DiscountController());
+  final DiscountController discountController = Get.put(DiscountController());
+  final VoucherController voucherController = Get.put(VoucherController());
 
   @override
   Widget build(BuildContext context) {
@@ -30,18 +32,30 @@ class DiscountScreen extends StatelessWidget {
             ),
             SizedBox(height: 16.h),
             Obx(() {
-              final discounts = controller.discounts;
-              return ListView.builder(
-                shrinkWrap: true,
-                itemCount: discounts.length,
-                itemBuilder: (context, index) {
-                  final discount = discounts[index];
-                  return ListTile(
-                    title: Text(discount['nama']),
-                    trailing: Text('${discount['diskon']}%'),
-                  );
-                },
-              );
+              if (voucherController.selectedVoucher.value != null) {
+                return Center(
+                  child: Text(
+                    'Anda tidak dapat menggunakan diskon dan voucher secara bersamaan',
+                    style: Get.textTheme.bodyLarge?.copyWith(
+                      color: Colors.red,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                );
+              } else {
+                final discounts = discountController.discounts;
+                return ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: discounts.length,
+                  itemBuilder: (context, index) {
+                    final discount = discounts[index];
+                    return ListTile(
+                      title: Text(discount['nama']),
+                      trailing: Text('${discount['diskon']}%'),
+                    );
+                  },
+                );
+              }
             }),
             SizedBox(height: 16.h),
             SizedBox(

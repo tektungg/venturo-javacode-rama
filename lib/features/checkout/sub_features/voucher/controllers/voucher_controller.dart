@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
+import 'package:venturo_core/features/checkout/controllers/checkout_controller.dart';
 
 class VoucherController extends GetxController {
   static VoucherController get to => Get.find();
@@ -12,9 +13,11 @@ class VoucherController extends GetxController {
       if (selectedVoucher.value != null && selectedVoucher.value!['id_voucher'] == voucher['id_voucher']) {
         selectedVoucher.value = null;
         logger.d('Voucher deselected');
+        CheckoutController.to.applyVoucher(null); // Apply null voucher to restore discounts
       } else {
         selectedVoucher.value = voucher;
         logger.d('Voucher selected: ${voucher['nominal']}');
+        CheckoutController.to.applyVoucher(voucher); // Apply selected voucher
       }
     } catch (e) {
       logger.e('Error in selectVoucher');

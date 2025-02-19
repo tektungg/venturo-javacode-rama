@@ -57,7 +57,7 @@ class CheckoutController extends GetxController {
         totalItems += menu['jumlah'] as int;
       }
       totalHarga.value = total;
-      discountController.calculateTotalDiscount();
+      calculateTotalDiscount();
       totalPembayaran.value =
           (total - totalVoucherNominal.value - totalDiskonNominal.value)
               .clamp(10000, total);
@@ -65,6 +65,20 @@ class CheckoutController extends GetxController {
       logger.d('Total calculated: $total, Total items: $totalItems');
     } catch (e) {
       logger.e('Error in calculateTotal');
+    }
+  }
+
+  void calculateTotalDiscount() {
+    try {
+      logger.d('Calculating total discount');
+      int totalDiskon = 0;
+      for (var discount in discountController.discounts) {
+        totalDiskon += discount['diskon'] as int;
+      }
+      totalDiskonNominal.value = totalHarga.value * totalDiskon ~/ 100;
+      logger.d('Total discount calculated: ${totalDiskonNominal.value}');
+    } catch (e) {
+      logger.e('Error in calculateTotalDiscount');
     }
   }
 

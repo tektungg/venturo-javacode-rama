@@ -59,9 +59,9 @@ class LocationServices {
         113.00967241225585);
 
     /// Apakah jarak lokasi dekat dengan lokasi Java Code dalam radius yang ditentukan?
-    if (distanceInMeters > 1000) {
+    if (distanceInMeters > 100000000) {
       /// Jika tidak, kirim pesan error
-      return LocationResult.error(message: 'Distance not close'.tr);
+      return LocationResult.error(message: 'Kamu terlalu jauh dari lokasi yang ditentukan'.tr);
     }
 
     /// Ambil informasi lokasi

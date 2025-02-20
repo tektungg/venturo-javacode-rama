@@ -28,7 +28,7 @@ PreferredSizeWidget buildVoucherAppBar() {
             Align(
               alignment: Alignment.centerLeft,
               child: IconButton(
-                icon: const Icon(Icons.arrow_back),
+                icon: const Icon(Icons.chevron_left),
                 onPressed: () => Get.back(),
               ),
             ),

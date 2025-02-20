@@ -15,19 +15,18 @@ class RoundedAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool? enableBackButton;
   final TextStyle? textStyle;
 
-  const RoundedAppBar({
-    super.key,
-    required this.title,
-    this.iconData,
-    this.onBackPressed,
-    this.heightSvg,
-    this.widthSvg,
-    this.actions,
-    this.svgPicture,
-    this.titleWidget,
-    this.enableBackButton,
-    this.textStyle
-  });
+  const RoundedAppBar(
+      {super.key,
+      required this.title,
+      this.iconData,
+      this.onBackPressed,
+      this.heightSvg,
+      this.widthSvg,
+      this.actions,
+      this.svgPicture,
+      this.titleWidget,
+      this.enableBackButton,
+      this.textStyle});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +44,6 @@ class RoundedAppBar extends StatelessWidget implements PreferredSizeWidget {
               size: 28.r,
               color: Theme.of(context).primaryColor,
             ),
-
           if (svgPicture != null)
             SvgPicture.asset(
               svgPicture!,
@@ -53,40 +51,34 @@ class RoundedAppBar extends StatelessWidget implements PreferredSizeWidget {
               height: heightSvg,
               color: Theme.of(context).primaryColor,
             ),
-
           if (iconData != null || svgPicture != null) 10.horizontalSpaceRadius,
-
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
                 title.tr,
-                style: textStyle ?? Get.textTheme.titleMedium!.copyWith(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: textStyle ??
+                    Get.textTheme.titleLarge!.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
-
               if (titleWidget != null) 10.verticalSpace,
               if (titleWidget != null) titleWidget!,
             ],
           ),
         ],
       ),
-
-      leading: (enableBackButton == true) ? IconButton(
-        onPressed: onBackPressed ?? () => Get.back(closeOverlays: true),
-        icon: Icon(
-          Icons.chevron_left,
-          color: ColorStyle.black,
-          size: 36.r,
-        ),
-      ) : null,
-
+      leading: (enableBackButton == true)
+          ? IconButton(
+              onPressed: onBackPressed ?? () => Get.back(closeOverlays: true),
+              icon: const Icon(
+                Icons.chevron_left,
+                color: ColorStyle.black,
+              ),
+            )
+          : null,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          bottom: Radius.circular(30.r)
-        ),
+        borderRadius: BorderRadius.vertical(bottom: Radius.circular(30.r)),
       ),
     );
   }

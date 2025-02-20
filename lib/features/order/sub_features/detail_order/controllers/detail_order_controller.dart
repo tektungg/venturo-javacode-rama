@@ -14,11 +14,11 @@ class DetailOrderController extends GetxController {
   Rxn<Map<String, dynamic>> order = Rxn();
 
   Timer? timer;
-  
+
   @override
   void onInit() {
     super.onInit();
-    
+
     _orderRepository = OrderRepository();
     final orderId = int.parse(Get.parameters['orderId'] as String);
 
@@ -30,7 +30,6 @@ class DetailOrderController extends GetxController {
     });
   }
 
-
   @override
   void onClose() {
     timer?.cancel();
@@ -38,10 +37,8 @@ class DetailOrderController extends GetxController {
     super.onClose();
   }
 
-
   Future<void> getOrderDetail(int orderId, {bool isPeriodic = false}) async {
     if (!isPeriodic) {
-
       orderDetailState('loading');
     }
 
@@ -60,7 +57,6 @@ class DetailOrderController extends GetxController {
     }
   }
 
-
   List<Map<String, dynamic>> get foodItems =>
       order.value?['menu']
           .where((element) => element['kategori'] == 'makanan')
@@ -72,4 +68,43 @@ class DetailOrderController extends GetxController {
           .where((element) => element['kategori'] == 'minuman')
           .toList() ??
       [];
+
+  List<Map<String, dynamic>> get snackItems =>
+      order.value?['menu']
+          .where((element) => element['kategori'] == 'snack')
+          .toList() ??
+      [];
+
+  Map<String, List<Map<String, dynamic>>> groupMenuByCategory(
+      List<Map<String, dynamic>> foodItems,
+      List<Map<String, dynamic>> drinkItems,
+      List<Map<String, dynamic>> snackItems) {
+    final Map<String, List<Map<String, dynamic>>> groupedMenu = {};
+
+    for (var item in foodItems) {
+      final category = item['kategori'] ?? 'Lainnya';
+      if (!groupedMenu.containsKey(category)) {
+        groupedMenu[category] = [];
+      }
+      groupedMenu[category]!.add(item);
+    }
+
+    for (var item in drinkItems) {
+      final category = item['kategori'] ?? 'Lainnya';
+      if (!groupedMenu.containsKey(category)) {
+        groupedMenu[category] = [];
+      }
+      groupedMenu[category]!.add(item);
+    }
+
+    for (var item in snackItems) {
+      final category = item['kategori'] ?? 'Lainnya';
+      if (!groupedMenu.containsKey(category)) {
+        groupedMenu[category] = [];
+      }
+      groupedMenu[category]!.add(item);
+    }
+
+    return groupedMenu;
+  }
 }

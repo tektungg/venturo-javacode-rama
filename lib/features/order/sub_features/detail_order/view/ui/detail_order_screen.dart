@@ -23,6 +23,8 @@ class DetailOrderScreen extends StatelessWidget {
       screenClassOverride: 'Trainee',
     );
 
+    final DetailOrderController controller = DetailOrderController.to;
+
     return Scaffold(
       appBar: RoundedAppBar(
         title: 'Pesanan',
@@ -33,7 +35,7 @@ class DetailOrderScreen extends StatelessWidget {
           Obx(() => Conditional.single(
                 context: context,
                 conditionBuilder: (context) =>
-                    DetailOrderController.to.order.value?['status'] == 0,
+                    controller.order.value?['status'] == 0,
                 widgetBuilder: (context) => Padding(
                   padding:
                       EdgeInsets.symmetric(vertical: 16.h, horizontal: 10.w),
@@ -56,35 +58,35 @@ class DetailOrderScreen extends StatelessWidget {
       ),
       body: Obx(
         () {
-          if (DetailOrderController.to.orderDetailState.value == 'loading') {
+          if (controller.orderDetailState.value == 'loading') {
             return const Center(child: CircularProgressIndicator());
-          } else if (DetailOrderController.to.orderDetailState.value ==
-              'error') {
+          } else if (controller.orderDetailState.value == 'error') {
             return const Center(child: Text('Error loading order details'));
           } else {
-            final order = DetailOrderController.to.order.value!;
-            final foodItems = DetailOrderController.to.foodItems;
-            final drinkItems = DetailOrderController.to.drinkItems;
-            final totalItems = foodItems.length + drinkItems.length;
+            final order = controller.order.value!;
+            final foodItems = controller.foodItems;
+            final drinkItems = controller.drinkItems;
+            final snackItems = controller.snackItems;
+            final totalItems =
+                foodItems.length + drinkItems.length + snackItems.length;
+
+            final groupedMenu = controller.groupMenuByCategory(
+                foodItems, drinkItems, snackItems);
 
             return Column(
               children: [
-                SizedBox(height: 16.h),
                 Expanded(
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: ListView.builder(
-                      itemCount: totalItems,
+                      itemCount: groupedMenu.keys.length,
                       itemBuilder: (context, index) {
-                        final item = index < foodItems.length
-                            ? foodItems[index]
-                            : drinkItems[index - foodItems.length];
+                        String category = groupedMenu.keys.elementAt(index);
+                        List<Map<String, dynamic>> menus =
+                            groupedMenu[category]!;
                         return Padding(
-                          padding: EdgeInsets.only(bottom: 8.h),
-                          child: DetailOrderMenuCard(
-                            menu: item,
-                            jumlah: item['jumlah'],
-                          ),
+                          padding: EdgeInsets.only(bottom: 4.h),
+                          child: buildCategorySection(category, menus),
                         );
                       },
                     ),
@@ -195,6 +197,50 @@ class DetailOrderScreen extends StatelessWidget {
         },
       ),
       bottomNavigationBar: BottomNavbar(),
+    );
+  }
+
+  Widget buildCategorySection(String title, List<Map<String, dynamic>> items) {
+    IconData icon;
+    switch (title.toLowerCase()) {
+      case 'makanan':
+        icon = Icons.local_dining;
+        break;
+      case 'minuman':
+        icon = Icons.local_drink;
+        break;
+      case 'snack':
+        icon = Icons.kebab_dining;
+        break;
+      default:
+        icon = Icons.category;
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 10.h),
+          child: Row(
+            children: [
+              Icon(icon, color: ColorStyle.primary),
+              SizedBox(width: 8.w),
+              Text(
+                title.capitalizeFirst!,
+                style: Get.textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: ColorStyle.primary,
+                ),
+              ),
+            ],
+          ),
+        ),
+        for (var item in items)
+          Padding(
+            padding: EdgeInsets.only(bottom: 8.h),
+            child: DetailOrderMenuCard(menu: item, jumlah: item['jumlah']),
+          ),
+      ],
     );
   }
 }

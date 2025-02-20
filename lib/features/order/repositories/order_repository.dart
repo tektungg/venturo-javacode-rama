@@ -17,6 +17,16 @@ class OrderRepository {
           "harga": "10000",
           "total": 10000,
           "catatan": "test"
+        },
+        {
+          "id_menu": 19,
+          "kategori": "snack",
+          "nama": "Grilled Sausage",
+          "foto": "https://javacode.landa.id/img/menu/gambar_62660f6f077fc.png",
+          "jumlah": 1,
+          "harga": "16000",
+          "total": 16000,
+          "catatan": "uhuy"
         }
       ]
     },

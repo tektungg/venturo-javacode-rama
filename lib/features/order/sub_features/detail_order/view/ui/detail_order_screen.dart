@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_conditional_rendering/conditional.dart';
 import 'package:get/get.dart';
 import 'package:venturo_core/features/order/sub_features/detail_order/controllers/detail_order_controller.dart';
+import 'package:venturo_core/features/order/sub_features/detail_order/view/components/detail_order_menu_card.dart';
+import 'package:venturo_core/shared/styles/color_style.dart';
 import 'package:venturo_core/shared/widgets/bottom_navbar.dart';
 import 'package:venturo_core/shared/widgets/rounded_app_bar.dart';
 import 'package:venturo_core/features/order/sub_features/detail_order/view/components/order_tracker.dart';
@@ -62,28 +64,35 @@ class DetailOrderScreen extends StatelessWidget {
             final order = DetailOrderController.to.order.value!;
             final foodItems = DetailOrderController.to.foodItems;
             final drinkItems = DetailOrderController.to.drinkItems;
+            final totalItems = foodItems.length + drinkItems.length;
 
             return Column(
               children: [
+                SizedBox(height: 16.h),
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: foodItems.length + drinkItems.length,
-                    itemBuilder: (context, index) {
-                      final item = index < foodItems.length
-                          ? foodItems[index]
-                          : drinkItems[index - foodItems.length];
-                      return ListTile(
-                        title: Text(item['nama']),
-                        subtitle: Text('Rp ${item['harga']}'),
-                        trailing: Text('x${item['jumlah']}'),
-                      );
-                    },
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: ListView.builder(
+                      itemCount: totalItems,
+                      itemBuilder: (context, index) {
+                        final item = index < foodItems.length
+                            ? foodItems[index]
+                            : drinkItems[index - foodItems.length];
+                        return Padding(
+                          padding: EdgeInsets.only(bottom: 8.h),
+                          child: DetailOrderMenuCard(
+                            menu: item,
+                            jumlah: item['jumlah'],
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
                 Container(
                   padding: EdgeInsets.all(16.r),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: ColorStyle.tertiary,
                     borderRadius:
                         BorderRadius.vertical(top: Radius.circular(20.r)),
                     boxShadow: const [
@@ -99,28 +108,46 @@ class DetailOrderScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text('Total Pesanan'),
-                          Text('Rp ${order['total_bayar']}'),
+                          Text('Total Pesanan ($totalItems Menu)'),
+                          Text(
+                            'Rp ${order['total_bayar']}',
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor),
+                          ),
                         ],
                       ),
-                      const SizedBox(height: 8),
+                      const Divider(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text('Potongan'),
-                          Text('Rp ${order['potongan'] ?? 0}'),
+                          Text(
+                            'Rp ${order['potongan'] ?? 0}',
+                            style: TextStyle(color: Colors.red),
+                          ),
                         ],
                       ),
-                      const SizedBox(height: 8),
+                      const Divider(),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Pembayaran'),
+                          Text('Pay Later'),
+                        ],
+                      ),
+                      const Divider(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text('Total Pembayaran'),
                           Text(
-                              'Rp ${order['total_bayar'] - (order['potongan'] ?? 0)}'),
+                            'Rp ${order['total_bayar'] - (order['potongan'] ?? 0)}',
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor),
+                          ),
                         ],
                       ),
-                      const SizedBox(height: 16),
+                      const Divider(),
                       const OrderTracker(),
                     ],
                   ),

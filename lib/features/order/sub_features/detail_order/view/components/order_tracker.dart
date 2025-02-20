@@ -35,7 +35,7 @@ class OrderTracker extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 22,
+              flex: 35,
               child: Container(
                 height: 2.h,
                 color: DetailOrderController.to.order.value?['status'] >= 1
@@ -54,7 +54,7 @@ class OrderTracker extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 22,
+              flex: 35,
               child: Container(
                 height: 2.h,
                 color: DetailOrderController.to.order.value?['status'] >= 2
@@ -80,7 +80,7 @@ class OrderTracker extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
-              flex: 10,
+              flex: 2,
               child: Text(
                 'Pesanan Diterima'.tr,
                 style: Get.textTheme.bodySmall,
@@ -89,7 +89,7 @@ class OrderTracker extends StatelessWidget {
             ),
             const Spacer(flex: 1),
             Expanded(
-              flex: 10,
+              flex: 2,
               child: Text(
                 'Menyiapkan'.tr,
                 style: Get.textTheme.bodySmall,
@@ -98,7 +98,7 @@ class OrderTracker extends StatelessWidget {
             ),
             const Spacer(flex: 1),
             Expanded(
-              flex: 10,
+              flex: 2,
               child: Text(
                 'Siap Diambil'.tr,
                 style: Get.textTheme.bodySmall,

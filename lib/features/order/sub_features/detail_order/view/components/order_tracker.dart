@@ -16,7 +16,8 @@ class OrderTracker extends StatelessWidget {
       children: [
         Text(
           'Pesananmu sedang disiapkan:'.tr,
-          style: Get.textTheme.titleSmall,
+          style:
+              Get.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
           textAlign: TextAlign.left,
         ),
         18.verticalSpace,

@@ -12,5 +12,6 @@ class ColorStyle {
   static const Color info = Color(0xff17a2b8);
   static const Color light = Color(0xfff8f9fa);
   static const Color dark = Color(0xff2e2e2e);
+  static const Color black = Color(0xff000000);
   static const Color white = Color(0xffffffff);
 }

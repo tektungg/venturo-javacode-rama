@@ -11,6 +11,7 @@ abstract class Routes {
   static const String detailMenuRoute = '/detail_menu';
   static const String checkoutRoute = '/checkout';
   static const String orderRoute = '/order';
+  static const String orderDetailRoute = '/order/:orderId';
   static const String editMenuRoute = '/edit_menu';
   static const String promoRoute = '/promo';
   static const String voucherRoute = '/voucher';

@@ -17,6 +17,8 @@ import 'package:venturo_core/features/list/sub_features/promo/view/ui/promo_scre
 import 'package:venturo_core/features/list/view/ui/list_screen.dart';
 import 'package:venturo_core/features/no_connection/view/ui/no_connection_screen.dart';
 import 'package:venturo_core/features/order/bindings/order_binding.dart';
+import 'package:venturo_core/features/order/sub_features/detail_order/bindings/detail_order_binding.dart';
+import 'package:venturo_core/features/order/sub_features/detail_order/view/ui/detail_order_screen.dart';
 import 'package:venturo_core/features/order/view/ui/order_screen.dart';
 import 'package:venturo_core/features/profile/bindings/profile_binding.dart';
 import 'package:venturo_core/features/profile/view/components/privacy_policy_screen.dart';
@@ -83,6 +85,11 @@ abstract class Pages {
       name: Routes.orderRoute,
       page: () => OrderScreen(),
       binding: OrderBinding(),
+    ),
+    GetPage(
+      name: Routes.orderDetailRoute,
+      page: () => DetailOrderScreen(),
+      binding: DetailOrderBinding(),
     ),
     GetPage(
       name: Routes.editMenuRoute,

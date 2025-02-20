@@ -61,7 +61,7 @@ class DetailOrderCard extends StatelessWidget {
                   maxLines: 1,
                 ),
                 Text(
-                  'Rp ${int.parse(detailOrder['harga'])}',
+                  'Rp${int.parse(detailOrder['harga'])}',
                   style: Get.textTheme.bodyMedium!.copyWith(
                       color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.bold),

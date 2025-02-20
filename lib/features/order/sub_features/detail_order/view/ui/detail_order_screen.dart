@@ -120,7 +120,7 @@ class DetailOrderScreen extends StatelessWidget {
                                 ?.copyWith(fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            'Rp ${NumberFormat.currency(locale: 'id_ID', symbol: '', decimalDigits: 0).format(order['total_bayar'])}',
+                            'Rp${NumberFormat.currency(locale: 'id_ID', symbol: '', decimalDigits: 0).format(order['total_bayar'])}',
                             style: TextStyle(
                                 color: Theme.of(context).primaryColor,
                                 fontWeight: FontWeight.bold),
@@ -144,7 +144,7 @@ class DetailOrderScreen extends StatelessWidget {
                             ],
                           ),
                           Text(
-                            '-Rp ${NumberFormat.currency(locale: 'id_ID', symbol: '', decimalDigits: 0).format(order['potongan'] ?? 0)}',
+                            '-Rp${NumberFormat.currency(locale: 'id_ID', symbol: '', decimalDigits: 0).format(order['potongan'] ?? 0)}',
                             style: const TextStyle(
                                 color: Colors.red, fontWeight: FontWeight.bold),
                           ),
@@ -179,7 +179,7 @@ class DetailOrderScreen extends StatelessWidget {
                                 ?.copyWith(fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            'Rp ${NumberFormat.currency(locale: 'id_ID', symbol: '', decimalDigits: 0).format(order['total_bayar'] - (order['potongan'] ?? 0))}',
+                            'Rp${NumberFormat.currency(locale: 'id_ID', symbol: '', decimalDigits: 0).format(order['total_bayar'] - (order['potongan'] ?? 0))}',
                             style: TextStyle(
                                 color: Theme.of(context).primaryColor,
                                 fontWeight: FontWeight.bold),

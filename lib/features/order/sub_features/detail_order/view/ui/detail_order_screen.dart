@@ -6,10 +6,9 @@ import 'package:get/get.dart';
 import 'package:venturo_core/features/order/sub_features/detail_order/controllers/detail_order_controller.dart';
 import 'package:venturo_core/shared/widgets/bottom_navbar.dart';
 import 'package:venturo_core/shared/widgets/rounded_app_bar.dart';
-import 'package:venturo_core/features/order/view/components/order_tracker.dart';
+import 'package:venturo_core/features/order/sub_features/detail_order/view/components/order_tracker.dart';
 
 class DetailOrderScreen extends StatelessWidget {
-
   const DetailOrderScreen({super.key});
 
   static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
@@ -23,39 +22,41 @@ class DetailOrderScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: RoundedAppBar(
-        title: 'Order',
-        iconData: Icons.shopping_bag_outlined,
+        title: 'Pesanan',
+        iconData: Icons.room_service,
         enableBackButton: true,
         onBackPressed: () => Get.back(),
         actions: [
           Obx(() => Conditional.single(
-            context: context,
-            conditionBuilder: (context) => DetailOrderController.to.order.value?['status'] == 0,
-            widgetBuilder: (context) => Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 10.w),
-              child: TextButton(
-                onPressed: () {},
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                  visualDensity: VisualDensity.compact,
+                context: context,
+                conditionBuilder: (context) =>
+                    DetailOrderController.to.order.value?['status'] == 0,
+                widgetBuilder: (context) => Padding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 16.h, horizontal: 10.w),
+                  child: TextButton(
+                    onPressed: () {},
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      visualDensity: VisualDensity.compact,
+                    ),
+                    child: Text(
+                      'Cancel'.tr,
+                      style: Get.textTheme.labelLarge
+                          ?.copyWith(color: const Color(0xFFD81D1D)),
+                    ),
+                  ),
                 ),
-                child: Text(
-                  'Cancel'.tr,
-                  style: Get.textTheme.labelLarge
-                      ?.copyWith(color: const Color(0xFFD81D1D)),
-                ),
-              ),
-            ),
-
-            fallbackBuilder: (context) => const SizedBox(),
-          )),
+                fallbackBuilder: (context) => const SizedBox(),
+              )),
         ],
       ),
       body: Obx(
         () {
           if (DetailOrderController.to.orderDetailState.value == 'loading') {
             return const Center(child: CircularProgressIndicator());
-          } else if (DetailOrderController.to.orderDetailState.value == 'error') {
+          } else if (DetailOrderController.to.orderDetailState.value ==
+              'error') {
             return const Center(child: Text('Error loading order details'));
           } else {
             final order = DetailOrderController.to.order.value!;
@@ -83,7 +84,8 @@ class DetailOrderScreen extends StatelessWidget {
                   padding: EdgeInsets.all(16.r),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(20.r)),
                     boxShadow: const [
                       BoxShadow(
                         color: Colors.black12,
@@ -97,7 +99,7 @@ class DetailOrderScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text('Total Asli'),
+                          const Text('Total Pesanan'),
                           Text('Rp ${order['total_bayar']}'),
                         ],
                       ),
@@ -114,11 +116,12 @@ class DetailOrderScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text('Total Pembayaran'),
-                          Text('Rp ${order['total_bayar'] - (order['potongan'] ?? 0)}'),
+                          Text(
+                              'Rp ${order['total_bayar'] - (order['potongan'] ?? 0)}'),
                         ],
                       ),
                       const SizedBox(height: 16),
-                      const OrderTracker(), // Add OrderTracker here
+                      const OrderTracker(),
                     ],
                   ),
                 ),

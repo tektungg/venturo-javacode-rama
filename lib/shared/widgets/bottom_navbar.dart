@@ -16,6 +16,9 @@ class BottomNavbar extends StatelessWidget {
       case Routes.orderRoute:
         selectedIndex.value = 1;
         break;
+      case Routes.orderDetailRoute:
+        selectedIndex.value = 1;
+        break;
       case Routes.profileRoute:
         selectedIndex.value = 2;
         break;

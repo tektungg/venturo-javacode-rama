@@ -3,8 +3,8 @@ import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:venturo_core/features/order/sub_features/detail_order/controllers/detail_order_controller.dart';
-import 'package:venturo_core/features/order/view/components/checked_step.dart';
-import 'package:venturo_core/features/order/view/components/unchecked_step.dart';
+import 'package:venturo_core/features/order/sub_features/detail_order/view/components/checked_step.dart';
+import 'package:venturo_core/features/order/sub_features/detail_order/view/components/unchecked_step.dart';
 
 class OrderTracker extends StatelessWidget {
   const OrderTracker({super.key});
@@ -15,7 +15,7 @@ class OrderTracker extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Your order is being prepared'.tr,
+          'Pesananmu sedang disiapkan:'.tr,
           style: Get.textTheme.titleSmall,
           textAlign: TextAlign.left,
         ),
@@ -82,7 +82,7 @@ class OrderTracker extends StatelessWidget {
             Expanded(
               flex: 10,
               child: Text(
-                'Order Placed'.tr,
+                'Pesanan Diterima'.tr,
                 style: Get.textTheme.bodySmall,
                 textAlign: TextAlign.center,
               ),
@@ -91,7 +91,7 @@ class OrderTracker extends StatelessWidget {
             Expanded(
               flex: 10,
               child: Text(
-                'Preparing'.tr,
+                'Menyiapkan'.tr,
                 style: Get.textTheme.bodySmall,
                 textAlign: TextAlign.center,
               ),
@@ -100,7 +100,7 @@ class OrderTracker extends StatelessWidget {
             Expanded(
               flex: 10,
               child: Text(
-                'Ready'.tr,
+                'Siap Diambil'.tr,
                 style: Get.textTheme.bodySmall,
                 textAlign: TextAlign.center,
               ),

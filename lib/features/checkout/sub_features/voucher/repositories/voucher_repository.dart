@@ -34,7 +34,6 @@ class VoucherRepository {
         "catatan":
             "<p>Nah gitu dong, terus aktif ya pada saat Training</p><p>Semoga ilmu yang dipelajari bermanfaat bagi pengembangan dirimu</p>"
       },
-      // Tambahkan data dummy lainnya jika diperlukan
     ];
   }
 }

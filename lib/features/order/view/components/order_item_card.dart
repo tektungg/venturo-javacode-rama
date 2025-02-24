@@ -54,7 +54,9 @@ class OrderItemCard extends StatelessWidget {
     }
 
     final String menuNames = truncateWithEllipsis(
-        order['menu'].map<String>((menu) => menu['nama'] as String).join(', '),
+        order['menu']
+            .map<String>((menu) => menu['nama']?.toString() ?? '')
+            .join(', '),
         30);
 
     final int totalMenu = order['menu'].length;
@@ -125,7 +127,7 @@ class OrderItemCard extends StatelessWidget {
                       ),
                       Text(
                         DateFormat('yyyy-MM-dd')
-                            .format(DateTime.parse(order['tanggal'])),
+                            .format(DateTime.parse(order['tanggal'] ?? '')),
                         style: TextStyle(
                           color: Colors.grey,
                           fontSize: 12.sp,
@@ -147,7 +149,7 @@ class OrderItemCard extends StatelessWidget {
                   RichText(
                     text: TextSpan(
                       text:
-                          'Rp${NumberFormat.currency(locale: 'id_ID', symbol: '', decimalDigits: 0).format(order['total_bayar'])} ',
+                          'Rp${NumberFormat.currency(locale: 'id_ID', symbol: '', decimalDigits: 0).format(order['total_bayar'] ?? 0)} ',
                       style: TextStyle(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w500,

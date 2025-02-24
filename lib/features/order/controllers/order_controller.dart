@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:logger/logger.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:venturo_core/features/order/repositories/order_repository.dart';
 
 class OrderController extends GetxController {
   static OrderController get to => Get.find<OrderController>();
   late final OrderRepository _orderRepository;
+  final Logger logger = Logger();
 
   @override
   void onInit() {
@@ -26,9 +29,9 @@ class OrderController extends GetxController {
   Rx<String> selectedCategory = 'all'.obs;
 
   Map<String, String> get dateFilterStatus => {
-        'all': 'Semua'.tr,
-        'completed': 'Selesai'.tr,
-        'canceled': 'Dibatalkan'.tr,
+        'all': 'All status'.tr,
+        'completed': 'Completed'.tr,
+        'canceled': 'Canceled'.tr,
       };
 
   Rx<DateTimeRange?> selectedDateRange = Rx<DateTimeRange?>(null);
@@ -37,12 +40,15 @@ class OrderController extends GetxController {
     onGoingOrderState('loading');
 
     try {
-      final result = _orderRepository.getOngoingOrder();
-      final data = result.where((element) => element['status'] != 4).toList();
-      onGoingOrders(data.reversed.toList());
+      final userId = Hive.box('venturo').get('userId');
+      logger.d('Fetching ongoing orders for user ID: $userId');
+      final result = await _orderRepository.getOngoingOrder(userId);
+      logger.d('Ongoing orders fetched successfully: $result');
+      onGoingOrders(result.reversed.toList());
 
       onGoingOrderState('success');
     } catch (exception, stacktrace) {
+      logger.e('Failed to fetch ongoing orders: $exception');
       await Sentry.captureException(
         exception,
         stackTrace: stacktrace,
@@ -56,11 +62,15 @@ class OrderController extends GetxController {
     orderHistoryState('loading');
 
     try {
-      final result = _orderRepository.getOrderHistory();
+      final userId = Hive.box('venturo').get('userId');
+      logger.d('Fetching order histories for user ID: $userId');
+      final result = await _orderRepository.getOrderHistory(userId);
+      logger.d('Order histories fetched successfully: $result');
       historyOrders(result.reversed.toList());
 
       orderHistoryState('success');
     } catch (exception, stacktrace) {
+      logger.e('Failed to fetch order histories: $exception');
       await Sentry.captureException(
         exception,
         stackTrace: stacktrace,

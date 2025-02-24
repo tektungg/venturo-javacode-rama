@@ -26,15 +26,12 @@ class OrderController extends GetxController {
   Rx<String> selectedCategory = 'all'.obs;
 
   Map<String, String> get dateFilterStatus => {
-        'all': 'All status'.tr,
-        'completed': 'Completed'.tr,
-        'canceled': 'Canceled'.tr,
+        'all': 'Semua'.tr,
+        'completed': 'Selesai'.tr,
+        'canceled': 'Dibatalkan'.tr,
       };
 
-  Rx<DateTimeRange> selectedDateRange = DateTimeRange(
-    start: DateTime.now().subtract(const Duration(days: 30)),
-    end: DateTime.now(),
-  ).obs;
+  Rx<DateTimeRange?> selectedDateRange = Rx<DateTimeRange?>(null);
 
   Future<void> getOngoingOrders() async {
     onGoingOrderState('loading');
@@ -74,11 +71,7 @@ class OrderController extends GetxController {
 
   void setDateFilter({String? category, DateTimeRange? range}) {
     selectedCategory(category ?? 'all');
-    selectedDateRange(range ??
-        DateTimeRange(
-          start: DateTime.now().subtract(const Duration(days: 30)),
-          end: DateTime.now(),
-        ));
+    selectedDateRange(range);
   }
 
   List<Map<String, dynamic>> get filteredHistoryOrder {
@@ -90,11 +83,13 @@ class OrderController extends GetxController {
       historyOrderList.removeWhere((element) => element['status'] != 4);
     }
 
-    historyOrderList.removeWhere((element) =>
-        DateTime.parse(element['tanggal'] as String)
-            .isBefore(selectedDateRange.value.start) ||
-        DateTime.parse(element['tanggal'] as String)
-            .isAfter(selectedDateRange.value.end));
+    if (selectedDateRange.value != null) {
+      historyOrderList.removeWhere((element) =>
+          DateTime.parse(element['tanggal'] as String)
+              .isBefore(selectedDateRange.value!.start) ||
+          DateTime.parse(element['tanggal'] as String)
+              .isAfter(selectedDateRange.value!.end));
+    }
 
     historyOrderList.sort((a, b) => DateTime.parse(b['tanggal'] as String)
         .compareTo(DateTime.parse(a['tanggal'] as String)));
@@ -106,8 +101,7 @@ class OrderController extends GetxController {
     final total = filteredHistoryOrder.where((e) => e['status'] == 3).fold(
         0,
         (previousValue, element) =>
-            previousValue + element['total_bayar'] as int);
-
+            previousValue + (element['total_bayar'] as int));
     return total.toString();
   }
 }

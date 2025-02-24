@@ -55,7 +55,8 @@ class OrderItemCard extends StatelessWidget {
 
     final String menuNames = truncateWithEllipsis(
         order['menu']
-            .map<String>((menu) => menu['nama']?.toString() ?? '')
+            .map<String>((menu) =>
+                menu['nama']?.toString() ?? 'Gabeli apa apa anjir beliau')
             .join(', '),
         30);
 

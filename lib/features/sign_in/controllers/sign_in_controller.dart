@@ -12,6 +12,7 @@ import 'package:venturo_core/shared/controllers/global_controllers.dart';
 import 'package:venturo_core/shared/styles/color_style.dart';
 import 'package:venturo_core/shared/styles/google_text_style.dart';
 import 'package:logger/logger.dart';
+import 'package:venturo_core/features/sign_in/repositories/sign_in_repository.dart';
 
 class SignInController extends GetxController {
   static SignInController get to => Get.find();
@@ -60,11 +61,17 @@ class SignInController extends GetxController {
         );
 
         formKey.currentState!.save();
-        if (emailCtrl.text == "admin@gmail.com" && passwordCtrl.text == "admin") {
+        try {
+          // ignore: unused_local_variable
+          final response =
+              await SignInRepository.instance.signInWithEmailAndPassword(
+            emailCtrl.text,
+            passwordCtrl.text,
+          );
           EasyLoading.dismiss();
           _saveSession();
           Get.offAllNamed(Routes.listRoute);
-        } else {
+        } catch (e) {
           EasyLoading.dismiss();
           PanaraInfoDialog.show(
             context,

@@ -5,13 +5,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:logger/logger.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:venturo_core/configs/routes/route.dart';
 import 'package:venturo_core/constants/core/api/api_constant.dart';
 import 'package:venturo_core/shared/controllers/global_controllers.dart';
 import 'package:venturo_core/shared/styles/color_style.dart';
 import 'package:venturo_core/shared/styles/google_text_style.dart';
-import 'package:logger/logger.dart';
 import 'package:venturo_core/features/sign_in/repositories/sign_in_repository.dart';
 
 class SignInController extends GetxController {
@@ -62,16 +62,18 @@ class SignInController extends GetxController {
 
         formKey.currentState!.save();
         try {
-          // ignore: unused_local_variable
           final response =
               await SignInRepository.instance.signInWithEmailAndPassword(
             emailCtrl.text,
             passwordCtrl.text,
           );
           EasyLoading.dismiss();
-          _saveSession();
+          final userId = response['data']['user']['id_user'];
+          final token = response['data']['token'];
+          _saveSession(userId, token);
           Get.offAllNamed(Routes.listRoute);
         } catch (e) {
+          logger.e('Error in validateForm: $e');
           EasyLoading.dismiss();
           PanaraInfoDialog.show(
             context,
@@ -89,7 +91,7 @@ class SignInController extends GetxController {
         Get.toNamed(Routes.noConnectionRoute);
       }
     } catch (e) {
-      logger.e('Error in validateForm');
+      logger.e('Error in validateForm: $e');
       EasyLoading.dismiss();
       PanaraInfoDialog.show(
         context,
@@ -121,24 +123,32 @@ class SignInController extends GetxController {
         idToken: googleAuth.idToken,
       );
 
-      await _auth.signInWithCredential(credential);
-      _saveSession();
-      Get.offAllNamed(Routes.listRoute);
+      final UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
+      final User? user = userCredential.user;
+      if (user != null) {
+        _saveSession(user.uid.hashCode, null);
+        Get.offAllNamed(Routes.listRoute);
+      }
     } catch (e) {
-      logger.e('Error in signInWithGoogle');
+      logger.e('Error in signInWithGoogle: $e');
       Get.snackbar("Error", "Failed to sign in with Google: $e",
           duration: const Duration(seconds: 2));
     }
   }
 
   /// Save session status
-  void _saveSession() {
+  void _saveSession(int userId, String? token) {
     try {
       var box = Hive.box('venturo');
       box.put('isLoggedIn', true);
+      box.put('userId', userId); // Save user ID
+      if (token != null) {
+        box.put('token', token); // Save token
+      }
       logger.d('Session saved successfully');
     } catch (e) {
-      logger.e('Error in _saveSession');
+      logger.e('Error in _saveSession: $e');
     }
   }
 
@@ -217,7 +227,7 @@ class SignInController extends GetxController {
         ),
       );
     } catch (e) {
-      logger.e('Error in flavorSeting');
+      logger.e('Error in flavorSeting: $e');
     }
   }
 }

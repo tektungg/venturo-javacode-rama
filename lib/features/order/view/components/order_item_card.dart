@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:venturo_core/shared/styles/color_style.dart';
 import 'package:venturo_core/utils/functions/string_utils.dart';
+import 'package:venturo_core/features/order/view/components/outlined_title_button.dart';
+import 'package:venturo_core/features/order/view/components/primary_button_with_title.dart';
 
 class OrderItemCard extends StatelessWidget {
   const OrderItemCard({
@@ -167,42 +169,21 @@ class OrderItemCard extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        ElevatedButton(
-                          onPressed: onOrderAgain,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 16.w, vertical: 8.h),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.r),
-                            ),
-                          ),
-                          child: Text(
-                            'Pesan Lagi',
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        ElevatedButton(
+                        OutlinedTitleButton(
+                          text: 'Ulasan',
                           onPressed: () =>
                               onGiveReview?.call(order['id_order'] ?? 0),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 16.w, vertical: 8.h),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.r),
-                            ),
-                          ),
-                          child: Text(
-                            'Ulasan',
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              color: Colors.white,
-                            ),
-                          ),
+                          width: 120.w,
+                          height: 30.h,
+                        ),
+                        PrimaryButtonWithTitle(
+                          onPressed: onOrderAgain,
+                          title: 'Pesan Lagi',
+                          backgroundColor: Colors.blue,
+                          titleColor: Colors.white,
+                          borderColor: Colors.blue,
+                          width: 120.w,
+                          height: 30.h,
                         ),
                       ],
                     ),

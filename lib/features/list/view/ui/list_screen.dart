@@ -42,6 +42,7 @@ class ListScreenState extends State<ListScreen> {
     Get.put(ListController());
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: SearchAppBar(
           searchController: TextEditingController(),
           onChange: (value) {

@@ -5,8 +5,8 @@ class OrderRepository {
       "no_struk": "001/KWT/01/2022",
       "nama": "dev noersy",
       "total_bayar": 12000,
-      "tanggal": "2023-06-19",
-      "status": 2,
+      "tanggal": "2025-02-01",
+      "status": 3,
       "menu": [
         {
           "id_menu": 9,
@@ -67,8 +67,8 @@ class OrderRepository {
       "no_struk": "002/KWT/02/2022",
       "nama": "admin",
       "total_bayar": 22400,
-      "tanggal": "2022-02-18",
-      "status": 0,
+      "tanggal": "2025-02-18",
+      "status": 4,
       "menu": [
         {
           "id_menu": 11,

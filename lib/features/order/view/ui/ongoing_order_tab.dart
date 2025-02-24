@@ -7,7 +7,6 @@ import 'package:venturo_core/features/order/controllers/order_controller.dart';
 import 'package:venturo_core/features/order/view/components/order_item_card.dart';
 
 class OnGoingOrderTabScreen extends StatelessWidget {
-
   const OnGoingOrderTabScreen({super.key});
 
   static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
@@ -31,7 +30,7 @@ class OnGoingOrderTabScreen extends StatelessWidget {
                 '${Routes.orderRoute}/${OrderController.to.onGoingOrders[index]['id_order']}',
               );
             },
-            onOrderAgain: () {},
+            showButtons: false,
           ),
           separatorBuilder: (context, index) => 16.verticalSpace,
           itemCount: OrderController.to.onGoingOrders.length,

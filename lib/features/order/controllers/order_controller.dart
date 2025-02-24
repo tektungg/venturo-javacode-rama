@@ -84,10 +84,14 @@ class OrderController extends GetxController {
   List<Map<String, dynamic>> get filteredHistoryOrder {
     final historyOrderList = historyOrders.toList();
 
+    print('Selected Category: ${selectedCategory.value}');
+    print(
+        'Selected Date Range: ${selectedDateRange.value.start} - ${selectedDateRange.value.end}');
+
     if (selectedCategory.value == 'canceled') {
-      historyOrderList.removeWhere((element) => element['status'] != 4);
-    } else if (selectedCategory.value == 'completed') {
       historyOrderList.removeWhere((element) => element['status'] != 3);
+    } else if (selectedCategory.value == 'completed') {
+      historyOrderList.removeWhere((element) => element['status'] != 4);
     }
 
     historyOrderList.removeWhere((element) =>
@@ -98,6 +102,8 @@ class OrderController extends GetxController {
 
     historyOrderList.sort((a, b) => DateTime.parse(b['tanggal'] as String)
         .compareTo(DateTime.parse(a['tanggal'] as String)));
+
+    print('Filtered History Order: $historyOrderList');
 
     return historyOrderList;
   }

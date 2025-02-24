@@ -58,11 +58,11 @@ class BottomNavbar extends StatelessWidget {
                 label: 'Beranda',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.receipt),
+                icon: Icon(Icons.room_service),
                 label: 'Pesanan',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.person),
+                icon: Icon(Icons.account_circle_outlined),
                 label: 'Profil',
               ),
             ],

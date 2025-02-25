@@ -71,9 +71,9 @@ class ProfileController extends GetxController {
 
     final pickedFile = await ImagePicker().pickImage(
       source: imageSource,
-      maxWidth: 300,
-      maxHeight: 300,
-      imageQuality: 75,
+      maxWidth: 1400,
+      maxHeight: 1400,
+      imageQuality: 100,
     );
 
     /// setelah dipilih, akan terbuka crop gambar
@@ -124,6 +124,17 @@ class ProfileController extends GetxController {
       logger.d('User profile updated successfully');
     } catch (e) {
       logger.e('Error in updateUserProfile: $e');
+    }
+  }
+
+  Future<void> logout() async {
+    try {
+      var box = Hive.box('venturo');
+      await box.clear();
+      logger.d('User logged out successfully');
+      Get.offAllNamed(Routes.signInRoute);
+    } catch (e) {
+      logger.e('Error in logout: $e');
     }
   }
 }

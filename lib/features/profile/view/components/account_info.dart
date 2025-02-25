@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:venturo_core/features/profile/controllers/profile_controller.dart';
+import 'package:venturo_core/features/profile/view/components/language_bottom_sheet.dart.dart';
 import 'package:venturo_core/shared/styles/color_style.dart';
 import 'package:venturo_core/features/profile/view/components/info_row.dart';
 
@@ -25,17 +26,19 @@ Widget buildAccountInfo() {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildInfoRow('Nama', profile['nama'] ?? 'N/A', 'nama'),
+          buildInfoRow('Nama', profile['nama'] ?? 'N/A', key: 'nama'),
           const Divider(),
-          buildInfoRow('Tanggal Lahir', profile['tgl_lahir'] ?? 'N/A', 'tgl_lahir'),
+          buildInfoRow('Tanggal Lahir', profile['tgl_lahir'] ?? 'N/A', key: 'tgl_lahir'),
           const Divider(),
-          buildInfoRow('No. Telepon', profile['telepon'] ?? 'N/A', 'telepon'),
+          buildInfoRow('No. Telepon', profile['telepon'] ?? 'N/A', key: 'telepon'),
           const Divider(),
-          buildInfoRow('Email', profile['email'] ?? 'N/A', 'email'),
+          buildInfoRow('Email', profile['email'] ?? 'N/A', key: 'email'),
           const Divider(),
-          buildInfoRow('PIN', profile['pin'] ?? 'N/A', 'pin'),
+          buildInfoRow('PIN', profile['pin'] ?? 'N/A', key: 'pin'),
           const Divider(),
-          buildInfoRow('Ganti Bahasa', 'Pilih Bahasa'),
+          buildInfoRow('Ganti Bahasa', 'Pilih Bahasa', onPressed: () {
+            showLanguageBottomSheet(Get.context!);
+          }),
         ],
       );
     }),

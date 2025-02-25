@@ -25,6 +25,7 @@ Widget buildOtherInfo() {
         buildInfoRow(
           'Privacy Policy',
           '',
+          onPressed: ProfileController.to.privacyPolicyWebView,
         ),
         const Divider(),
         Obx(() {

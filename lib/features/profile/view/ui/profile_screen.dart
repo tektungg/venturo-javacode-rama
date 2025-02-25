@@ -22,6 +22,10 @@ class ProfileScreen extends StatelessWidget {
             image: AssetImage(ImageConstant.bgPattern2),
             fit: BoxFit.fitHeight,
             alignment: Alignment.center,
+            colorFilter: ColorFilter.mode(
+              Color.fromARGB(50, 255, 255, 255),
+              BlendMode.dstATop,
+            ),
           ),
         ),
         child: ListView(

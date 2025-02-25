@@ -2,12 +2,14 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
 import 'package:venturo_core/configs/routes/route.dart';
 import 'package:venturo_core/shared/styles/color_style.dart';
 import 'package:venturo_core/shared/widgets/image_picker_dialog.dart';
+import 'package:venturo_core/features/profile/repositories/profile_repository.dart';
 
 class ProfileController extends GetxController {
   static ProfileController get to => Get.find();
@@ -16,6 +18,7 @@ class ProfileController extends GetxController {
   final Logger logger = Logger();
 
   final Rx<File?> _imageFile = Rx<File?>(null);
+  final RxMap<String, dynamic> userProfile = RxMap<String, dynamic>({});
 
   File? get imageFile => _imageFile.value;
 
@@ -25,6 +28,7 @@ class ProfileController extends GetxController {
     try {
       logger.d('Initializing ProfileController');
       _getDeviceInfo();
+      fetchUserProfile();
     } catch (e) {
       logger.e('Error in ProfileController onInit');
     }
@@ -93,6 +97,33 @@ class ProfileController extends GetxController {
       if (croppedFile != null) {
         _imageFile.value = File(croppedFile.path);
       }
+    }
+  }
+
+  Future<void> fetchUserProfile() async {
+    try {
+      var box = Hive.box('venturo');
+      int userId = box.get('userId');
+      logger.d('Fetching user profile for user ID: $userId');
+      final profileData =
+          await ProfileRepository.instance.getUserProfile(userId);
+      userProfile.value = profileData;
+      logger.d('User profile fetched successfully: $profileData');
+    } catch (e) {
+      logger.e('Error in fetchUserProfile: $e');
+    }
+  }
+
+  Future<void> updateUserProfile(String key, String value) async {
+    try {
+      var box = Hive.box('venturo');
+      int userId = box.get('userId');
+      logger.d('Updating user profile for user ID: $userId');
+      userProfile[key] = value;
+      await ProfileRepository.instance.updateUserProfile(userId, userProfile);
+      logger.d('User profile updated successfully');
+    } catch (e) {
+      logger.e('Error in updateUserProfile: $e');
     }
   }
 }

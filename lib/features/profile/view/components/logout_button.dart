@@ -20,7 +20,8 @@ Widget buildLogoutButton() {
       },
       child: Text(
         'Logout',
-        style: Get.textTheme.button!.copyWith(color: Colors.white),
+        style: Get.textTheme.titleMedium!
+            .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
       ),
     ),
   );

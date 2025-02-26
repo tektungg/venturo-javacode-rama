@@ -36,7 +36,7 @@ abstract class Pages {
         binding: SplashBinding()),
     GetPage(
       name: Routes.noConnectionRoute,
-      page: () => NoConnectionScreen(),
+      page: () => const NoConnectionScreen(),
     ),
     GetPage(
       name: Routes.signInRoute,
@@ -55,7 +55,7 @@ abstract class Pages {
     ),
     GetPage(
       name: Routes.profileRoute,
-      page: () => ProfileScreen(),
+      page: () => const ProfileScreen(),
       binding: ProfileBinding(),
     ),
     GetPage(
@@ -83,12 +83,12 @@ abstract class Pages {
     ),
     GetPage(
       name: Routes.orderRoute,
-      page: () => OrderScreen(),
+      page: () => const OrderScreen(),
       binding: OrderBinding(),
     ),
     GetPage(
       name: Routes.orderDetailRoute,
-      page: () => DetailOrderScreen(),
+      page: () => const DetailOrderScreen(),
       binding: DetailOrderBinding(),
     ),
     GetPage(

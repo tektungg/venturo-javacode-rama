@@ -10,6 +10,7 @@ import 'package:venturo_core/configs/routes/route.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:venturo_core/features/get_location/controllers/get_location_controller.dart';
+import 'package:venturo_core/shared/bindings/global_binding.dart';
 
 import 'firebase_options.dart';
 import 'configs/pages/page.dart';
@@ -71,7 +72,7 @@ class MyApp extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          // initialBinding: , Jika memiliki global bindding
+          initialBinding: GlobalBinding(), 
           initialRoute: Routes.splashRoute,
           theme: themeLight,
           defaultTransition: Transition.native,

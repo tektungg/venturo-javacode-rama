@@ -109,6 +109,7 @@ class CheckoutMenuCard extends StatelessWidget {
                       menu['jumlah']--;
                     } else {
                       controller.menuList.remove(menu);
+                      controller.removeMenu(menu['id_menu']);
                     }
                     controller.calculateTotal();
                   },

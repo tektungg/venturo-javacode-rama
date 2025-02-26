@@ -23,6 +23,17 @@ class CheckoutScreen extends StatelessWidget {
 
         final groupedMenu = checkoutController.groupedMenuByCategory;
 
+        // Urutkan kategori
+        final sortedCategories = ['makanan', 'minuman', 'snack'];
+        final sortedKeys = groupedMenu.keys.toList()
+          ..sort((a, b) {
+            final indexA = sortedCategories.indexOf(a.toLowerCase());
+            final indexB = sortedCategories.indexOf(b.toLowerCase());
+            if (indexA == -1) return 1;
+            if (indexB == -1) return -1;
+            return indexA.compareTo(indexB);
+          });
+
         return Stack(
           children: [
             Column(
@@ -31,9 +42,9 @@ class CheckoutScreen extends StatelessWidget {
                 Expanded(
                   child: ListView.builder(
                     padding: EdgeInsets.all(16.r),
-                    itemCount: groupedMenu.keys.length,
+                    itemCount: sortedKeys.length,
                     itemBuilder: (context, index) {
-                      String category = groupedMenu.keys.elementAt(index);
+                      String category = sortedKeys[index];
                       List<Map<String, dynamic>> menus = groupedMenu[category]!;
                       return buildCategorySection(category, menus);
                     },

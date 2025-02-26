@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logger/logger.dart';
 import 'package:venturo_core/features/detail_menu/repositories/detail_menu_repository.dart';
 import 'package:venturo_core/features/checkout/sub_features/discount/controllers/discount_controller.dart';
@@ -25,9 +26,26 @@ class CheckoutController extends GetxController {
     // Fetch menu list and calculate total price
     try {
       logger.d('Initializing CheckoutController');
+      loadOrdersFromHive();
       fetchMenuDetails();
     } catch (e) {
       logger.e('Error in CheckoutController onInit');
+    }
+  }
+
+  void loadOrdersFromHive() {
+    try {
+      logger.d('Loading orders from Hive');
+      var box = Hive.box('orders');
+      final orders = box.values
+          .cast<Map>()
+          .map((e) => Map<String, dynamic>.from(e))
+          .toList();
+      menuList.addAll(orders);
+      calculateTotal();
+      logger.d('Orders loaded from Hive: ${menuList.length}');
+    } catch (e) {
+      logger.e('Error in loadOrdersFromHive: $e');
     }
   }
 
@@ -43,7 +61,7 @@ class CheckoutController extends GetxController {
       logger.d('Menu details fetched successfully');
       calculateTotal();
     } catch (e) {
-      logger.e('Error in fetchMenuDetails');
+      logger.e('Error in fetchMenuDetails: $e');
     }
   }
 
@@ -64,7 +82,7 @@ class CheckoutController extends GetxController {
       totalMenuDipesan.value = totalItems;
       logger.d('Total calculated: $total, Total items: $totalItems');
     } catch (e) {
-      logger.e('Error in calculateTotal');
+      logger.e('Error in calculateTotal: $e');
     }
   }
 
@@ -78,7 +96,7 @@ class CheckoutController extends GetxController {
       totalDiskonNominal.value = totalHarga.value * totalDiskon ~/ 100;
       logger.d('Total discount calculated: ${totalDiskonNominal.value}');
     } catch (e) {
-      logger.e('Error in calculateTotalDiscount');
+      logger.e('Error in calculateTotalDiscount: $e');
     }
   }
 
@@ -97,7 +115,7 @@ class CheckoutController extends GetxController {
       }
       calculateTotal();
     } catch (e) {
-      logger.e('Error in applyVoucher');
+      logger.e('Error in applyVoucher: $e');
     }
   }
 
@@ -108,7 +126,7 @@ class CheckoutController extends GetxController {
       totalDiskonNominal.value = 0;
       calculateTotal();
     } catch (e) {
-      logger.e('Error in removeDiscounts');
+      logger.e('Error in removeDiscounts: $e');
     }
   }
 
@@ -120,7 +138,7 @@ class CheckoutController extends GetxController {
           .fetchDiscounts(); // Assuming fetchDiscounts() will restore the discounts
       calculateTotal(); // Recalculate total after restoring discounts
     } catch (e) {
-      logger.e('Error in restoreDiscounts');
+      logger.e('Error in restoreDiscounts: $e');
     }
   }
 
@@ -137,7 +155,7 @@ class CheckoutController extends GetxController {
       }
       return groupedMenu;
     } catch (e) {
-      logger.e('Error in groupedMenuByCategory');
+      logger.e('Error in groupedMenuByCategory: $e');
       return {};
     }
   }
@@ -152,7 +170,23 @@ class CheckoutController extends GetxController {
         calculateTotal();
       }
     } catch (e) {
-      logger.e('Error in updateMenu');
+      logger.e('Error in updateMenu: $e');
+    }
+  }
+
+  void removeMenu(int menuId) {
+    try {
+      logger.d('Removing menu: $menuId');
+      int index = menuList.indexWhere((menu) => menu['id_menu'] == menuId);
+      if (index != -1) {
+        menuList.removeAt(index);
+        var box = Hive.box('orders');
+        box.deleteAt(index);
+        calculateTotal();
+        logger.d('Menu removed: $menuId');
+      }
+    } catch (e) {
+      logger.e('Error in removeMenu: $e');
     }
   }
 }

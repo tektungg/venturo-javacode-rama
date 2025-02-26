@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:venturo_core/features/checkout/controllers/checkout_controller.dart';
 import 'package:venturo_core/features/detail_menu/controllers/detail_menu_controller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -78,8 +79,8 @@ Widget buildMenuHeader(
       ),
       Row(
         children: [
-          buildQuantityButton(
-              controller, Icons.remove, controller.decrementQuantity),
+          buildQuantityButton(controller, Icons.remove,
+              () => controller.decrementQuantity(menu['id_menu'])),
           Obx(() => Padding(
                 padding: EdgeInsets.symmetric(horizontal: 6.w),
                 child: Text('${controller.quantity.value}',
@@ -140,6 +141,13 @@ Widget buildAddToOrderButton(
         };
         checkoutController.menuList.add(updatedMenu);
         checkoutController.calculateTotal();
+
+        // Simpan data pesanan ke Hive box
+        var box = Hive.box('orders');
+        box.add(updatedMenu);
+
+        // Tambahkan log
+        checkoutController.logger.d('Menu added to order: $updatedMenu');
       },
       child: Text(
         'Tambahkan ke Pesanan',

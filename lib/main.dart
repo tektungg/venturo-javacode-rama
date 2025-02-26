@@ -23,6 +23,7 @@ Future<void> main() async {
   // Init Local Storage
   await Hive.initFlutter();
   await Hive.openBox('venturo');
+  await Hive.openBox('orders');
   // Init dotenv
   await dotenv.load(fileName: '.env');
   // Init Firebase

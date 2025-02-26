@@ -80,7 +80,11 @@ Widget buildMenuHeader(
         children: [
           buildQuantityButton(controller, Icons.remove, () {
             if (controller.quantity.value > 1) {
-              controller.decrementQuantity();
+              controller.decrementQuantity(menuDetail['id_menu']);
+            } else {
+              // Jika jumlah menu 1 lalu di-decrement lagi, hapus menu dari Hive box
+              CheckoutController.to.removeMenu(menuDetail['id_menu']);
+              Get.back();
             }
           }),
           Obx(() => Padding(

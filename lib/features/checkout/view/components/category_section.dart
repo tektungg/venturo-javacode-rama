@@ -31,7 +31,7 @@ Widget buildCategorySection(String title, List<Map<String, dynamic>> items) {
             Icon(icon, color: ColorStyle.primary),
             SizedBox(width: 8.w),
             Text(
-              capitalize(title), // Gunakan capitalize dari StringUtils
+              capitalize(title),
               style: Get.textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: ColorStyle.primary,

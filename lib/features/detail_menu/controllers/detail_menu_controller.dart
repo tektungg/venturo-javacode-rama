@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:venturo_core/features/detail_menu/repositories/detail_menu_repository.dart';
+import 'package:venturo_core/features/checkout/controllers/checkout_controller.dart';
 
 class DetailMenuController extends GetxController {
   static DetailMenuController get to => Get.find();
@@ -41,11 +42,14 @@ class DetailMenuController extends GetxController {
     }
   }
 
-  void decrementQuantity() {
+  void decrementQuantity(int menuId) {
     try {
       if (quantity.value > 1) {
         quantity.value--;
         logger.d('Quantity decremented to ${quantity.value}');
+      } else {
+        CheckoutController.to.removeMenu(menuId);
+        logger.d('Menu removed from order: $menuId');
       }
     } catch (e) {
       logger.e('Error in decrementQuantity');

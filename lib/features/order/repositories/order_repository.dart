@@ -69,12 +69,10 @@ class OrderRepository {
     if (response.statusCode == 200) {
       final responseBody = await response.stream.bytesToString();
       logger.d('Response body: $responseBody');
-      print(responseBody);
     } else {
       final responseBody = await response.stream.bytesToString();
       logger.e('Failed to create order: ${response.reasonPhrase}');
       logger.e('Response body: $responseBody');
-      print(response.reasonPhrase);
       throw Exception('Failed to create order: ${response.reasonPhrase}');
     }
   }

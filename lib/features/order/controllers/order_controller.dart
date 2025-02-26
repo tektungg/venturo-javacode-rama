@@ -135,7 +135,8 @@ class OrderController extends GetxController {
             "harga": menu['harga'],
             "level": menu['level'],
             "topping": menu['toppings'] ?? [],
-            "jumlah": menu['jumlah']
+            "jumlah": menu['jumlah'],
+            "catatan": menu['catatan'] ?? '',
           };
         }).toList()
       };

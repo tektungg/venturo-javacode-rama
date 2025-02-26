@@ -8,6 +8,7 @@ import 'package:venturo_core/features/checkout/sub_features/voucher/view/ui/vouc
 import 'package:venturo_core/shared/styles/color_style.dart';
 import 'package:venturo_core/features/checkout/view/components/detail_row.dart';
 import 'package:venturo_core/features/checkout/view/components/touchable_detail_row.dart';
+import 'package:venturo_core/features/order/controllers/order_controller.dart';
 
 PreferredSizeWidget buildAppBar() {
   return PreferredSize(
@@ -206,8 +207,14 @@ Widget buildBottomBar(CheckoutController controller) {
             ],
           ),
           ElevatedButton(
-            onPressed: () {
-              // Implementasi untuk memesan
+            onPressed: () async {
+              try {
+                await OrderController.to.createOrder();
+                Get.snackbar('Success', 'Order created successfully');
+              } catch (e) {
+                Get.snackbar('Error', 'Failed to create order');
+                OrderController.to.logger.e('Failed to create order: $e');
+              }
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: ColorStyle.primary,

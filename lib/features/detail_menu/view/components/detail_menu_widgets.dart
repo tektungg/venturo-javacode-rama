@@ -138,6 +138,8 @@ Widget buildAddToOrderButton(
           'foto': menu['foto'] ?? '',
           'catatan': controller.catatan.value,
           'kategori': menu['kategori'] ?? '',
+          'toppings': controller.selectedToppings,
+          'level': controller.selectedLevel.value,
         };
         checkoutController.menuList.add(updatedMenu);
         checkoutController.calculateTotal();

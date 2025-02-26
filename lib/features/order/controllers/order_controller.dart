@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logger/logger.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:venturo_core/features/order/repositories/order_repository.dart';
+import 'package:venturo_core/features/checkout/controllers/checkout_controller.dart';
 
 class OrderController extends GetxController {
   static OrderController get to => Get.find<OrderController>();
@@ -113,5 +114,46 @@ class OrderController extends GetxController {
         (previousValue, element) =>
             previousValue + (element['total_bayar'] as int));
     return total.toString();
+  }
+
+  Future<void> createOrder() async {
+    try {
+      final userId = Hive.box('venturo').get('userId');
+      final checkoutController = CheckoutController.to;
+
+      final orderData = {
+        "order": {
+          "id_user": userId,
+          "id_voucher": checkoutController.selectedVoucher.value?['id_voucher'],
+          "potongan": checkoutController.totalVoucherNominal.value +
+              checkoutController.totalDiskonNominal.value,
+          "total_bayar": checkoutController.totalPembayaran.value
+        },
+        "menu": checkoutController.menuList.map((menu) {
+          return {
+            "id_menu": menu['id_menu'],
+            "harga": menu['harga'],
+            "level": menu['level'],
+            "topping": menu['toppings'] ?? [],
+            "jumlah": menu['jumlah']
+          };
+        }).toList()
+      };
+
+      logger.d('Order data: $orderData');
+
+      await _orderRepository.createOrder(orderData);
+      logger.d('Order created successfully');
+
+      // Clear orders from Hive box
+      var box = Hive.box('orders');
+      await box.clear();
+      checkoutController.menuList.clear();
+      checkoutController.calculateTotal();
+      logger.d('Orders cleared from Hive');
+    } catch (e) {
+      logger.e('Error in createOrder: $e');
+      rethrow;
+    }
   }
 }

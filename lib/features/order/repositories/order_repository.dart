@@ -53,4 +53,29 @@ class OrderRepository {
     return orders.firstWhere((element) => element['id_order'] == idOrder,
         orElse: () => {});
   }
+
+  Future<void> createOrder(Map<String, dynamic> orderData) async {
+    var headers = {'token': token, 'Content-Type': 'application/json'};
+    var request = http.Request('POST', Uri.parse('${baseUrl}order/add'));
+    request.body = json.encode(orderData);
+    request.headers.addAll(headers);
+
+    logger.d('Sending request to ${request.url}');
+    logger.d('Request body: ${request.body}');
+    logger.d('Request headers: ${request.headers}');
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      final responseBody = await response.stream.bytesToString();
+      logger.d('Response body: $responseBody');
+      print(responseBody);
+    } else {
+      final responseBody = await response.stream.bytesToString();
+      logger.e('Failed to create order: ${response.reasonPhrase}');
+      logger.e('Response body: $responseBody');
+      print(response.reasonPhrase);
+      throw Exception('Failed to create order: ${response.reasonPhrase}');
+    }
+  }
 }

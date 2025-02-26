@@ -23,7 +23,6 @@ class CheckoutScreen extends StatelessWidget {
 
         final groupedMenu = checkoutController.groupedMenuByCategory;
 
-        // Urutkan kategori
         final sortedCategories = ['makanan', 'minuman', 'snack'];
         final sortedKeys = groupedMenu.keys.toList()
           ..sort((a, b) {

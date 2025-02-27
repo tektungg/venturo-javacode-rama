@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:venturo_core/configs/routes/route.dart';
 import 'package:venturo_core/constants/core/assets/image_constant.dart';
-import 'package:venturo_core/features/review/repositories/review_repository.dart';
+import 'package:venturo_core/features/review/controllers/review_controller.dart';
 import 'package:venturo_core/features/review/sub_features/write_review/view/components/app_bar.dart';
 import 'package:venturo_core/features/review/view/components/review_card.dart';
 import 'package:venturo_core/shared/styles/color_style.dart';
@@ -28,14 +28,17 @@ class ReviewScreen extends StatelessWidget {
             ),
           ),
         ),
-        child: ListView.builder(
-          padding: EdgeInsets.symmetric(horizontal: 16.r, vertical: 25.r),
-          itemCount: ReviewRepository.reviews.length,
-          itemBuilder: (context, index) {
-            final review = ReviewRepository.reviews[index];
-            return ReviewCard(review: review);
-          },
-        ),
+        child: Obx(() {
+          final reviews = ReviewController.to.reviews;
+          return ListView.builder(
+            padding: EdgeInsets.symmetric(horizontal: 16.r, vertical: 25.r),
+            itemCount: reviews.length,
+            itemBuilder: (context, index) {
+              final review = reviews[index];
+              return ReviewCard(review: review);
+            },
+          );
+        }),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

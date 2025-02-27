@@ -17,4 +17,8 @@ class ReviewRepository {
       'review': 'Pelayanan sangat memuaskan, ramah dan cepat.',
     },
   ];
+
+  static void addReview(Map<String, dynamic> review) {
+    reviews.add(review);
+  }
 }

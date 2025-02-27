@@ -16,6 +16,7 @@ class WriteReviewScreen extends StatefulWidget {
 class WriteReviewScreenState extends State<WriteReviewScreen> {
   int _selectedRating = 0;
   final List<String> _selectedImprovements = [];
+  final TextEditingController _reviewController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +57,8 @@ class WriteReviewScreenState extends State<WriteReviewScreen> {
                   }
                 });
               },
+              reviewController: _reviewController,
+              selectedRating: _selectedRating,
             ),
           ],
         ),

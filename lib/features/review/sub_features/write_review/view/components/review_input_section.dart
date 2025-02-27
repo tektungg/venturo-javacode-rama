@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:venturo_core/features/review/controllers/review_controller.dart';
 import 'package:venturo_core/shared/styles/color_style.dart';
 
 class ReviewInputImprovementSection extends StatelessWidget {
   final List<String> selectedImprovements;
   final Function(String) onImprovementSelected;
+  final TextEditingController reviewController;
+  final int selectedRating;
   final List<String> _improvementOptions = [
     'Harga',
     'Rasa',
@@ -18,6 +21,8 @@ class ReviewInputImprovementSection extends StatelessWidget {
     super.key,
     required this.selectedImprovements,
     required this.onImprovementSelected,
+    required this.reviewController,
+    required this.selectedRating,
   });
 
   @override
@@ -97,6 +102,7 @@ class ReviewInputImprovementSection extends StatelessWidget {
           ),
           SizedBox(height: 10.h),
           TextField(
+            controller: reviewController,
             maxLines: 5,
             decoration: InputDecoration(
               hintText: 'Ketik review Anda di sini...',
@@ -111,7 +117,14 @@ class ReviewInputImprovementSection extends StatelessWidget {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
-                    // Handle submit review
+                    if (reviewController.text.isNotEmpty) {
+                      ReviewController.to.addReview({
+                        'improvements': selectedImprovements,
+                        'rating': selectedRating,
+                        'review': reviewController.text,
+                      });
+                      Get.back();
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: ColorStyle.primary,

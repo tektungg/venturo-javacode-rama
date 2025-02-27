@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:venturo_core/configs/routes/route.dart';
 import 'package:venturo_core/shared/styles/color_style.dart';
 
 Widget buildRatingSection() {
@@ -32,7 +33,7 @@ Widget buildRatingSection() {
             backgroundColor: ColorStyle.primary,
           ),
           onPressed: () {
-            // Handle rating button press
+            Get.toNamed(Routes.reviewRoute);
           },
           child: Text(
             'Nilai sekarang'.tr,

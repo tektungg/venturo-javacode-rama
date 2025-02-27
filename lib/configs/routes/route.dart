@@ -16,4 +16,6 @@ abstract class Routes {
   static const String promoRoute = '/promo';
   static const String voucherRoute = '/voucher';
   static const String discountRoute = '/discount';
+  static const String reviewRoute = '/review';
+  static const String writeReviewRoute = '/write_review';
 }

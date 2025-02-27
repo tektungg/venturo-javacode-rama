@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:venturo_core/shared/styles/color_style.dart';
 
-PreferredSizeWidget buildAppBar() {
+PreferredSizeWidget buildAppBarWithTitle(String title) {
   return PreferredSize(
     preferredSize: Size.fromHeight(68.h),
     child: SafeArea(
@@ -37,7 +37,7 @@ PreferredSizeWidget buildAppBar() {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'Profil'.tr,
+                    title.tr,
                     style: Get.textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.bold, color: Colors.black),
                   ),

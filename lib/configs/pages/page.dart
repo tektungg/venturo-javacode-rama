@@ -23,6 +23,8 @@ import 'package:venturo_core/features/order/view/ui/order_screen.dart';
 import 'package:venturo_core/features/profile/bindings/profile_binding.dart';
 import 'package:venturo_core/features/profile/view/components/privacy_policy_screen.dart';
 import 'package:venturo_core/features/profile/view/ui/profile_screen.dart';
+import 'package:venturo_core/features/review/sub_features/write_review/view/ui/write_review_screen.dart';
+import 'package:venturo_core/features/review/view/ui/review_screen.dart';
 import 'package:venturo_core/features/sign_in/bindings/sign_in_binding.dart';
 import 'package:venturo_core/features/sign_in/view/ui/sign_in_screen.dart';
 import 'package:venturo_core/features/splash/bindings/splash_binding.dart';
@@ -106,6 +108,14 @@ abstract class Pages {
     GetPage(
       name: Routes.discountRoute,
       page: () => DiscountScreen(),
+    ),
+    GetPage(
+      name: Routes.reviewRoute,
+      page: () => ReviewScreen(),
+    ),
+    GetPage(
+      name: Routes.writeReviewRoute,
+      page: () => WriteReviewScreen(),
     ),
   ];
 }

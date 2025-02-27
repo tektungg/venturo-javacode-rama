@@ -49,6 +49,19 @@ class CheckoutController extends GetxController {
     }
   }
 
+  Future<void> clearOrders() async {
+    try {
+      logger.d('Clearing orders from Hive');
+      var box = Hive.box('orders');
+      await box.clear();
+      menuList.clear();
+      calculateTotal();
+      logger.d('Orders cleared from Hive');
+    } catch (e) {
+      logger.e('Error in clearOrders: $e');
+    }
+  }
+
   void fetchMenuDetails() async {
     try {
       logger.d('Fetching menu details');
@@ -167,7 +180,10 @@ class CheckoutController extends GetxController {
           .indexWhere((menu) => menu['id_menu'] == updatedMenu['id_menu']);
       if (index != -1) {
         menuList[index] = updatedMenu;
+        var box = Hive.box('orders');
+        box.putAt(index, updatedMenu);
         calculateTotal();
+        logger.d('Menu updated: $updatedMenu');
       }
     } catch (e) {
       logger.e('Error in updateMenu: $e');

@@ -21,9 +21,11 @@ class EditMenuScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final DetailMenuController controller = Get.put(DetailMenuController());
     final CheckoutController checkoutController = Get.put(CheckoutController());
-    final Map<String, dynamic> menu = Get.arguments as Map<String, dynamic>;
+    final Map<String, dynamic> arguments =
+        Get.arguments as Map<String, dynamic>;
+    final int menuId = arguments['id_menu'] as int;
 
-    controller.fetchMenuDetail(menu['id_menu']);
+    controller.fetchMenuDetail(menuId);
     controller.updateTotalPrice();
 
     final TextEditingController catatanController = TextEditingController();
@@ -54,7 +56,7 @@ class EditMenuScreen extends StatelessWidget {
               left: 0,
               right: 0,
               child: buildSaveButton(
-                  controller, checkoutController, menu, menuDetail),
+                  controller, checkoutController, arguments, menuDetail),
             ),
           ],
         );

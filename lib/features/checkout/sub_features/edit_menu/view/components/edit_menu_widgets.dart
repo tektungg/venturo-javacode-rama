@@ -75,8 +75,13 @@ Widget buildMenuHeader(
       (element) => element['id_menu'] == menuDetail['id_menu'],
       orElse: () => null);
   if (savedMenu != null) {
-    controller.selectedToppings.assignAll(savedMenu['toppings']);
-    controller.selectedLevel.value = savedMenu['level'];
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller.selectedToppings.assignAll(savedMenu['toppings']);
+      controller.selectedLevel.value = savedMenu['level'];
+      controller.quantity.value = savedMenu['jumlah'];
+      controller.catatan.value = savedMenu['catatan'];
+      controller.totalPrice.value = savedMenu['harga'];
+    });
   }
 
   return Row(

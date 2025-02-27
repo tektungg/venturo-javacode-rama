@@ -7,7 +7,7 @@ import 'package:venturo_core/features/order/repositories/order_repository.dart';
 import 'package:venturo_core/features/checkout/controllers/checkout_controller.dart';
 
 class OrderController extends GetxController {
-  static OrderController get to => Get.find<OrderController>();
+  static OrderController get to => Get.put(OrderController());
   late final OrderRepository _orderRepository;
   final Logger logger = Logger();
 

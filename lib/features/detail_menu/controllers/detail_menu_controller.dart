@@ -25,10 +25,10 @@ class DetailMenuController extends GetxController {
       menuDetail.value = data['menu'];
       toppings.assignAll(data['topping']);
       levels.assignAll(data['level']);
-      totalPrice.value = (data['menu']['harga'] as num).toInt();
+      totalPrice.value = (data['menu']['harga'] as num?)?.toInt() ?? 0;
       logger.d('Menu detail fetched successfully');
     } catch (e) {
-      logger.e('Error in fetchMenuDetail');
+      logger.e('Error in fetchMenuDetail: $e');
       Get.snackbar('Error', e.toString());
     }
   }
@@ -36,9 +36,10 @@ class DetailMenuController extends GetxController {
   void incrementQuantity() {
     try {
       quantity.value++;
+      updateTotalPrice();
       logger.d('Quantity incremented to ${quantity.value}');
     } catch (e) {
-      logger.e('Error in incrementQuantity');
+      logger.e('Error in incrementQuantity: $e');
     }
   }
 
@@ -46,36 +47,37 @@ class DetailMenuController extends GetxController {
     try {
       if (quantity.value > 1) {
         quantity.value--;
+        updateTotalPrice();
         logger.d('Quantity decremented to ${quantity.value}');
       } else {
         CheckoutController.to.removeMenu(menuId);
         logger.d('Menu removed from order: $menuId');
       }
     } catch (e) {
-      logger.e('Error in decrementQuantity');
+      logger.e('Error in decrementQuantity: $e');
     }
   }
 
   void updateTotalPrice() {
     try {
-      int price = (menuDetail['harga'] as num).toInt();
+      int price = (menuDetail['harga'] as num?)?.toInt() ?? 0;
       if (selectedLevel.isNotEmpty) {
         final level = levels.firstWhere(
             (level) => level['keterangan'] == selectedLevel.value,
             orElse: () => null);
         if (level != null) {
-          price += (level['harga'] as num).toInt();
+          price += (level['harga'] as num?)?.toInt() ?? 0;
         }
       }
       for (var topping in selectedToppings) {
         final toppingItem =
             toppings.firstWhere((t) => t['keterangan'] == topping);
-        price += (toppingItem['harga'] as num).toInt();
+        price += (toppingItem['harga'] as num?)?.toInt() ?? 0;
       }
       totalPrice.value = price;
       logger.d('Total price updated to $price');
     } catch (e) {
-      logger.e('Error in updateTotalPrice');
+      logger.e('Error in updateTotalPrice: $e');
     }
   }
 }

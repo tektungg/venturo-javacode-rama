@@ -53,10 +53,27 @@ PreferredSizeWidget buildAppBar() {
                 ],
               ),
             ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: buildClearOrdersButton(),
+            ),
           ],
         ),
       ),
     ),
+  );
+}
+
+IconButton buildClearOrdersButton() {
+  return IconButton(
+    icon: const Icon(
+      Icons.delete_forever,
+      color: ColorStyle.danger,
+    ),
+    onPressed: () async {
+      await CheckoutController.to.clearOrders();
+      Get.snackbar('Success', 'All orders have been cleared');
+    },
   );
 }
 

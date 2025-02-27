@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:venturo_core/shared/styles/color_style.dart';
 
 class RatingSection extends StatelessWidget {
   final int selectedRating;
@@ -13,7 +14,8 @@ class RatingSection extends StatelessWidget {
     'Sempurna'
   ];
 
-  RatingSection({super.key, 
+  RatingSection({
+    super.key,
     required this.selectedRating,
     required this.onRatingSelected,
   });
@@ -23,13 +25,13 @@ class RatingSection extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(16.r),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10.r),
+        color: ColorStyle.tertiary,
+        borderRadius: BorderRadius.circular(30.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
             blurRadius: 10,
-            spreadRadius: 1,
+            spreadRadius: 8,
             offset: const Offset(0, 5),
           ),
         ],
@@ -47,17 +49,28 @@ class RatingSection extends StatelessWidget {
           Row(
             children: [
               for (int i = 1; i <= 5; i++)
-                IconButton(
-                  icon: Icon(
+                GestureDetector(
+                  onTap: () => onRatingSelected(i),
+                  child: Icon(
                     Icons.star,
                     color: i <= selectedRating ? Colors.amber : Colors.grey,
+                    size: 38.r,
                   ),
-                  onPressed: () => onRatingSelected(i),
                 ),
               SizedBox(width: 10.w),
-              Text(
-                selectedRating > 0 ? _ratingDescriptions[selectedRating - 1] : '',
-                style: Get.textTheme.bodyLarge,
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.only(right: 10.w),
+                  child: Text(
+                    selectedRating > 0
+                        ? _ratingDescriptions[selectedRating - 1]
+                        : '',
+                    style: Get.textTheme.bodySmall?.copyWith(
+                      color: Colors.grey,
+                    ),
+                    textAlign: TextAlign.right,
+                  ),
+                ),
               ),
             ],
           ),

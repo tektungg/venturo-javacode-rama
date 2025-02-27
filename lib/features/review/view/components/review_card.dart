@@ -21,7 +21,7 @@ class ReviewCard extends StatelessWidget {
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
             blurRadius: 10,
-            spreadRadius: 1,
+            spreadRadius: 5,
             offset: const Offset(0, 5),
           ),
         ],
@@ -34,7 +34,7 @@ class ReviewCard extends StatelessWidget {
             children: [
               Text(
                 review['improvements'].join(', '),
-                style: Get.textTheme.titleLarge?.copyWith(
+                style: Get.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: ColorStyle.primary,
                 ),
@@ -52,8 +52,8 @@ class ReviewCard extends StatelessWidget {
           ),
           SizedBox(height: 10.h),
           Text(
-            string_utils.truncateWithEllipsis(review['review'], 35),
-            style: Get.textTheme.bodyLarge,
+            string_utils.truncateWithEllipsis(review['review'], 50),
+            style: Get.textTheme.bodySmall,
           ),
         ],
       ),

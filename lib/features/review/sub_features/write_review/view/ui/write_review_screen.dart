@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:venturo_core/constants/core/assets/image_constant.dart';
 import 'package:venturo_core/features/review/sub_features/write_review/view/components/app_bar.dart';
 import 'package:venturo_core/features/review/sub_features/write_review/view/components/rating_section.dart';
-import 'package:venturo_core/features/review/sub_features/write_review/view/components/improvement_section.dart';
 import 'package:venturo_core/features/review/sub_features/write_review/view/components/review_input_section.dart';
 import 'package:venturo_core/shared/widgets/bottom_navbar.dart';
 
@@ -46,7 +45,7 @@ class WriteReviewScreenState extends State<WriteReviewScreen> {
               },
             ),
             SizedBox(height: 20.h),
-            ImprovementSection(
+            ReviewInputImprovementSection(
               selectedImprovements: _selectedImprovements,
               onImprovementSelected: (improvement) {
                 setState(() {
@@ -58,8 +57,6 @@ class WriteReviewScreenState extends State<WriteReviewScreen> {
                 });
               },
             ),
-            SizedBox(height: 20.h),
-            const ReviewInputSection(),
           ],
         ),
       ),

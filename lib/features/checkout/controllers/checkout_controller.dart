@@ -211,6 +211,8 @@ class CheckoutController extends GetxController {
       logger.d('Adding menus from order: $menus');
       var box = Hive.box('orders');
       for (var menu in menus) {
+        // Ensure the price is correctly set
+        menu['harga'] = int.parse(menu['harga'].toString());
         menuList.add(menu);
         box.add(menu);
       }

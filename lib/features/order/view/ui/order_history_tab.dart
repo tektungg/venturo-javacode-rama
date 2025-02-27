@@ -8,6 +8,7 @@ import 'package:venturo_core/features/order/controllers/order_controller.dart';
 import 'package:venturo_core/features/order/view/components/order_item_card.dart';
 import 'package:venturo_core/features/order/view/components/dropdown_status.dart';
 import 'package:venturo_core/features/order/view/components/date_picker.dart';
+import 'package:venturo_core/features/checkout/controllers/checkout_controller.dart';
 
 class OrderHistoryTabScreen extends StatelessWidget {
   const OrderHistoryTabScreen({super.key});
@@ -89,7 +90,12 @@ class OrderHistoryTabScreen extends StatelessWidget {
                                   '${Routes.orderRoute}/${order['id_order']}',
                                 ),
                                 onOrderAgain: () {
-                                  // Handle onOrderAgain
+                                  final List<Map<String, dynamic>> menus =
+                                      List<Map<String, dynamic>>.from(
+                                          order['menu']);
+                                  CheckoutController.to
+                                      .addMenusFromOrder(menus);
+                                  Get.toNamed(Routes.checkoutRoute);
                                 },
                                 onGiveReview: (id) {
                                   // Handle onGiveReview

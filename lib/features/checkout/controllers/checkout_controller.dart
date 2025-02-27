@@ -205,4 +205,19 @@ class CheckoutController extends GetxController {
       logger.e('Error in removeMenu: $e');
     }
   }
+
+  void addMenusFromOrder(List<Map<String, dynamic>> menus) {
+    try {
+      logger.d('Adding menus from order: $menus');
+      var box = Hive.box('orders');
+      for (var menu in menus) {
+        menuList.add(menu);
+        box.add(menu);
+      }
+      calculateTotal();
+      logger.d('Menus added from order');
+    } catch (e) {
+      logger.e('Error in addMenusFromOrder: $e');
+    }
+  }
 }

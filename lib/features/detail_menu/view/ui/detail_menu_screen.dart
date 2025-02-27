@@ -23,7 +23,19 @@ class DetailMenuScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final DetailMenuController controller = Get.put(DetailMenuController());
     final CheckoutController checkoutController = Get.put(CheckoutController());
-    final int menuId = Get.arguments as int;
+    final Map<String, dynamic>? arguments =
+        Get.arguments as Map<String, dynamic>?;
+    if (arguments == null) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Detail Menu'),
+        ),
+        body: const Center(
+          child: Text('No menu data available'),
+        ),
+      );
+    }
+    final int menuId = arguments['id_menu'] as int;
 
     // Fetch menu detail when screen is loaded
     controller.fetchMenuDetail(menuId);

@@ -88,9 +88,37 @@ class DetailOrderMenuCard extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.edit_note,
+                        size: 16.r,
+                        color: ColorStyle.primary,
+                      ),
+                      SizedBox(width: 4.w),
+                      Expanded(
+                        child: Text(
+                          'Catatan: ${menu['catatan'] ?? '-'}',
+                          style: Get.textTheme.bodySmall,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              height: 75.r,
+              padding: EdgeInsets.only(left: 12.w, right: 12.w),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
                   Text(
-                    'Jumlah: $jumlah',
-                    style: Get.textTheme.bodySmall,
+                    '$jumlah',
+                    style: Get.textTheme.titleMedium,
+                    textAlign: TextAlign.right,
                   ),
                 ],
               ),

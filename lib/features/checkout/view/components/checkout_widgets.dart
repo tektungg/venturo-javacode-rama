@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:venturo_core/features/checkout/controllers/checkout_controller.dart';
 import 'package:venturo_core/features/checkout/sub_features/discount/view/ui/discount_screen.dart';
 import 'package:venturo_core/features/checkout/sub_features/voucher/view/ui/voucher_screen.dart';
+import 'package:venturo_core/features/checkout/view/components/order_success_dialog.dart';
 import 'package:venturo_core/shared/styles/color_style.dart';
 import 'package:venturo_core/features/checkout/view/components/detail_row.dart';
 import 'package:venturo_core/features/checkout/view/components/touchable_detail_row.dart';
@@ -230,7 +231,7 @@ Widget buildBottomBar(CheckoutController controller) {
               if (didAuthenticate) {
                 try {
                   await OrderController.to.createOrder();
-                  Get.snackbar('Success', 'Order created successfully');
+                  showOrderSuccessDialog(); 
                 } catch (e) {
                   Get.snackbar('Error', 'Failed to create order');
                   OrderController.to.logger.e('Failed to create order: $e');

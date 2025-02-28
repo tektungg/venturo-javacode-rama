@@ -5,6 +5,7 @@ import 'package:logger/logger.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:venturo_core/features/order/repositories/order_repository.dart';
 import 'package:venturo_core/features/checkout/controllers/checkout_controller.dart';
+import 'package:venturo_core/features/order/sub_features/detail_order/controllers/detail_order_controller.dart';
 
 class OrderController extends GetxController {
   static OrderController get to => Get.put(OrderController());
@@ -89,9 +90,9 @@ class OrderController extends GetxController {
     final historyOrderList = historyOrders.toList();
 
     if (selectedCategory.value == 'canceled') {
-      historyOrderList.removeWhere((element) => element['status'] != 3);
-    } else if (selectedCategory.value == 'completed') {
       historyOrderList.removeWhere((element) => element['status'] != 4);
+    } else if (selectedCategory.value == 'completed') {
+      historyOrderList.removeWhere((element) => element['status'] != 3);
     }
 
     if (selectedDateRange.value != null) {
@@ -154,6 +155,21 @@ class OrderController extends GetxController {
       logger.d('Orders cleared from Hive');
     } catch (e) {
       logger.e('Error in createOrder: $e');
+      rethrow;
+    }
+  }
+
+  Future<void> cancelOrder(int orderId) async {
+    try {
+      await _orderRepository.cancelOrder(orderId);
+      logger.d('Order canceled successfully');
+      await getOngoingOrders();
+      await getOrderHistories();
+
+      final userId = Hive.box('venturo').get('userId');
+      await DetailOrderController.to.getOrderDetail(orderId, userId);
+    } catch (e) {
+      logger.e('Error in cancelOrder: $e');
       rethrow;
     }
   }

@@ -16,7 +16,7 @@ class OrderTracker extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (status == 3) ...[
+        if (status == 4) ...[
           Center(
             child: Column(
               children: [
@@ -35,7 +35,7 @@ class OrderTracker extends StatelessWidget {
               ],
             ),
           ),
-        ] else if (status == 4) ...[
+        ] else if (status == 3) ...[
           Center(
             child: Column(
               children: [

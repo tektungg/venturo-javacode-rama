@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:venturo_core/features/order/sub_features/detail_order/controllers/detail_order_controller.dart';
 import 'package:venturo_core/features/order/sub_features/detail_order/view/components/build_category_section.dart';
 import 'package:venturo_core/features/order/sub_features/detail_order/view/components/build_summary_section.dart';
+import 'package:venturo_core/features/order/sub_features/detail_order/view/components/cancel_order_dialog.dart';
 import 'package:venturo_core/shared/widgets/bottom_navbar.dart';
 import 'package:venturo_core/shared/widgets/rounded_app_bar.dart';
 
@@ -38,7 +39,12 @@ class DetailOrderScreen extends StatelessWidget {
                   padding:
                       EdgeInsets.symmetric(vertical: 16.h, horizontal: 10.w),
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      final orderId = controller.order.value?['id_order'];
+                      if (orderId != null) {
+                        showCancelOrderConfirmationDialog(orderId);
+                      }
+                    },
                     style: TextButton.styleFrom(
                       padding: EdgeInsets.zero,
                       visualDensity: VisualDensity.compact,

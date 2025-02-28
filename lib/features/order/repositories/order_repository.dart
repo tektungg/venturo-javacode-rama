@@ -76,4 +76,26 @@ class OrderRepository {
       throw Exception('Failed to create order: ${response.reasonPhrase}');
     }
   }
+
+  Future<void> cancelOrder(int orderId) async {
+    var headers = {'token': token, 'Content-Type': 'application/json'};
+    var request =
+        http.Request('POST', Uri.parse('${baseUrl}order/batal/$orderId'));
+    request.headers.addAll(headers);
+
+    logger.d('Sending request to ${request.url}');
+    logger.d('Request headers: ${request.headers}');
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      final responseBody = await response.stream.bytesToString();
+      logger.d('Response body: $responseBody');
+    } else {
+      final responseBody = await response.stream.bytesToString();
+      logger.e('Failed to cancel order: ${response.reasonPhrase}');
+      logger.e('Response body: $responseBody');
+      throw Exception('Failed to cancel order: ${response.reasonPhrase}');
+    }
+  }
 }

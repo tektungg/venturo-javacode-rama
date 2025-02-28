@@ -41,15 +41,15 @@ class OrderItemCard extends StatelessWidget {
         statusColor = const Color(0xFFFFAC01);
         break;
       case 3:
-        statusText = 'Dibatalkan';
+        statusText = 'Selesai';
         statusIcon = Icons.cancel;
-        statusColor = Colors.red;
+        statusColor = Colors.green;
         break;
       case 4:
       default:
-        statusText = 'Selesai';
+        statusText = 'Dibatalkan';
         statusIcon = Icons.check_circle;
-        statusColor = Colors.green;
+        statusColor = Colors.red;
         break;
     }
 

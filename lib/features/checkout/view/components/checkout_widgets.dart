@@ -225,12 +225,18 @@ Widget buildBottomBar(CheckoutController controller) {
           ),
           ElevatedButton(
             onPressed: () async {
-              try {
-                await OrderController.to.createOrder();
-                Get.snackbar('Success', 'Order created successfully');
-              } catch (e) {
-                Get.snackbar('Error', 'Failed to create order');
-                OrderController.to.logger.e('Failed to create order: $e');
+              final didAuthenticate =
+                  await CheckoutController.to.authenticateWithBiometrics();
+              if (didAuthenticate) {
+                try {
+                  await OrderController.to.createOrder();
+                  Get.snackbar('Success', 'Order created successfully');
+                } catch (e) {
+                  Get.snackbar('Error', 'Failed to create order');
+                  OrderController.to.logger.e('Failed to create order: $e');
+                }
+              } else {
+                Get.snackbar('Error', 'Authentication failed');
               }
             },
             style: ElevatedButton.styleFrom(

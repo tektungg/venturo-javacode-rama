@@ -3,10 +3,12 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logger/logger.dart';
 import 'package:venturo_core/features/detail_menu/repositories/detail_menu_repository.dart';
 import 'package:venturo_core/features/checkout/sub_features/discount/controllers/discount_controller.dart';
+import 'package:local_auth/local_auth.dart';
 
 class CheckoutController extends GetxController {
   static CheckoutController get to => Get.find();
 
+  final LocalAuthentication auth = LocalAuthentication();
   final RxList<Map<String, dynamic>> menuList = <Map<String, dynamic>>[].obs;
   final RxInt totalHarga = 0.obs;
   final RxInt totalPembayaran = 0.obs;
@@ -220,6 +222,23 @@ class CheckoutController extends GetxController {
       logger.d('Menus added from order');
     } catch (e) {
       logger.e('Error in addMenusFromOrder: $e');
+    }
+  }
+
+  Future<bool> authenticateWithBiometrics() async {
+    try {
+      final bool didAuthenticate = await auth.authenticate(
+        authMessages: [],
+        localizedReason: 'Please authenticate to verify your order',
+        options: const AuthenticationOptions(
+          useErrorDialogs: true,
+          stickyAuth: true,
+        ),
+      );
+      return didAuthenticate;
+    } catch (e) {
+      logger.e('Error in authenticateWithBiometrics: $e');
+      return false;
     }
   }
 }

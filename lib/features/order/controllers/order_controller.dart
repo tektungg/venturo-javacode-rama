@@ -48,7 +48,13 @@ class OrderController extends GetxController {
       logger.d('Ongoing orders fetched successfully: $result');
       onGoingOrders(result.reversed.toList());
 
-      onGoingOrderState('success');
+      // Untuk tujuan debugging, kosongkan daftar pesanan
+      /*
+      onGoingOrders([]);
+      logger.d('Ongoing orders cleared for debugging');
+
+      onGoingOrderState('empty');
+      */
     } catch (exception, stacktrace) {
       logger.e('Failed to fetch ongoing orders: $exception');
       await Sentry.captureException(
@@ -68,9 +74,13 @@ class OrderController extends GetxController {
       logger.d('Fetching order histories for user ID: $userId');
       final result = await _orderRepository.getOrderHistory(userId);
       logger.d('Order histories fetched successfully: $result');
-      historyOrders(result.reversed.toList());
 
-      orderHistoryState('success');
+      /*
+      // Untuk tujuan debugging, kosongkan daftar pesanan
+      historyOrders([]);
+      logger.d('Order histories cleared for debugging');
+      */
+      orderHistoryState('empty');
     } catch (exception, stacktrace) {
       logger.e('Failed to fetch order histories: $exception');
       await Sentry.captureException(

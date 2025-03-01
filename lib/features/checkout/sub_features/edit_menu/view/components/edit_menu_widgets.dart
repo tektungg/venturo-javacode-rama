@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:venturo_core/features/checkout/controllers/checkout_controller.dart';
-import 'package:venturo_core/features/detail_menu/controllers/detail_menu_controller.dart';
+import 'package:venturo_core/features/checkout/sub_features/edit_menu/controllers/edit_menu_controller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:venturo_core/shared/styles/color_style.dart';
 
@@ -68,56 +67,52 @@ Widget buildMenuImage(String? imageUrl) {
 }
 
 Widget buildMenuHeader(
-    DetailMenuController controller, Map<String, dynamic> menuDetail) {
-  // Fetch data from Hive
-  var box = Hive.box('orders');
-  var savedMenu = box.values.firstWhere(
-      (element) => element['id_menu'] == menuDetail['id_menu'],
-      orElse: () => null);
-  if (savedMenu != null) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      controller.selectedToppings.assignAll(savedMenu['toppings']);
-      controller.selectedLevel.value = savedMenu['level'];
-      controller.quantity.value = savedMenu['jumlah'];
-      controller.catatan.value = savedMenu['catatan'];
-      controller.totalPrice.value = savedMenu['harga'];
-    });
-  }
-
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Text(
-        menuDetail['nama'] ?? 'Nama Tidak Tersedia',
-        style: Get.textTheme.headlineSmall
-            ?.copyWith(fontWeight: FontWeight.bold, color: ColorStyle.primary),
-      ),
-      Row(
-        children: [
-          buildQuantityButton(controller, Icons.remove, () {
-            if (controller.quantity.value > 1) {
-              controller.decrementQuantity(menuDetail['id_menu']);
-            } else {
-              // Jika jumlah menu 1 lalu di-decrement lagi, hapus menu dari Hive box
-              CheckoutController.to.removeMenu(menuDetail['id_menu']);
-              Get.back();
-            }
-          }),
-          Obx(() => Padding(
-                padding: EdgeInsets.symmetric(horizontal: 6.w),
-                child: Text('${controller.quantity.value}',
-                    style: Get.textTheme.bodyLarge),
-              )),
-          buildQuantityButton(
-              controller, Icons.add, controller.incrementQuantity),
-        ],
-      ),
-    ],
+    EditMenuController controller, Map<String, dynamic> menuDetail) {
+  return FutureBuilder(
+    future: controller.fetchMenuFromHive(menuDetail['id_menu']),
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const Center(child: CircularProgressIndicator());
+      } else if (snapshot.hasError) {
+        return const Center(child: Text('Error loading menu details'));
+      } else {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              menuDetail['nama'] ?? 'Nama Tidak Tersedia',
+              style: Get.textTheme.headlineSmall
+                  ?.copyWith(fontWeight: FontWeight.bold, color: ColorStyle.primary),
+            ),
+            Row(
+              children: [
+                buildQuantityButton(controller, Icons.remove, () {
+                  if (controller.quantity.value > 1) {
+                    controller.decrementQuantity(menuDetail['id_menu']);
+                  } else {
+                    // Jika jumlah menu 1 lalu di-decrement lagi, hapus menu dari Hive box
+                    CheckoutController.to.removeMenu(menuDetail['id_menu']);
+                    Get.back();
+                  }
+                }),
+                Obx(() => Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 6.w),
+                      child: Text('${controller.quantity.value}',
+                          style: Get.textTheme.bodyLarge),
+                    )),
+                buildQuantityButton(
+                    controller, Icons.add, controller.incrementQuantity),
+              ],
+            ),
+          ],
+        );
+      }
+    },
   );
 }
 
 Widget buildQuantityButton(
-    DetailMenuController controller, IconData icon, VoidCallback onPressed) {
+    EditMenuController controller, IconData icon, VoidCallback onPressed) {
   return Container(
     width: 20.w,
     height: 20.h,
@@ -138,7 +133,7 @@ Widget buildQuantityButton(
 }
 
 Widget buildSaveButton(
-    DetailMenuController controller,
+    EditMenuController controller,
     CheckoutController checkoutController,
     Map<String, dynamic> menu,
     Map<String, dynamic> menuDetail) {
@@ -179,13 +174,7 @@ Widget buildSaveButton(
         checkoutController.updateMenu(updatedMenu);
 
         // Update data pesanan di Hive box
-        var box = Hive.box('orders');
-        int index = box.values
-            .toList()
-            .indexWhere((element) => element['id_menu'] == menu['id_menu']);
-        if (index != -1) {
-          box.putAt(index, updatedMenu);
-        }
+        controller.updateMenuInHive(updatedMenu);
 
         Get.back();
       },

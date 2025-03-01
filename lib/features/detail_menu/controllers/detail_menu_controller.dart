@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:venturo_core/features/detail_menu/repositories/detail_menu_repository.dart';
 import 'package:venturo_core/features/checkout/controllers/checkout_controller.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class DetailMenuController extends GetxController {
   static DetailMenuController get to => Get.find();
@@ -79,5 +80,27 @@ class DetailMenuController extends GetxController {
     } catch (e) {
       logger.e('Error in updateTotalPrice: $e');
     }
+  }
+
+  void addToOrder() {
+    final updatedMenu = {
+      'id_menu': menuDetail['id_menu'],
+      'nama': menuDetail['nama'],
+      'harga': totalPrice.value,
+      'jumlah': quantity.value,
+      'foto': menuDetail['foto'],
+      'catatan': catatan.value,
+      'kategori': menuDetail['kategori'],
+      'toppings': selectedToppings,
+      'level': selectedLevel.value,
+    };
+    CheckoutController.to.menuList.add(updatedMenu);
+    CheckoutController.to.calculateTotal();
+
+    // Save data to Hive box
+    var box = Hive.box('orders');
+    box.add(updatedMenu);
+
+    logger.d('Menu added to order: $updatedMenu');
   }
 }

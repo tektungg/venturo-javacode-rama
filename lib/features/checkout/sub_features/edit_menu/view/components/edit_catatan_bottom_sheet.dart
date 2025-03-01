@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:venturo_core/features/checkout/sub_features/edit_menu/controllers/edit_menu_controller.dart';
+import 'package:venturo_core/shared/styles/color_style.dart';
 
 void showEditCatatanBottomSheet(BuildContext context,
     EditMenuController controller, TextEditingController catatanController) {
@@ -26,43 +27,65 @@ void showEditCatatanBottomSheet(BuildContext context,
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.r, vertical: 16.r),
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Center(
                       child: Container(
-                        width: 40.w,
+                        width: 155.w,
                         height: 4.h,
                         decoration: BoxDecoration(
-                          color: Colors.grey[300],
+                          color: Colors.grey,
                           borderRadius: BorderRadius.circular(2.r),
                         ),
                       ),
                     ),
                     SizedBox(height: 16.h),
                     Text(
-                      'Catatan',
-                      style: Get.textTheme.headlineSmall
-                          ?.copyWith(fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 16.h),
-                    TextField(
-                      controller: catatanController,
-                      maxLines: 5,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Tambahkan catatan...',
+                      'Buat Catatan',
+                      style: Get.textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
                       ),
-                      onChanged: (value) {
-                        controller.catatan.value = value;
-                      },
                     ),
                     SizedBox(height: 16.h),
-                    ElevatedButton(
-                      onPressed: () {
-                        controller.catatan.value = catatanController.text;
-                        Get.back();
-                      },
-                      child: const Text('Simpan'),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            controller: catatanController,
+                            decoration: const InputDecoration(
+                              hintText: 'Masukkan catatan',
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: ColorStyle.primary,
+                                ),
+                              ),
+                              border: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: ColorStyle.primary,
+                                ),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: ColorStyle.primary,
+                                ),
+                              ),
+                            ),
+                            maxLines: null,
+                            maxLength: 100,
+                          ),
+                        ),
+                        IconButton(
+                          icon: const CircleAvatar(
+                            backgroundColor: ColorStyle.primary,
+                            child: Icon(Icons.check, color: Colors.white),
+                          ),
+                          onPressed: () {
+                            controller.catatan.value = catatanController.text;
+                            Get.back();
+                          },
+                        ),
+                      ],
                     ),
                   ],
                 ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:venturo_core/features/checkout/sub_features/edit_menu/controllers/edit_menu_controller.dart';
+import 'package:venturo_core/utils/functions/string_utils.dart' as string_utils;
 
 void showEditToppingBottomSheet(
     BuildContext context, EditMenuController controller) {
@@ -20,10 +21,10 @@ void showEditToppingBottomSheet(
           children: [
             Center(
               child: Container(
-                width: 40.w,
+                width: 155.w,
                 height: 4.h,
                 decoration: BoxDecoration(
-                  color: Colors.grey[300],
+                  color: Colors.grey,
                   borderRadius: BorderRadius.circular(2.r),
                 ),
               ),
@@ -33,35 +34,71 @@ void showEditToppingBottomSheet(
               padding: EdgeInsets.symmetric(horizontal: 7.r),
               child: Text(
                 'Pilih Topping',
-                style: Get.textTheme.headlineSmall
-                    ?.copyWith(fontWeight: FontWeight.bold),
+                style: Get.textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             SizedBox(height: 16.h),
             Obx(() {
               if (controller.toppings.isEmpty) {
-                return Center(child: Text('No toppings available'));
-              } else {
-                return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: controller.toppings.length,
-                  itemBuilder: (context, index) {
-                    final topping = controller.toppings[index];
-                    return CheckboxListTile(
-                      title: Text(topping['keterangan']),
-                      value: controller.selectedToppings.contains(topping['keterangan']),
-                      onChanged: (bool? value) {
-                        if (value == true) {
-                          controller.selectedToppings.add(topping['keterangan']);
-                        } else {
-                          controller.selectedToppings.remove(topping['keterangan']);
-                        }
-                        controller.updateTotalPrice();
-                      },
-                    );
-                  },
+                return Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 7.r),
+                  child: Text(
+                    'Menu ini tidak memiliki pilihan topping',
+                    style: Get.textTheme.bodyMedium,
+                  ),
                 );
               }
+              return Wrap(
+                spacing: 8.w,
+                runSpacing: 8.h,
+                children: controller.toppings.map((topping) {
+                  final isSelected = controller.selectedToppings
+                      .contains(topping['keterangan']);
+                  return ChoiceChip(
+                    showCheckmark: false,
+                    label: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(string_utils.capitalize(topping['keterangan'])),
+                        if (isSelected)
+                          Padding(
+                            padding: EdgeInsets.only(left: 4.w),
+                            child: Icon(
+                              Icons.check,
+                              color: Colors.white,
+                              size: 16.r,
+                            ),
+                          ),
+                      ],
+                    ),
+                    selected: isSelected,
+                    onSelected: (selected) {
+                      if (isSelected) {
+                        controller.selectedToppings
+                            .remove(topping['keterangan']);
+                      } else {
+                        controller.selectedToppings.add(topping['keterangan']);
+                      }
+                      controller.updateTotalPrice();
+                    },
+                    selectedColor: Theme.of(context).primaryColor,
+                    backgroundColor: Colors.grey[200],
+                    labelStyle: TextStyle(
+                      color: isSelected ? Colors.white : Colors.black,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.r),
+                      side: BorderSide(
+                        color: isSelected
+                            ? Colors.transparent
+                            : Theme.of(context).primaryColor,
+                      ),
+                    ),
+                  );
+                }).toList(),
+              );
             }),
           ],
         ),

@@ -27,7 +27,8 @@ class DetailMenuController extends GetxController {
       toppings.assignAll(data['topping']);
       levels.assignAll(data['level']);
       totalPrice.value = (data['menu']['harga'] as num?)?.toInt() ?? 0;
-      logger.d('Menu detail fetched successfully');
+      logger.d(
+          'Menu detail fetched successfully :$menuDetail, $toppings, $levels');
     } catch (e) {
       logger.e('Error in fetchMenuDetail: $e');
       Get.snackbar('Error', e.toString());
@@ -93,6 +94,9 @@ class DetailMenuController extends GetxController {
       'kategori': menuDetail['kategori'],
       'toppings': selectedToppings,
       'level': selectedLevel.value,
+      'available_levels': levels,
+      'available_toppings': toppings,
+      'deskripsi': menuDetail['deskripsi'],
     };
     CheckoutController.to.menuList.add(updatedMenu);
     CheckoutController.to.calculateTotal();
@@ -102,5 +106,6 @@ class DetailMenuController extends GetxController {
     box.add(updatedMenu);
 
     logger.d('Menu added to order: $updatedMenu');
+    logger.d('Data tersimpan di Hive: ${box.values.toList()}');
   }
 }

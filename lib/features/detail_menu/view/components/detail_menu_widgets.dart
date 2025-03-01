@@ -140,6 +140,9 @@ Widget buildAddToOrderButton(
           'kategori': menu['kategori'] ?? '',
           'toppings': controller.selectedToppings,
           'level': controller.selectedLevel.value,
+          'available_levels': controller.levels,
+          'available_toppings': controller.toppings,
+          'deskripsi': menu['deskripsi'] ?? '',
         };
         checkoutController.menuList.add(updatedMenu);
         checkoutController.calculateTotal();

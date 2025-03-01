@@ -81,8 +81,8 @@ Widget buildMenuHeader(
           children: [
             Text(
               menuDetail['nama'] ?? 'Nama Tidak Tersedia',
-              style: Get.textTheme.headlineSmall
-                  ?.copyWith(fontWeight: FontWeight.bold, color: ColorStyle.primary),
+              style: Get.textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold, color: ColorStyle.primary),
             ),
             Row(
               children: [
@@ -170,6 +170,9 @@ Widget buildSaveButton(
           'kategori': menu['kategori'],
           'toppings': controller.selectedToppings,
           'level': controller.selectedLevel.value,
+          'available_levels': controller.levels,
+          'available_toppings': controller.toppings,
+          'deskripsi': menu['deskripsi'] ?? '',
         };
         checkoutController.updateMenu(updatedMenu);
 

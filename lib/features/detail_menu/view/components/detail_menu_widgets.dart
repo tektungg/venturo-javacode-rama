@@ -134,6 +134,7 @@ Widget buildAddToOrderButton(
           'id_menu': menuId,
           'nama': menu['nama'] ?? '',
           'harga': controller.totalPrice.value,
+          'base_price': menu['harga'] ?? 0,
           'jumlah': controller.quantity.value,
           'foto': menu['foto'] ?? '',
           'catatan': controller.catatan.value,

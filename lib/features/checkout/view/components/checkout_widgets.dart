@@ -73,7 +73,8 @@ IconButton buildClearOrdersButton() {
     ),
     onPressed: () async {
       await CheckoutController.to.clearOrders();
-      Get.snackbar('Success', 'All orders have been cleared');
+      Get.snackbar('Success', 'All orders have been cleared',
+          snackPosition: SnackPosition.BOTTOM);
     },
   );
 }
@@ -231,7 +232,7 @@ Widget buildBottomBar(CheckoutController controller) {
               if (didAuthenticate) {
                 try {
                   await OrderController.to.createOrder();
-                  showOrderSuccessDialog(); 
+                  showOrderSuccessDialog();
                 } catch (e) {
                   Get.snackbar('Error', 'Failed to create order');
                   OrderController.to.logger.e('Failed to create order: $e');

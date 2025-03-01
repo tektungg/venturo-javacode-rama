@@ -164,6 +164,7 @@ Widget buildSaveButton(
           'id_menu': menu['id_menu'],
           'nama': menuDetail['nama'],
           'harga': controller.totalPrice.value,
+          'base_price': menu['harga'] ?? 0,
           'jumlah': controller.quantity.value,
           'foto': menuDetail['foto'],
           'catatan': controller.catatan.value,

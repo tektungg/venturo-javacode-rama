@@ -5,6 +5,7 @@ import 'package:logger/logger.dart';
 class EditMenuController extends GetxController {
   static EditMenuController get to => Get.put(EditMenuController());
 
+  final RxMap<String, dynamic> menuDetail = <String, dynamic>{}.obs;
   final RxList<dynamic> selectedToppings = <dynamic>[].obs;
   final RxString selectedLevel = ''.obs;
   final RxString catatan = ''.obs;
@@ -45,6 +46,7 @@ class EditMenuController extends GetxController {
         levels.assignAll(savedMenu['available_levels'] ?? []);
         toppings.assignAll(savedMenu['available_toppings'] ?? []);
         deskripsi.value = savedMenu['deskripsi'] ?? '';
+        menuDetail['base_price'] = savedMenu['base_price']; // Ambil harga dasar
         logger.d('Menu fetched from Hive: $savedMenu');
       }
     } catch (e) {
@@ -86,7 +88,8 @@ class EditMenuController extends GetxController {
 
   void updateTotalPrice() {
     try {
-      int price = totalPrice.value;
+      int price = (menuDetail['base_price'] as num?)?.toInt() ??
+          0; // Gunakan harga dasar
       if (selectedLevel.isNotEmpty) {
         final level = levels.firstWhere(
             (level) => level['keterangan'] == selectedLevel.value,

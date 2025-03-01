@@ -88,6 +88,7 @@ class DetailMenuController extends GetxController {
       'id_menu': menuDetail['id_menu'],
       'nama': menuDetail['nama'],
       'harga': totalPrice.value,
+      'base_price': menuDetail['harga'], // Simpan harga dasar
       'jumlah': quantity.value,
       'foto': menuDetail['foto'],
       'catatan': catatan.value,

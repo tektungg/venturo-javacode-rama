@@ -91,45 +91,45 @@ class EditMenuScreen extends StatelessWidget {
           ),
           SizedBox(height: 16.h),
           const Divider(),
-          DetailRowWidget(
-            title: 'Harga',
-            value: Obx(() => Text(
+          Obx(() => DetailRowWidget(
+                title: 'Harga',
+                value: Text(
                   'Rp${NumberFormat.currency(locale: 'id_ID', symbol: '', decimalDigits: 0).format(controller.totalPrice.value)}',
                   style: const TextStyle(
                       color: ColorStyle.primary, fontWeight: FontWeight.bold),
-                )),
-            icon: Icons.attach_money,
-          ),
+                ),
+                icon: Icons.attach_money,
+              )),
           const Divider(),
-          TouchableDetailRowWidget(
-            title: 'Level',
-            value: controller.selectedLevel.value.isEmpty
-                ? 'Pilih Level'
-                : string_utils.capitalize(controller.selectedLevel.value),
-            onTap: () => showEditLevelBottomSheet(context, controller),
-            icon: Icons.whatshot,
-          ),
+          Obx(() => TouchableDetailRowWidget(
+                title: 'Level',
+                value: controller.selectedLevel.value.isEmpty
+                    ? 'Pilih Level'
+                    : string_utils.capitalize(controller.selectedLevel.value),
+                onTap: () => showEditLevelBottomSheet(context, controller),
+                icon: Icons.whatshot,
+              )),
           const Divider(),
-          TouchableDetailRowWidget(
-            title: 'Topping',
-            value: controller.selectedToppings.isEmpty
-                ? 'Pilih Topping'
-                : controller.selectedToppings
-                    .map((item) => string_utils.capitalize(item as String))
-                    .join(', '),
-            onTap: () => showEditToppingBottomSheet(context, controller),
-            icon: Icons.local_pizza,
-          ),
+          Obx(() => TouchableDetailRowWidget(
+                title: 'Topping',
+                value: controller.selectedToppings.isEmpty
+                    ? 'Pilih Topping'
+                    : controller.selectedToppings
+                        .map((item) => string_utils.capitalize(item as String))
+                        .join(', '),
+                onTap: () => showEditToppingBottomSheet(context, controller),
+                icon: Icons.local_pizza,
+              )),
           const Divider(),
-          TouchableDetailRowWidget(
-            title: 'Catatan',
-            value: controller.catatan.value.isEmpty
-                ? 'Masukkan catatan'
-                : truncateWithEllipsis(controller.catatan.value, 20),
-            onTap: () => showEditCatatanBottomSheet(context, controller,
-                TextEditingController(text: controller.catatan.value)),
-            icon: Icons.edit_note_outlined,
-          ),
+          Obx(() => TouchableDetailRowWidget(
+                title: 'Catatan',
+                value: controller.catatan.value.isEmpty
+                    ? 'Masukkan catatan'
+                    : truncateWithEllipsis(controller.catatan.value, 20),
+                onTap: () => showEditCatatanBottomSheet(context, controller,
+                    TextEditingController(text: controller.catatan.value)),
+                icon: Icons.edit_note_outlined,
+              )),
           const Divider(),
         ],
       ),

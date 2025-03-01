@@ -34,6 +34,14 @@ class CheckoutMenuCard extends StatelessWidget {
                 color: Colors.transparent,
                 width: 2.w,
               ),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black87,
+                  offset: Offset(0, 2),
+                  blurRadius: 4,
+                  spreadRadius: -1,
+                ),
+              ],
             ),
             child: Row(
               children: [

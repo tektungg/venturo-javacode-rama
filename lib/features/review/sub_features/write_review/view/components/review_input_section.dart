@@ -10,11 +10,11 @@ class ReviewInputImprovementSection extends StatelessWidget {
   final TextEditingController reviewController;
   final int selectedRating;
   final List<String> _improvementOptions = [
-    'Harga',
-    'Rasa',
-    'Penyajian Makanan',
-    'Pelayanan',
-    'Fasilitas'
+    'Harga'.tr,
+    'Rasa'.tr,
+    'Penyajian Makanan'.tr,
+    'Pelayanan'.tr,
+    'Fasilitas'.tr,
   ];
 
   ReviewInputImprovementSection({
@@ -45,7 +45,7 @@ class ReviewInputImprovementSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Apa yang bisa ditingkatkan?',
+            'Apa yang bisa ditingkatkan?'.tr,
             style: Get.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -95,7 +95,7 @@ class ReviewInputImprovementSection extends StatelessWidget {
           const Divider(),
           SizedBox(height: 10.h),
           Text(
-            'Tulis Review',
+            'Tulis Review'.tr,
             style: Get.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -105,7 +105,7 @@ class ReviewInputImprovementSection extends StatelessWidget {
             controller: reviewController,
             maxLines: 5,
             decoration: InputDecoration(
-              hintText: 'Ketik review Anda di sini...',
+              hintText: 'Ketik review Anda di sini...'.tr,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20.r),
               ),
@@ -133,9 +133,9 @@ class ReviewInputImprovementSection extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30.r),
                     ),
                   ),
-                  child: const Text(
-                    'Kirim Penilaian',
-                    style: TextStyle(
+                  child: Text(
+                    'Kirim Penilaian'.tr,
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),

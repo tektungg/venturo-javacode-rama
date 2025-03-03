@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:venturo_core/constants/core/assets/image_constant.dart';
 import 'package:venturo_core/features/review/sub_features/write_review/view/components/app_bar.dart';
 import 'package:venturo_core/features/review/sub_features/write_review/view/components/rating_section.dart';
@@ -21,7 +22,7 @@ class WriteReviewScreenState extends State<WriteReviewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBarWithTitle('Penilaian'),
+      appBar: buildAppBarWithTitle('Penilaian'.tr),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(

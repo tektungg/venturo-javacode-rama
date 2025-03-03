@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:venturo_core/features/review/constants/review_api_constant.dart';
 
 class ReviewRepository {
@@ -7,14 +8,14 @@ class ReviewRepository {
 
   static final List<Map<String, dynamic>> reviews = [
     {
-      'improvements': ['Harga', 'Rasa'],
+      'improvements': ['Harga'.tr, 'Rasa'.tr],
       'rating': 4,
-      'review': 'Makanan enak, harga terjangkau, pelayanan cepat.',
+      'review': 'Makanan enak, harga terjangkau, pelayanan cepat.'.tr,
     },
     {
-      'improvements': ['Pelayanan'],
+      'improvements': ['Pelayanan'.tr],
       'rating': 5,
-      'review': 'Pelayanan sangat memuaskan, ramah dan cepat.',
+      'review': 'Pelayanan sangat memuaskan, ramah dan cepat.'.tr,
     },
   ];
 

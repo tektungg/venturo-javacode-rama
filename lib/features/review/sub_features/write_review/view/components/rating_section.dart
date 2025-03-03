@@ -7,11 +7,11 @@ class RatingSection extends StatelessWidget {
   final int selectedRating;
   final Function(int) onRatingSelected;
   final List<String> _ratingDescriptions = [
-    'Buruk',
-    'Kurang',
-    'Cukup',
-    'Baik',
-    'Sempurna'
+    'Buruk'.tr,
+    'Kurang'.tr,
+    'Cukup'.tr,
+    'Baik'.tr,
+    'Sempurna'.tr,
   ];
 
   RatingSection({
@@ -40,7 +40,7 @@ class RatingSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Berikan Penilaianmu!',
+            'Berikan Penilaianmu!'.tr,
             style: Get.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),

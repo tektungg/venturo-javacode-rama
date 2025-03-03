@@ -94,6 +94,25 @@ class TranslationService extends Translations {
               'Already ordered?\n Track your order here',
           'Mulai buat pesanan.\n Makanan yang telah kamu pesan akan muncul di sini agar kamu bisa menemukan menu favoritmu lagi!':
               'Start ordering.\n The food you have ordered will appear here so you can find your favorite menu again!',
+          'Buruk': 'Bad',
+          'Kurang': 'Poor',
+          'Cukup': 'Fair',
+          'Baik': 'Good',
+          'Sempurna': 'Perfect',
+          'Berikan Penilaianmu!': 'Give Your Rating!',
+          'Rasa': 'Taste',
+          'Penyajian Makanan': 'Food Presentation',
+          'Pelayanan': 'Service',
+          'Fasilitas': 'Facilities',
+          'Apa yang bisa ditingkatkan?': 'What can be improved?',
+          'Tulis Review': 'Write Review',
+          'Ketik review Anda di sini...': 'Type your review here...',
+          'Kirim Penilaian': 'Send Rating',
+          'Daftar Penilaian': 'Rating List',
+          'Makanan enak, harga terjangkau, pelayanan cepat.':
+              'Delicious food, affordable prices, fast service.',
+          'Pelayanan sangat memuaskan, ramah dan cepat.':
+              'Very satisfying service, friendly and fast.',
         },
       };
 }

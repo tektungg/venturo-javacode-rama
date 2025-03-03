@@ -15,7 +15,7 @@ class ReviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBarWithTitle('Daftar Penilaian'),
+      appBar: buildAppBarWithTitle('Daftar Penilaian'.tr),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(

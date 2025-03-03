@@ -52,18 +52,18 @@ class BottomNavbar extends StatelessWidget {
             unselectedItemColor: Colors.grey,
             currentIndex: selectedIndex.value,
             onTap: onItemTapped,
-            items: const [
+            items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Beranda',
+                icon: const Icon(Icons.home),
+                label: 'Beranda'.tr,
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.room_service),
-                label: 'Pesanan',
+                icon: const Icon(Icons.room_service),
+                label: 'Pesanan'.tr,
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle_outlined),
-                label: 'Profil',
+                icon: const Icon(Icons.account_circle_outlined),
+                label: 'Profil'.tr,
               ),
             ],
             type: BottomNavigationBarType.fixed,

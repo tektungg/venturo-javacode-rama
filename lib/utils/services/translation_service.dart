@@ -20,6 +20,8 @@ class TranslationService extends Translations {
           'Model Perangkat': 'Device Model',
           'Versi Android': 'Android Version',
           'Kebijakan Privasi': 'Privacy Policy',
+          'Beranda': 'Home',
+          'Pesanan': 'Orders',
         },
         'id_ID': {
           'Ganti Bahasa': 'Ganti Bahasa',
@@ -38,6 +40,8 @@ class TranslationService extends Translations {
           'Model Perangkat': 'Model Perangkat',
           'Versi Android': 'Versi Android',
           'Privacy Policy': 'Kebijakan Privasi',
+          'Beranda': 'Beranda',
+          'Pesanan': 'Pesanan',
         },
       };
 }

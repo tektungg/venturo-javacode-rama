@@ -28,6 +28,8 @@ class TranslationService extends Translations {
           'Snack': 'Snacks',
           'Semua': 'All',
           'Cari': 'Search',
+          'Syarat dan Ketentuan': 'Terms and Conditions',
+          'Tidak ada syarat dan ketentuan': 'No terms and conditions',
         },
         'id_ID': {
           'Ganti Bahasa': 'Ganti Bahasa',
@@ -54,6 +56,8 @@ class TranslationService extends Translations {
           'Snack': 'Snack',
           'Semua': 'Semua',
           'Cari': 'Cari',
+          'Syarat dan Ketentuan': 'Syarat dan Ketentuan',
+          'Tidak ada syarat dan ketentuan': 'Tidak ada syarat dan ketentuan',
         },
       };
 }

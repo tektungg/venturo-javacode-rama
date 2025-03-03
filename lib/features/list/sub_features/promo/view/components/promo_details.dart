@@ -48,7 +48,7 @@ class PromoDetails extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Syarat dan Ketentuan',
+                      'Syarat dan Ketentuan'.tr,
                       style: Get.textTheme.titleMedium!.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -56,7 +56,7 @@ class PromoDetails extends StatelessWidget {
                     SizedBox(height: 6.h),
                     Html(
                       data: promo['syarat_ketentuan'] ??
-                          'Tidak ada syarat dan ketentuan',
+                          'Tidak ada syarat dan ketentuan'.tr,
                       style: {
                         "body": Style(
                           fontSize: FontSize(15.sp),

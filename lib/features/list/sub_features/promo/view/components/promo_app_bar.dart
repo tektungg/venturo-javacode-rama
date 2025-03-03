@@ -45,7 +45,7 @@ class PromoAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                     SizedBox(width: 8.w),
                     Text(
-                      'Promo',
+                      'Promo'.tr,
                       style: Get.textTheme.titleLarge
                           ?.copyWith(fontWeight: FontWeight.bold),
                     ),

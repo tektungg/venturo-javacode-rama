@@ -58,7 +58,7 @@ class ListScreenState extends State<ListScreen> {
                 const Padding(
                   padding: EdgeInsets.symmetric(),
                   child: SectionHeader(
-                    title: 'Available Promos',
+                    title: 'Promo Untukmu',
                     icon: Icons.local_offer,
                   ),
                 ),

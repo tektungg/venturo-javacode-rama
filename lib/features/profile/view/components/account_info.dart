@@ -26,17 +26,17 @@ Widget buildAccountInfo() {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildInfoRow('Nama', profile['nama'] ?? 'N/A', key: 'nama'),
+          buildInfoRow('Nama'.tr, profile['nama'] ?? 'N/A', key: 'nama'),
           const Divider(),
-          buildInfoRow('Tanggal Lahir', profile['tgl_lahir'] ?? 'N/A', key: 'tgl_lahir'),
+          buildInfoRow('Tanggal Lahir'.tr, profile['tgl_lahir'] ?? 'N/A', key: 'tgl_lahir'),
           const Divider(),
-          buildInfoRow('No. Telepon', profile['telepon'] ?? 'N/A', key: 'telepon'),
+          buildInfoRow('No. Telepon'.tr, profile['telepon'] ?? 'N/A', key: 'telepon'),
           const Divider(),
-          buildInfoRow('Email', profile['email'] ?? 'N/A', key: 'email'),
+          buildInfoRow('Email'.tr, profile['email'] ?? 'N/A', key: 'email'),
           const Divider(),
-          buildInfoRow('PIN', profile['pin'] ?? 'N/A', key: 'pin'),
+          buildInfoRow('PIN'.tr, profile['pin'] ?? 'N/A', key: 'pin'),
           const Divider(),
-          buildInfoRow('Ganti Bahasa', 'Pilih Bahasa', onPressed: () {
+          buildInfoRow('Ganti Bahasa'.tr, 'Pilih Bahasa'.tr, onPressed: () {
             showLanguageBottomSheet(Get.context!);
           }),
         ],

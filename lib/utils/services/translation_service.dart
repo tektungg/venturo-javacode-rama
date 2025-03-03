@@ -22,6 +22,12 @@ class TranslationService extends Translations {
           'Kebijakan Privasi': 'Privacy Policy',
           'Beranda': 'Home',
           'Pesanan': 'Orders',
+          'Promo Untukmu': 'Available Promo',
+          'Makanan': 'Food',
+          'Minuman': 'Drinks',
+          'Snack': 'Snacks',
+          'Semua': 'All',
+          'Cari': 'Search',
         },
         'id_ID': {
           'Ganti Bahasa': 'Ganti Bahasa',
@@ -42,6 +48,12 @@ class TranslationService extends Translations {
           'Privacy Policy': 'Kebijakan Privasi',
           'Beranda': 'Beranda',
           'Pesanan': 'Pesanan',
+          'Promo Untukmu': 'Promo Untukmu',
+          'Makanan': 'Makanan',
+          'Minuman': 'Minuman',
+          'Snack': 'Snack',
+          'Semua': 'Semua',
+          'Cari': 'Cari',
         },
       };
 }

@@ -40,6 +40,7 @@ class ListScreenState extends State<ListScreen> {
   @override
   Widget build(BuildContext context) {
     Get.put(ListController());
+
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -55,10 +56,10 @@ class ListScreenState extends State<ListScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 20.h),
-                const Padding(
-                  padding: EdgeInsets.symmetric(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(),
                   child: SectionHeader(
-                    title: 'Promo Untukmu',
+                    title: 'Promo Untukmu'.tr,
                     icon: Icons.local_offer,
                   ),
                 ),
@@ -112,7 +113,7 @@ class ListScreenState extends State<ListScreen> {
                           return Padding(
                             padding: EdgeInsets.only(right: 10.w),
                             child: MenuChip(
-                              text: category,
+                              text: category.tr,
                               icon: icon,
                               isSelected: isSelected,
                               onTap: () {
@@ -140,9 +141,9 @@ class ListScreenState extends State<ListScreen> {
                         padding: EdgeInsets.symmetric(horizontal: 25.w),
                         children: [
                           if (ListController.to.selectedCategory.value ==
-                              'Semua') ...[
+                              'Semua'.tr) ...[
                             buildCategorySection(
-                              'Makanan',
+                              'Makanan'.tr,
                               ListController.to.filteredList
                                   .where((item) =>
                                       item['kategori']
@@ -153,7 +154,7 @@ class ListScreenState extends State<ListScreen> {
                               Icons.local_dining,
                             ),
                             buildCategorySection(
-                              'Minuman',
+                              'Minuman'.tr,
                               ListController.to.filteredList
                                   .where((item) =>
                                       item['kategori']
@@ -164,7 +165,7 @@ class ListScreenState extends State<ListScreen> {
                               Icons.local_drink,
                             ),
                             buildCategorySection(
-                              'Snack',
+                              'Snack'.tr,
                               ListController.to.filteredList
                                   .where((item) =>
                                       item['kategori']

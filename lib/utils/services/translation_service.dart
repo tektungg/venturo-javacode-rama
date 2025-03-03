@@ -126,6 +126,17 @@ class TranslationService extends Translations {
           'Sedang Diproses...': 'Processing...',
           'Email & Password Salah': 'Email & Password Wrong',
           'Coba lagi': 'Try Again',
+          'Izin Diperlukan': 'Permission Required',
+          'Aplikasi ini membutuhkan akses lokasi untuk digunakan.':
+              'This application requires location access to be used.',
+              'Berikan Izin': 'Grant Permission',
+              'Mencari lokasi...' : 'Finding location...',
+              'Buka pengaturan' : 'Open settings',
+              'Layanan lokasi tidak aktif' : 'Location service not enabled',
+              'Tidak mendapatkan izin lokasi' : 'Location permission not granted',
+              'Izin lokasi ditolak selamanya' : 'Location permission denied forever',
+              'Kamu terlalu jauh dari lokasi yang ditentukan' : 'You are too far from the specified location',
+              'Lokasi tidak diketahui' : 'Unknown location',
         },
       };
 }

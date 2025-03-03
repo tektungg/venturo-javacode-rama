@@ -15,7 +15,7 @@ class LocationServices {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       /// Jika tidak, kirim pesan error
-      return LocationResult.error(message: 'Location service not enabled'.tr);
+      return LocationResult.error(message: 'Layanan lokasi tidak aktif'.tr);
     }
 
     /// Cek izin lokasi
@@ -28,7 +28,7 @@ class LocationServices {
       if (permission == LocationPermission.denied) {
         /// Jika izin ditolak, kirim pesan error
         return LocationResult.error(
-          message: 'Location permission not granted'.tr,
+          message: 'Tidak mendapatkan izin lokasi'.tr,
         );
       }
     }
@@ -37,7 +37,7 @@ class LocationServices {
     if (permission == LocationPermission.deniedForever) {
       /// Jika izin lokasi ditolak selamanya, kirim pesan error
       return LocationResult.error(
-        message: 'Location permission not granted forever'.tr,
+        message: 'Izin lokasi ditolak selamanya'.tr,
       );
     }
 
@@ -46,7 +46,7 @@ class LocationServices {
     try {
       position = await Geolocator.getCurrentPosition();
     } catch (e) {
-      return LocationResult.error(message: 'Location service not enabled'.tr);
+      return LocationResult.error(message: 'Layanan lokasi tidak aktif'.tr);
     }
 
     /// Mendapatkan informasi jarak lokasi dalam meter
@@ -72,7 +72,7 @@ class LocationServices {
 
     if (placemarks.isEmpty) {
       /// Jika tidak ada informasi lokasi, kirim pesan error
-      return LocationResult.error(message: 'Unknown location'.tr);
+      return LocationResult.error(message: 'Lokasi tidak diketahui'.tr);
     }
 
     /// Jika ada informasi lokasi, kirim informasi lokasi

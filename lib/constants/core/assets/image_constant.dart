@@ -9,4 +9,6 @@ class ImageConstant {
   static const String promo1 = 'assets/images/bg_promo1.png';
   static const String promo2 = 'assets/images/bg_promo2.png';
   static const String promo3 = 'assets/images/bg_promo3.png';
+  static const String flagIndonesia = 'assets/images/ind-flag.png';
+  static const String flagEnglish = 'assets/images/eng-flag.png';
 }

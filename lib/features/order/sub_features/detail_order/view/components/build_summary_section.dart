@@ -10,10 +10,10 @@ class SummarySection extends StatelessWidget {
   final Map<String, dynamic> order;
 
   const SummarySection({
-    Key? key,
+    super.key,
     required this.totalItems,
     required this.order,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class SummarySection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Total Pesanan ($totalItems Menu)',
+                'Total Pesanan (%s Menu)'.trArgs([totalItems.toString()]),
                 style: Get.textTheme.titleMedium
                     ?.copyWith(fontWeight: FontWeight.bold),
               ),
@@ -60,7 +60,7 @@ class SummarySection extends StatelessWidget {
                   const Icon(Icons.local_offer, color: ColorStyle.primary),
                   const SizedBox(width: 8),
                   Text(
-                    'Potongan',
+                    'Potongan'.tr,
                     style: Get.textTheme.titleMedium
                         ?.copyWith(fontWeight: FontWeight.bold),
                   ),
@@ -82,7 +82,7 @@ class SummarySection extends StatelessWidget {
                   const Icon(Icons.payment, color: ColorStyle.primary),
                   const SizedBox(width: 8),
                   Text(
-                    'Pembayaran',
+                    'Pembayaran'.tr,
                     style: Get.textTheme.titleMedium
                         ?.copyWith(fontWeight: FontWeight.bold),
                   ),
@@ -96,7 +96,7 @@ class SummarySection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Total Pembayaran',
+                'Total Pembayaran'.tr,
                 style: Get.textTheme.titleMedium
                     ?.copyWith(fontWeight: FontWeight.bold),
               ),

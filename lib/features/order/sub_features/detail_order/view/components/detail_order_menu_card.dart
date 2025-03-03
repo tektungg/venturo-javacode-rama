@@ -76,7 +76,7 @@ class DetailOrderMenuCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    menu['nama'] ?? 'Menu Tanpa Nama',
+                    menu['nama'] ?? 'Menu Tanpa Nama'.tr,
                     style: Get.textTheme.titleMedium,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
@@ -98,7 +98,7 @@ class DetailOrderMenuCard extends StatelessWidget {
                       SizedBox(width: 4.w),
                       Expanded(
                         child: Text(
-                          'Catatan: ${menu['catatan'] ?? '-'}',
+                          'Catatan: %s'.trArgs([menu['catatan'] ?? 'Tidak ada catatan'.tr]),
                           style: Get.textTheme.bodySmall,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,

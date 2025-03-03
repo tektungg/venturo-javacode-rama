@@ -16,7 +16,7 @@ void showCancelOrderConfirmationDialog(int orderId) {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Apakah kamu yakin ingin membatalkan pesanan?',
+              'Apakah kamu yakin ingin membatalkan pesanan?'.tr,
               style: Get.textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -39,7 +39,7 @@ void showCancelOrderConfirmationDialog(int orderId) {
                     ),
                   ),
                   child: Text(
-                    'Tidak',
+                    'Tidak'.tr,
                     style: Get.textTheme.labelLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -61,7 +61,7 @@ void showCancelOrderConfirmationDialog(int orderId) {
                     ),
                   ),
                   child: Text(
-                    'Iya',
+                    'Iya'.tr,
                     style: Get.textTheme.labelLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,

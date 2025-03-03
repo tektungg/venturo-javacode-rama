@@ -26,7 +26,7 @@ class DetailOrderScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: RoundedAppBar(
-        title: 'Pesanan',
+        title: 'Pesanan'.tr,
         iconData: Icons.room_service,
         enableBackButton: true,
         onBackPressed: () => Get.back(),

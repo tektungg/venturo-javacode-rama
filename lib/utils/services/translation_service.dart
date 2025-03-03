@@ -46,6 +46,10 @@ class TranslationService extends Translations {
           'Level': 'Level',
           'Topping': 'Topping',
           'Catatan': 'Note',
+          'Info Diskon': 'Discount Info',
+          'Anda tidak dapat menggunakan diskon dan voucher secara bersamaan':
+              'You cannot use discounts and vouchers at the same time',
+          'Oke': 'Okay',
         },
         'id_ID': {
           'Ganti Bahasa': 'Ganti Bahasa',
@@ -90,6 +94,10 @@ class TranslationService extends Translations {
           'Level': 'Level',
           'Topping': 'Topping',
           'Catatan': 'Catatan',
+          'Info Diskon': 'Info Diskon',
+          'Anda tidak dapat menggunakan diskon dan voucher secara bersamaan':
+              'Anda tidak dapat menggunakan diskon dan voucher secara bersamaan',
+          'Oke': 'Oke',
         },
       };
 }

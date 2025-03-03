@@ -25,7 +25,7 @@ class DiscountScreen extends StatelessWidget {
           children: [
             Center(
               child: Text(
-                'Info Diskon',
+                'Info Diskon'.tr,
                 style: Get.textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold, color: ColorStyle.primary),
               ),
@@ -35,7 +35,7 @@ class DiscountScreen extends StatelessWidget {
               if (voucherController.selectedVoucher.value != null) {
                 return Center(
                   child: Text(
-                    'Anda tidak dapat menggunakan diskon dan voucher secara bersamaan',
+                    'Anda tidak dapat menggunakan diskon dan voucher secara bersamaan'.tr,
                     style: Get.textTheme.bodyLarge?.copyWith(
                       color: Colors.red,
                     ),
@@ -72,7 +72,7 @@ class DiscountScreen extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'Oke',
+                  'Oke'.tr,
                   style: Get.textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: Colors.white,

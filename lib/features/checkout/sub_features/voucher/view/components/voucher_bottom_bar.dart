@@ -43,12 +43,12 @@ Widget buildVoucherBottomBar(VoucherController controller) {
             Expanded(
               child: RichText(
                 text: TextSpan(
-                  text: 'Penggunaan voucher tidak dapat digabung dengan ',
+                  text: 'Penggunaan voucher tidak dapat digabung dengan '.tr,
                   style:
                       Get.textTheme.titleSmall?.copyWith(color: Colors.black),
                   children: [
                     TextSpan(
-                      text: 'discount employee reward program.',
+                      text: 'discount employee reward program.'.tr,
                       style: Get.textTheme.titleSmall
                           ?.copyWith(color: ColorStyle.primary),
                     ),
@@ -76,7 +76,7 @@ Widget buildVoucherBottomBar(VoucherController controller) {
               ),
             ),
             child: Text(
-              'Oke',
+              'Oke'.tr,
               style: Get.textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: Colors.white,

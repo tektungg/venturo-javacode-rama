@@ -76,7 +76,7 @@ class CheckoutMenuCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        menu['nama'] ?? 'Menu Tanpa Nama',
+                        menu['nama'] ?? 'Menu Tanpa Nama'.tr,
                         style: Get.textTheme.titleMedium,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
@@ -166,7 +166,7 @@ class CheckoutMenuCard extends StatelessWidget {
           bottom: 20.h,
           left: 111.w,
           child: Text(
-            'Catatan: ${menu['catatan'] ?? 'Tidak ada catatan'}',
+            'Catatan: %s'.trArgs([menu['catatan'] ?? 'Tidak ada catatan'.tr]),
             style: Get.textTheme.bodySmall?.copyWith(
               color: Colors.grey,
             ),

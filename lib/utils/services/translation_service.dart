@@ -51,6 +51,26 @@ class TranslationService extends Translations {
           'Anda tidak dapat menggunakan diskon dan voucher secara bersamaan':
               'You cannot use discounts and vouchers at the same time',
           'Oke': 'Okay',
+          'Menu Tanpa Nama': 'Unnamed Menu',
+          'Tidak ada catatan': 'No notes',
+          'Belum ada pesanan': 'No orders yet',
+          'Total Pesanan': 'Total Orders',
+          'Total Pesanan (%s Menu)': 'Total Orders (%s Menu)',
+          'Menu': 'Menu',
+          'Diskon': 'Discount',
+          'Voucher': 'Voucher',
+          'Pembayaran': 'Payment',
+          'Kamu dapat melacak pesananmu di fitur Pesanan':
+              'You can track your order in the Orders feature',
+          'Pesanan sedang disiapkan': 'Order is being prepared',
+          'Pesan Sekarang': 'Order Now',
+          'Total Pembayaran': 'Total Payment',
+          'Penggunaan voucher tidak dapat digabung dengan ':
+              'Voucher usage cannot be combined with ',
+          'discount employee reward program.':
+              'discount employee reward program.',
+          'Pilih Voucher': 'Select Voucher',
+          'Catatan: %s': 'Note: %s',
         },
         'id_ID': {
           'Ganti Bahasa': 'Ganti Bahasa',
@@ -100,6 +120,26 @@ class TranslationService extends Translations {
           'Anda tidak dapat menggunakan diskon dan voucher secara bersamaan':
               'Anda tidak dapat menggunakan diskon dan voucher secara bersamaan',
           'Oke': 'Oke',
+          'Menu Tanpa Nama': 'Menu Tanpa Nama',
+          'Tidak ada catatan': 'Tidak ada catatan',
+          'Belum ada pesanan': 'Belum ada pesanan',
+          'Total Pesanan': 'Total Pesanan',
+          'Total Pesanan (%s Menu)': 'Total Pesanan (%s Menu)',
+          'Menu': 'Menu',
+          'Diskon': 'Diskon',
+          'Voucher': 'Voucher',
+          'Pembayaran': 'Pembayaran',
+          'Pesan Sekarang': 'Pesan Sekarang',
+          'Total Pembayaran': 'Total Pembayaran',
+          'Kamu dapat melacak pesananmu di fitur Pesanan':
+              'Kamu dapat melacak pesananmu di fitur Pesanan',
+          'Pesanan sedang disiapkan': 'Pesanan sedang disiapkan',
+          'Penggunaan voucher tidak dapat digabung dengan ':
+              'Penggunaan voucher tidak dapat digabung dengan ',
+          'discount employee reward program.':
+              'discount employee reward program.',
+          'Pilih Voucher': 'Pilih Voucher',
+          'Catatan: %s': 'Catatan: %s',
         },
       };
 }

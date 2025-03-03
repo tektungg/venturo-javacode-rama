@@ -47,7 +47,7 @@ PreferredSizeWidget buildAppBar() {
                   const Icon(Icons.room_service, color: ColorStyle.primary),
                   SizedBox(width: 8.w),
                   Text(
-                    'Pesanan',
+                    'Pesanan'.tr,
                     style: Get.textTheme.titleLarge
                         ?.copyWith(fontWeight: FontWeight.bold),
                   ),
@@ -87,7 +87,7 @@ Widget buildEmptyCart() {
         Icon(Icons.shopping_cart_outlined, size: 100.r, color: Colors.grey),
         SizedBox(height: 16.h),
         Text(
-          'Belum ada pesanan',
+          'Belum ada pesanan'.tr,
           style: Get.textTheme.titleLarge
               ?.copyWith(color: Colors.grey, fontWeight: FontWeight.bold),
         ),
@@ -119,7 +119,8 @@ Widget buildSummarySection(
       children: [
         buildDetailRow(
           context,
-          'Total Pesanan (${controller.totalMenuDipesan} Menu)',
+          'Total Pesanan (%s Menu)'
+              .trArgs([controller.totalMenuDipesan.toString()]),
           Obx(() => Text(
                 'Rp${NumberFormat.currency(locale: 'id_ID', symbol: '', decimalDigits: 0).format(controller.totalHarga.value)}',
                 style: const TextStyle(
@@ -130,10 +131,10 @@ Widget buildSummarySection(
         Obx(() {
           return buildTouchableDetailRow(
             context,
-            'Diskon',
+            'Diskon'.tr,
             controller.totalDiskonNominal.value > 0
                 ? '-Rp${NumberFormat.currency(locale: 'id_ID', symbol: '', decimalDigits: 0).format(controller.totalDiskonNominal.value)}'
-                : 'Info Diskon',
+                : 'Info Diskon'.tr,
             () async {
               await Get.dialog(DiscountScreen());
             },
@@ -149,10 +150,10 @@ Widget buildSummarySection(
           final voucherName = voucher != null ? voucher['nama'] : null;
           return buildTouchableDetailRow(
             context,
-            'Voucher',
+            'Voucher'.tr,
             controller.totalVoucherNominal.value > 0
                 ? '-Rp${NumberFormat.currency(locale: 'id_ID', symbol: '', decimalDigits: 0).format(controller.totalVoucherNominal.value)}'
-                : 'Pilih Voucher',
+                : 'Pilih Voucher'.tr,
             () async {
               final selectedVoucher = await Get.to(() => VoucherScreen());
               if (selectedVoucher != null) {
@@ -169,7 +170,7 @@ Widget buildSummarySection(
         const Divider(),
         buildDetailRow(
           context,
-          'Pembayaran',
+          'Pembayaran'.tr,
           const Text('Pay Later'),
           icon: Icons.payment,
         ),
@@ -211,7 +212,7 @@ Widget buildBottomBar(CheckoutController controller) {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Total Pembayaran',
+                    'Total Pembayaran'.tr,
                     style: Get.textTheme.titleMedium
                         ?.copyWith(fontWeight: FontWeight.bold),
                   ),
@@ -248,7 +249,7 @@ Widget buildBottomBar(CheckoutController controller) {
                   borderRadius: BorderRadius.circular(30.r)),
             ),
             child: Text(
-              'Pesan Sekarang',
+              'Pesan Sekarang'.tr,
               style: Get.textTheme.labelLarge
                   ?.copyWith(fontWeight: FontWeight.bold, color: Colors.white),
             ),

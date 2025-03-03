@@ -21,7 +21,7 @@ void showOrderSuccessDialog() {
             ),
             SizedBox(height: 16.h),
             Text(
-              'Pesanan sedang disiapkan',
+              'Pesanan sedang disiapkan'.tr,
               style: Get.textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -29,7 +29,7 @@ void showOrderSuccessDialog() {
             ),
             SizedBox(height: 8.h),
             Text(
-              'Kamu dapat melacak pesananmu di fitur Pesanan',
+              'Kamu dapat melacak pesananmu di fitur Pesanan'.tr,
               style: Get.textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
@@ -49,7 +49,7 @@ void showOrderSuccessDialog() {
                   ),
                 ),
                 child: Text(
-                  'Oke',
+                  'Oke'.tr,
                   style: Get.textTheme.labelLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: Colors.white,

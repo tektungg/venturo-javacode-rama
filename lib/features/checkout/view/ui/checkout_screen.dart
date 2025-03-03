@@ -23,11 +23,11 @@ class CheckoutScreen extends StatelessWidget {
 
         final groupedMenu = checkoutController.groupedMenuByCategory;
 
-        final sortedCategories = ['makanan', 'minuman', 'snack'];
+        final sortedCategories = ['makanan'.tr, 'minuman'.tr, 'snack'.tr];
         final sortedKeys = groupedMenu.keys.toList()
           ..sort((a, b) {
-            final indexA = sortedCategories.indexOf(a.toLowerCase());
-            final indexB = sortedCategories.indexOf(b.toLowerCase());
+            final indexA = sortedCategories.indexOf(a.toLowerCase().tr);
+            final indexB = sortedCategories.indexOf(b.toLowerCase().tr);
             if (indexA == -1) return 1;
             if (indexB == -1) return -1;
             return indexA.compareTo(indexB);

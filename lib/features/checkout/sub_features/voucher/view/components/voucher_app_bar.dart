@@ -39,7 +39,7 @@ PreferredSizeWidget buildVoucherAppBar() {
                   const Icon(Icons.local_play, color: ColorStyle.primary),
                   SizedBox(width: 8.w),
                   Text(
-                    'Voucher',
+                    'Voucher'.tr,
                     style: Get.textTheme.titleLarge
                         ?.copyWith(fontWeight: FontWeight.bold),
                   ),

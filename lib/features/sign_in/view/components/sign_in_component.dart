@@ -22,10 +22,10 @@ class FormSignInComponent extends StatelessWidget {
             controller: SignInController.to.emailCtrl,
             keyboardType: TextInputType.emailAddress,
             initialValue: SignInController.to.emailValue.value,
-            label: "Email Address",
-            hint: "Masukkan alamat email",
+            label: "Alamat Email".tr,
+            hint: "Masukkan alamat email".tr,
             isRequired: true,
-            requiredText: "Alamat email tidak boleh kosong",
+            requiredText: "Alamat email tidak boleh kosong".tr,
           ),
           SizedBox(
             height: 40.h,
@@ -36,10 +36,10 @@ class FormSignInComponent extends StatelessWidget {
               keyboardType: TextInputType.visiblePassword,
               initialValue: SignInController.to.passwordValue.value,
               label: "Password",
-              hint: "Masukkan password",
+              hint: "Masukkan password".tr,
               isPassword: SignInController.to.isPassword.value,
               isRequired: true,
-              requiredText: "Password tidak boleh kosong",
+              requiredText: "Password tidak boleh kosong".tr,
               suffixIcon: IconButton(
                 icon: Icon(
                   SignInController.to.isPassword.value
@@ -63,7 +63,7 @@ class FormSignInComponent extends StatelessWidget {
                   Get.toNamed(Routes.forgotPasswordRoute);
                 },
                 child: Text(
-                  "Lupa Password?",
+                  "Lupa Password?".tr,
                   style: GoogleTextStyle.fw600.copyWith(
                     fontSize: 14.sp,
                     color: ColorStyle.primary,

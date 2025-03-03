@@ -55,7 +55,7 @@ class SignInController extends GetxController {
 
       if (isValid && GlobalController.to.isConnect.value == true) {
         EasyLoading.show(
-          status: 'Sedang Diproses...',
+          status: 'Sedang Diproses...'.tr,
           maskType: EasyLoadingMaskType.black,
           dismissOnTap: false,
         );
@@ -78,8 +78,8 @@ class SignInController extends GetxController {
           PanaraInfoDialog.show(
             context,
             title: "Warning",
-            message: "Email & Password Salah",
-            buttonText: "Coba lagi",
+            message: "Email & Password Salah".tr,
+            buttonText: "Coba lagi".tr,
             onTapDismiss: () {
               Get.back();
             },
@@ -97,7 +97,7 @@ class SignInController extends GetxController {
         context,
         title: "Error",
         message: "An error occurred while validating the form",
-        buttonText: "Coba lagi",
+        buttonText: "Coba lagi".tr,
         onTapDismiss: () {
           Get.back();
         },

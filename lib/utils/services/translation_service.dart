@@ -113,6 +113,19 @@ class TranslationService extends Translations {
               'Delicious food, affordable prices, fast service.',
           'Pelayanan sangat memuaskan, ramah dan cepat.':
               'Very satisfying service, friendly and fast.',
+          'Alamat Email': 'Email Address',
+          'Masukkan alamat email': 'Enter your email address',
+          'Alamat email tidak boleh kosong': 'Email address cannot be empty',
+          'Password': 'Password',
+          'Masukkan password': 'Enter your password',
+          'Password tidak boleh kosong': 'Password cannot be empty',
+          'Lupa Password?': 'Forgot Password?',
+          'Masuk untuk melanjutkan!': 'Sign in to continue!',
+          'Masuk': 'Sign In',
+          'Masuk dengan Google': 'Sign in with Google',
+          'Sedang Diproses...': 'Processing...',
+          'Email & Password Salah': 'Email & Password Wrong',
+          'Coba lagi': 'Try Again',
         },
       };
 }

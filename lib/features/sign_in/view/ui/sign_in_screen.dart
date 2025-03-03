@@ -69,7 +69,7 @@ class SignInScreen extends StatelessWidget {
               ),
               SizedBox(height: 121.h),
               Text(
-                'Masuk untuk melanjutkan!',
+                'Masuk untuk melanjutkan!'.tr,
                 style: GoogleTextStyle.fw600.copyWith(
                   fontSize: 22.sp,
                   color: ColorStyle.dark,
@@ -88,7 +88,7 @@ class SignInScreen extends StatelessWidget {
                 ),
                 onPressed: () => controller.validateForm(context),
                 child: Text(
-                  "Masuk",
+                  "Masuk".tr,
                   style: GoogleTextStyle.fw800.copyWith(
                     fontSize: 14.sp,
                     color: ColorStyle.white,
@@ -114,7 +114,7 @@ class SignInScreen extends StatelessWidget {
                     ),
                     const SizedBox(width: 10),
                     Text(
-                      "Masuk dengan Google",
+                      "Masuk dengan Google".tr,
                       style: GoogleTextStyle.fw800.copyWith(
                         fontSize: 14.sp,
                         color: ColorStyle.dark,

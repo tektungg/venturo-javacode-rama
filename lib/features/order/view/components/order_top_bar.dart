@@ -26,9 +26,9 @@ class OrderTopBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       child: TabBar(
-        tabs: const [
-          Tab(text: 'Sedang Berjalan'),
-          Tab(text: 'Riwayat'),
+        tabs:  [
+          Tab(text: 'Sedang Berjalan'.tr),
+          Tab(text: 'Riwayat'.tr),
         ],
         indicatorColor: Theme.of(context).primaryColor,
         indicatorWeight: 3.h,

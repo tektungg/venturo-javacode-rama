@@ -82,6 +82,18 @@ class TranslationService extends Translations {
           'Pesanan Diterima': 'Order Received',
           'Menyiapkan': 'Preparing',
           'Siap Diambil': 'Ready',
+          'Pilih tanggal': 'Select date',
+          'Disiapkan': 'Preparing',
+          'Selesai': 'Complete',
+          'Dibatalkan': 'Canceled',
+          'Ulasan': 'Review',
+          'Pesan Lagi': 'Order Again',
+          'Sedang Berjalan': 'Ongoing',
+          'Riwayat': 'History',
+          'Sudah pesan?\n Lacak pesananmu di sini':
+              'Already ordered?\n Track your order here',
+          'Mulai buat pesanan.\n Makanan yang telah kamu pesan akan muncul di sini agar kamu bisa menemukan menu favoritmu lagi!':
+              'Start ordering.\n The food you have ordered will appear here so you can find your favorite menu again!',
         },
       };
 }

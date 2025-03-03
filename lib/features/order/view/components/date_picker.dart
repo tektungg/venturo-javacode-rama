@@ -68,7 +68,7 @@ class _DatePickerState extends State<DatePicker> {
               child: Obx(() {
                 if (startDate.value == null || endDate.value == null) {
                   return Text(
-                    'Pilih tanggal',
+                    'Pilih tanggal'.tr,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Get.textTheme.titleSmall?.copyWith(),

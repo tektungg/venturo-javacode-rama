@@ -59,9 +59,9 @@ class OnGoingOrderTabScreen extends StatelessWidget {
                             SizedBox(height: 16.h),
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 16.w),
-                              child: const Text(
-                                'Sudah pesan?\n Lacak pesananmu di sini',
-                                style: TextStyle(fontSize: 24),
+                              child: Text(
+                                'Sudah pesan?\n Lacak pesananmu di sini'.tr,
+                                style: const TextStyle(fontSize: 24),
                                 textAlign: TextAlign.center,
                               ),
                             ),

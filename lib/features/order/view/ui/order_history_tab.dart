@@ -99,9 +99,9 @@ class OrderHistoryTabScreen extends StatelessWidget {
                                   Padding(
                                     padding:
                                         EdgeInsets.symmetric(horizontal: 16.w),
-                                    child: const Text(
-                                      'Mulai buat pesanan.\n Makanan yang telah kamu pesan akan muncul di sini agar kamu bisa menemukan menu favoritmu lagi!',
-                                      style: TextStyle(fontSize: 24),
+                                    child: Text(
+                                      'Mulai buat pesanan.\n Makanan yang telah kamu pesan akan muncul di sini agar kamu bisa menemukan menu favoritmu lagi!'.tr,
+                                      style: const TextStyle(fontSize: 24),
                                       textAlign: TextAlign.center,
                                     ),
                                   ),

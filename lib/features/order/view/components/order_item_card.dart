@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:venturo_core/shared/styles/color_style.dart';
 import 'package:venturo_core/utils/functions/string_utils.dart';
@@ -36,18 +37,18 @@ class OrderItemCard extends StatelessWidget {
       case 0:
       case 1:
       case 2:
-        statusText = 'Disiapkan';
+        statusText = 'Disiapkan'.tr;
         statusIcon = Icons.access_time;
         statusColor = const Color(0xFFFFAC01);
         break;
       case 3:
-        statusText = 'Selesai';
+        statusText = 'Selesai'.tr;
         statusIcon = Icons.cancel;
         statusColor = Colors.green;
         break;
       case 4:
       default:
-        statusText = 'Dibatalkan';
+        statusText = 'Dibatalkan'.tr;
         statusIcon = Icons.check_circle;
         statusColor = Colors.red;
         break;
@@ -56,7 +57,7 @@ class OrderItemCard extends StatelessWidget {
     final String menuNames = truncateWithEllipsis(
         order['menu']
             .map<String>((menu) =>
-                menu['nama']?.toString() ?? 'Gabeli apa apa anjir beliau')
+                menu['nama']?.toString() ?? 'Gabeli apa apa anjir beliau'.tr)
             .join(', '),
         30);
 
@@ -173,7 +174,7 @@ class OrderItemCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         OutlinedTitleButton(
-                          text: 'Ulasan',
+                          text: 'Ulasan'.tr,
                           onPressed: () =>
                               onGiveReview?.call(order['id_order'] ?? 0),
                           width: 120.w,
@@ -181,7 +182,7 @@ class OrderItemCard extends StatelessWidget {
                         ),
                         PrimaryButtonWithTitle(
                           onPressed: onOrderAgain,
-                          title: 'Pesan Lagi',
+                          title: 'Pesan Lagi'.tr,
                           backgroundColor: Colors.blue,
                           titleColor: Colors.white,
                           borderColor: Colors.blue,

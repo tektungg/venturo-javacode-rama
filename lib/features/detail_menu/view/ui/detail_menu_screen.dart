@@ -97,7 +97,7 @@ class DetailMenuScreen extends StatelessWidget {
           SizedBox(height: 16.h),
           const Divider(),
           DetailRowWidget(
-            title: 'Harga',
+            title: 'Harga'.tr,
             value: Obx(() => Text(
                   'Rp${NumberFormat.currency(locale: 'id_ID', symbol: '', decimalDigits: 0).format(controller.totalPrice.value)}',
                   style: const TextStyle(
@@ -107,18 +107,18 @@ class DetailMenuScreen extends StatelessWidget {
           ),
           const Divider(),
           TouchableDetailRowWidget(
-            title: 'Level',
+            title: 'Level'.tr,
             value: controller.selectedLevel.value.isEmpty
-                ? 'Pilih Level'
+                ? 'Pilih Level'.tr
                 : string_utils.capitalize(controller.selectedLevel.value),
             onTap: () => showLevelBottomSheet(context, controller),
             icon: Icons.whatshot,
           ),
           const Divider(),
           TouchableDetailRowWidget(
-            title: 'Topping',
+            title: 'Topping'.tr,
             value: controller.selectedToppings.isEmpty
-                ? 'Pilih Topping'
+                ? 'Pilih Topping'.tr
                 : controller.selectedToppings
                     .map(string_utils.capitalize)
                     .join(', '),
@@ -127,9 +127,9 @@ class DetailMenuScreen extends StatelessWidget {
           ),
           const Divider(),
           TouchableDetailRowWidget(
-            title: 'Catatan',
+            title: 'Catatan'.tr,
             value: controller.catatan.value.isEmpty
-                ? 'Masukkan catatan'
+                ? 'Masukkan catatan'.tr
                 : truncateWithEllipsis(controller.catatan.value, 20),
             onTap: () =>
                 showCatatanBottomSheet(context, controller, catatanController),

@@ -33,7 +33,7 @@ void showToppingBottomSheet(
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 7.r),
               child: Text(
-                'Pilih Topping',
+                'Pilih Topping'.tr,
                 style: Get.textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -45,7 +45,7 @@ void showToppingBottomSheet(
                 return Padding(
                   padding: EdgeInsets.symmetric(horizontal: 7.r),
                   child: Text(
-                    'Menu ini tidak memiliki pilihan topping',
+                    'Menu ini tidak memiliki pilihan topping'.tr,
                     style: Get.textTheme.bodyMedium,
                   ),
                 );

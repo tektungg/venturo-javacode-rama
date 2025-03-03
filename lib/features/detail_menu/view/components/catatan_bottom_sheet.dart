@@ -42,7 +42,7 @@ void showCatatanBottomSheet(BuildContext context,
                     ),
                     SizedBox(height: 16.h),
                     Text(
-                      'Buat Catatan',
+                      'Buat Catatan'.tr,
                       style: Get.textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -53,19 +53,19 @@ void showCatatanBottomSheet(BuildContext context,
                         Expanded(
                           child: TextField(
                             controller: catatanController,
-                            decoration: const InputDecoration(
-                              hintText: 'Masukkan catatan',
-                              enabledBorder: UnderlineInputBorder(
+                            decoration: InputDecoration(
+                              hintText: 'Masukkan catatan'.tr,
+                              enabledBorder: const UnderlineInputBorder(
                                 borderSide: BorderSide(
                                   color: ColorStyle.primary,
                                 ),
                               ),
-                              border: UnderlineInputBorder(
+                              border: const UnderlineInputBorder(
                                 borderSide: BorderSide(
                                   color: ColorStyle.primary,
                                 ),
                               ),
-                              focusedBorder: UnderlineInputBorder(
+                              focusedBorder: const UnderlineInputBorder(
                                 borderSide: BorderSide(
                                   color: ColorStyle.primary,
                                 ),

@@ -30,6 +30,22 @@ class TranslationService extends Translations {
           'Cari': 'Search',
           'Syarat dan Ketentuan': 'Terms and Conditions',
           'Tidak ada syarat dan ketentuan': 'No terms and conditions',
+          'Buat Catatan': 'Create Note',
+          'Masukkan catatan': 'Add note',
+          'Detail Menu': 'Menu Detail',
+          'Nama Tidak Tersedia': 'Name Not Available',
+          'Deskripsi Tidak Tersedia': 'Description Not Available',
+          'Tambahkan ke Pesanan': 'Add to Order',
+          'Pilih Level': 'Select Level',
+          'Pilih Topping': 'Select Topping',
+          'Menu ini tidak memiliki pilihan level':
+              'This menu has no level options',
+          'Menu ini tidak memiliki pilihan topping':
+              'This menu has no topping options',
+          'Harga': 'Price',
+          'Level': 'Level',
+          'Topping': 'Topping',
+          'Catatan': 'Note',
         },
         'id_ID': {
           'Ganti Bahasa': 'Ganti Bahasa',
@@ -58,6 +74,22 @@ class TranslationService extends Translations {
           'Cari': 'Cari',
           'Syarat dan Ketentuan': 'Syarat dan Ketentuan',
           'Tidak ada syarat dan ketentuan': 'Tidak ada syarat dan ketentuan',
+          'Buat Catatan': 'Buat Catatan',
+          'Masukkan catatan': 'Masukkan catatan',
+          'Detail Menu': 'Detail Menu',
+          'Nama Tidak Tersedia': 'Nama Tidak Tersedia',
+          'Deskripsi Tidak Tersedia': 'Deskripsi Tidak Tersedia',
+          'Tambahkan ke Pesanan': 'Tambahkan ke Pesanan',
+          'Pilih Level': 'Pilih Level',
+          'Pilih Topping': 'Pilih Topping',
+          'Menu ini tidak memiliki pilihan level':
+              'Menu ini tidak memiliki pilihan level',
+          'Menu ini tidak memiliki pilihan topping':
+              'Menu ini tidak memiliki pilihan topping',
+          'Harga': 'Harga',
+          'Level': 'Level',
+          'Topping': 'Topping',
+          'Catatan': 'Catatan',
         },
       };
 }

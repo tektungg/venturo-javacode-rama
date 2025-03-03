@@ -38,7 +38,7 @@ PreferredSizeWidget buildAppBar() {
             ),
             Center(
               child: Text(
-                'Detail Menu',
+                'Detail Menu'.tr,
                 style: Get.textTheme.titleLarge
                     ?.copyWith(fontWeight: FontWeight.bold),
               ),
@@ -73,7 +73,7 @@ Widget buildMenuHeader(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       Text(
-        menu['nama'] ?? 'Nama Tidak Tersedia',
+        menu['nama'] ?? 'Nama Tidak Tersedia'.tr,
         style: Get.textTheme.headlineSmall
             ?.copyWith(fontWeight: FontWeight.bold, color: ColorStyle.primary),
       ),
@@ -156,7 +156,7 @@ Widget buildAddToOrderButton(
         checkoutController.logger.d('Menu added to order: $updatedMenu');
       },
       child: Text(
-        'Tambahkan ke Pesanan',
+        'Tambahkan ke Pesanan'.tr,
         style: Get.textTheme.titleMedium
             ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
       ),

@@ -33,7 +33,7 @@ void showEditLevelBottomSheet(
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 7.r),
               child: Text(
-                'Pilih Level',
+                'Pilih Level'.tr,
                 style: Get.textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -45,7 +45,7 @@ void showEditLevelBottomSheet(
                 return Padding(
                   padding: EdgeInsets.symmetric(horizontal: 7.r),
                   child: Text(
-                    'Menu ini tidak memiliki pilihan level',
+                    'Menu ini tidak memiliki pilihan level'.tr,
                     style: Get.textTheme.bodyMedium,
                   ),
                 );

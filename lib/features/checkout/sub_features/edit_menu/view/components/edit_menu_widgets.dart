@@ -37,7 +37,7 @@ PreferredSizeWidget buildAppBar() {
             ),
             Center(
               child: Text(
-                'Edit Menu',
+                'Edit Menu'.tr,
                 style: Get.textTheme.titleLarge
                     ?.copyWith(fontWeight: FontWeight.bold),
               ),
@@ -80,7 +80,7 @@ Widget buildMenuHeader(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              menuDetail['nama'] ?? 'Nama Tidak Tersedia',
+              menuDetail['nama'] ?? 'Nama Tidak Tersedia'.tr,
               style: Get.textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold, color: ColorStyle.primary),
             ),
@@ -90,7 +90,6 @@ Widget buildMenuHeader(
                   if (controller.quantity.value > 1) {
                     controller.decrementQuantity(menuDetail['id_menu']);
                   } else {
-                    // Jika jumlah menu 1 lalu di-decrement lagi, hapus menu dari Hive box
                     CheckoutController.to.removeMenu(menuDetail['id_menu']);
                     Get.back();
                   }

@@ -23,7 +23,7 @@ Widget buildRatingSection() {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'Penilaian',
+          'Penilaian'.tr,
           style: Get.textTheme.bodyLarge?.copyWith(
             fontWeight: FontWeight.bold,
           ),

@@ -11,6 +11,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:venturo_core/features/get_location/controllers/get_location_controller.dart';
 import 'package:venturo_core/shared/bindings/global_binding.dart';
+import 'package:venturo_core/utils/services/translation_service.dart';
 
 import 'firebase_options.dart';
 import 'configs/pages/page.dart';
@@ -53,7 +54,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// Screen Util Init berdasarkan ukuran iphone xr
     return ScreenUtilInit(
       designSize: const Size(414, 896),
       minTextAdapt: true,
@@ -62,18 +62,19 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           title: 'Java Code',
           debugShowCheckedModeBanner: false,
-          locale: const Locale('id'),
-          fallbackLocale: const Locale('id'),
+          locale: const Locale('id', 'ID'),
+          fallbackLocale: const Locale('id', 'ID'),
+          translations: TranslationService(),
           supportedLocales: const [
             Locale('en', 'US'),
-            Locale('id'),
+            Locale('id', 'ID'),
           ],
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          initialBinding: GlobalBinding(), 
+          initialBinding: GlobalBinding(),
           initialRoute: Routes.splashRoute,
           theme: themeLight,
           defaultTransition: Transition.native,

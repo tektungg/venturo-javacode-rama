@@ -23,21 +23,21 @@ Widget buildOtherInfo() {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         buildInfoRow(
-          'Privacy Policy',
+          'Kebijakan Privasi'.tr,
           '',
           onPressed: ProfileController.to.privacyPolicyWebView,
         ),
         const Divider(),
         Obx(() {
           return buildInfoRow(
-            'Model Perangkat',
+            'Model Perangkat'.tr,
             ProfileController.to.deviceModel.value,
           );
         }),
         const Divider(),
         Obx(() {
           return buildInfoRow(
-            'Versi Android',
+            'Versi Android'.tr,
             ProfileController.to.deviceVersion.value,
           );
         }),

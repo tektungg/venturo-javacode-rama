@@ -9,6 +9,7 @@ import 'package:venturo_core/features/profile/view/components/rating_section.dar
 import 'package:venturo_core/features/profile/view/components/other_info.dart';
 import 'package:venturo_core/features/profile/view/components/logout_button.dart';
 import 'package:venturo_core/shared/widgets/bottom_navbar.dart';
+import 'package:get/get.dart'; // Tambahkan import GetX
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -34,13 +35,13 @@ class ProfileScreen extends StatelessWidget {
           children: [
             buildProfileIcon(context),
             SizedBox(height: 20.h),
-            buildSectionTitle('Info Akun'),
+            buildSectionTitle('Info Akun'.tr),
             SizedBox(height: 10.h),
             buildAccountInfo(),
             SizedBox(height: 10.h),
             buildRatingSection(),
             SizedBox(height: 20.h),
-            buildSectionTitle('Info Lainnya'),
+            buildSectionTitle('Info Lainnya'.tr),
             SizedBox(height: 10.h),
             buildOtherInfo(),
             buildLogoutButton(),

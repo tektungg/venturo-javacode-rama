@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:venturo_core/constants/core/assets/image_constant.dart'; // Import ImageConstant
+import 'package:logger/logger.dart';
+import 'package:venturo_core/constants/core/assets/image_constant.dart';
 
 void showLanguageBottomSheet(BuildContext context) {
   showModalBottomSheet(
@@ -85,6 +86,7 @@ void showLanguageBottomSheet(BuildContext context) {
                             if (selected) {
                               Get.updateLocale(Locale(
                                   language == 'Indonesia' ? 'id' : 'en'));
+                              Logger().i('Language changed to $language');
                             }
                           },
                           selectedColor: Theme.of(context).primaryColor,

@@ -60,7 +60,7 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
             size: 26.h,
           ),
           prefixIconColor: Theme.of(context).primaryColor,
-          hintText: 'Search'.tr,
+          hintText: 'Cari'.tr,
           hintStyle: Get.textTheme.labelSmall?.copyWith(
             color: Colors.black87,
             fontSize: 14.sp,
